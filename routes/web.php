@@ -12,3 +12,13 @@
 */
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
+Route::get('/about', ['as' => 'about', 'uses' => 'HomeController@about']);
+Route::get('/contact', ['as' => 'contact', 'uses' => 'HomeController@contact']);
+Route::get('/terms', ['as' => 'terms', 'uses' => 'HomeController@terms']);
+Route::get('/privacy', ['as' => 'privacy', 'uses' => 'HomeController@privacy']);
+Route::get('/start-selling', ['as' => 'start-selling', 'uses' => 'HomeController@start']);
+Route::get('/seller-faqs', ['as' => 'seller-faqs', 'uses' => 'HomeController@faqs']);
+
+Route::get('/blog', ['as' => 'blog.index', 'uses' => 'BlogController@index']);
+Route::get('/blog/{slug}', ['as' => 'blog.post', 'uses' => 'BlogController@post']);
+Route::get('/cars', ['as' => 'cars.index', 'uses' => 'CarsController@index']);
