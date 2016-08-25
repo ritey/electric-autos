@@ -15,15 +15,13 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 
 @section('content')
 
-<section class="">
+	<section class="hero">
 
-	<div class="container-fluid no-padding">
+		<div class="container">
 
-		<div class="row">
+			<div class="row">
 
-			<div class="col-sm-12">
-
-				<section class="hero">
+				<div class="col-sm-12">
 
 					<div class="container">
 
@@ -45,121 +43,7 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 
 					</div>
 
-				</section>
-
-				<section class="brands-section section-pad">
-
-					<div class="container">
-
-						<div class="row">
-
-								<div class="col-sm-12 col-md-12 text-center">
-
-									<div class="row">
-
-										<div class="col-sm-3 col-md-3">
-
-											<a href="{{ route('cars.brand.index' , ['brand' => 'tesla']) }}">Tesla</a>
-
-										</div>
-
-										<div class="col-sm-3 col-md-3">
-
-											<a href="{{ route('cars.brand.index' , ['brand' => 'toyota']) }}">Toyota</a>
-
-										</div>
-
-										<div class="col-sm-3 col-md-3">
-
-											<a href="{{ route('cars.brand.index' , ['brand' => 'bmw']) }}">BMW</a>
-
-										</div>
-
-										<div class="col-sm-3 col-md-3">
-
-											<a href="{{ route('cars.brand.index' , ['brand' => 'volkswagen']) }}">Volkswagen</a>
-
-										</div>
-
-									</div>
-
-								</div>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</section>
-
-				<section class="section-pad">
-
-					<div class="container">
-
-						<div class="row">
-
-							<div class="col-sm-12">
-
-								<div class="addon-header">
-									<h2>Featured electric cars</h1>
-								</div>
-
-								<div class="row">
-
-									@foreach($vars['featured'] as $car)
-
-										<div class="col-sm-6 col-md-4">
-
-											@include('partials.card', ['car' => $car])
-
-										</div>
-
-									@endforeach
-
-								</div>
-
-							</h2>
-
-						</div>
-
-					</div>
-
-				</section>
-
-				<section class="section-pad alternative">
-
-					<div class="container">
-
-						<div class="row">
-
-							<div class="col-sm-12">
-
-								<div class="addon-header">
-									<h2>Latest electric autos</h1>
-								</div>
-
-								<div class="row">
-
-									@foreach($vars['latest'] as $car)
-
-										<div class="col-sm-6 col-md-4">
-
-											@include('partials.card', ['car' => $car])
-
-										</div>
-
-									@endforeach
-
-								</div>
-
-							</h2>
-
-						</div>
-
-					</div>
-
-				</section>
+				</div>
 
 			</div>
 
@@ -167,7 +51,117 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 
 	</section>
 
-</section>
+	<section class="brands-section section-pad">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-sm-12 col-md-12 text-center">
+
+					<div class="row">
+
+						<div class="col-sm-3 col-md-3">
+
+							<a href="{{ route('cars.brand.index' , ['brand' => 'tesla']) }}">Tesla</a>
+
+						</div>
+
+						<div class="col-sm-3 col-md-3">
+
+							<a href="{{ route('cars.brand.index' , ['brand' => 'toyota']) }}">Toyota</a>
+
+						</div>
+
+						<div class="col-sm-3 col-md-3">
+
+							<a href="{{ route('cars.brand.index' , ['brand' => 'bmw']) }}">BMW</a>
+
+						</div>
+
+						<div class="col-sm-3 col-md-3">
+
+							<a href="{{ route('cars.brand.index' , ['brand' => 'volkswagen']) }}">Volkswagen</a>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
+	<section class="section-pad">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-sm-12">
+
+					<div class="addon-header">
+						<h2>Featured electric cars</h2>
+					</div>
+
+					<div class="row">
+
+						@foreach($vars['featured'] as $car)
+
+							<div class="col-sm-6 col-md-4">
+
+								@include('partials.card', ['car' => $car])
+
+							</div>
+
+						@endforeach
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
+	<section class="section-pad alternative">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-sm-12">
+
+					<div class="addon-header">
+						<h2>Latest electric autos</h2>
+					</div>
+
+					<div class="row">
+
+						@foreach($vars['latest'] as $car)
+
+							<div class="col-sm-6 col-md-4">
+
+								@include('partials.card', ['car' => $car])
+
+							</div>
+
+						@endforeach
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
 
 @endsection
 

@@ -15,87 +15,21 @@ About Electric Autos
 
 @section('content')
 
-<section class="">
+	<section class="hero">
 
-	<div class="container-fluid no-padding">
+		<div class="container">
 
-		<div class="row">
+			<div class="row text-center">
 
-			<div class="col-sm-12">
+				<div class="heading">
+					<h1>About electric cars</h1>
+				</div>
 
-				<section class="hero">
+				<div class="intro">
 
-					<div class="container">
+					<p>A new generation electric car directory of used and new electric cars.</p>
 
-						<div class="row text-center">
-
-							<div class="heading">
-								<h1>About electric cars</h1>
-							</div>
-
-							<div class="intro">
-
-								<p>A new generation electric car directory of used and new electric cars.</p>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</section>
-
-				<section class="section-pad">
-
-					<div class="container">
-
-						<div class="row">
-
-							<div class="col-sm-12">
-
-								<div class="addon-header text-center">
-									<h2>Meet the team</h1>
-								</div>
-
-								<div class="row">
-
-
-
-								</div>
-
-							</h2>
-
-						</div>
-
-					</div>
-
-				</section>
-
-				<section class="section-pad alternative">
-
-					<div class="container">
-
-						<div class="row">
-
-							<div class="col-sm-12">
-
-								<div class="addon-header text-center">
-									<h2>Our latest milestones</h1>
-								</div>
-
-								<div class="row">
-
-
-
-								</div>
-
-							</h2>
-
-						</div>
-
-					</div>
-
-				</section>
+				</div>
 
 			</div>
 
@@ -103,6 +37,56 @@ About Electric Autos
 
 	</section>
 
-</section>
+	<section class="section-pad">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-sm-12">
+
+					<div class="addon-header text-center">
+						<h2>Meet the team</h1>
+					</div>
+
+					<div class="row">
+
+
+
+					</div>
+
+				</h2>
+
+			</div>
+
+		</div>
+
+	</section>
+
+	<section class="section-pad alternative">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-sm-12">
+
+					<div class="addon-header text-center">
+						<h2>Our latest milestones</h1>
+					</div>
+
+					<div class="row">
+
+
+
+					</div>
+
+				</h2>
+
+			</div>
+
+		</div>
+
+	</section>
 
 @endsection
