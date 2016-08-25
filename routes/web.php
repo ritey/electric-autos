@@ -11,4 +11,4 @@
 |
 */
 
-Route::post('/', ['as' => 'home', 'uses' => 'HomeController@home']);
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
