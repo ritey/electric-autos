@@ -41,7 +41,7 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="{{ route('home') }}">Home</a></li>
-					<li><a href="#">Autos</a></li>
+					<li><a href="{{ route('cars.index') }}">Autos</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="caret"></span></a>
 						<ul class="dropdown-menu">

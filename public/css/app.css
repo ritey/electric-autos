@@ -99,6 +99,16 @@ body {
 		border-top: 1px solid #ebeded;
 	}
 
+.brands-section {
+	background-color: #66ad44;
+	color: #fff;
+	padding: 20px 0;
+}
+
+	.brands-section a {
+		color: #fff;
+	}
+
 #social-links {
 	background-color: #66ad44;
 	color: #fff;

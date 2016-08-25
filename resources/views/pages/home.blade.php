@@ -47,6 +47,52 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 
 				</section>
 
+				<section class="brands-section section-pad">
+
+					<div class="container">
+
+						<div class="row">
+
+								<div class="col-sm-12 col-md-12 text-center">
+
+									<div class="row">
+
+										<div class="col-sm-3 col-md-3">
+
+											<a href="{{ route('cars.brand.index' , ['brand' => 'tesla']) }}">Tesla</a>
+
+										</div>
+
+										<div class="col-sm-3 col-md-3">
+
+											<a href="{{ route('cars.brand.index' , ['brand' => 'toyota']) }}">Toyota</a>
+
+										</div>
+
+										<div class="col-sm-3 col-md-3">
+
+											<a href="{{ route('cars.brand.index' , ['brand' => 'bmw']) }}">BMW</a>
+
+										</div>
+
+										<div class="col-sm-3 col-md-3">
+
+											<a href="{{ route('cars.brand.index' , ['brand' => 'volkswagen']) }}">Volkswagen</a>
+
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</section>
+
 				<section class="section-pad">
 
 					<div class="container">

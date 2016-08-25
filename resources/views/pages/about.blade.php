@@ -5,7 +5,7 @@ About Electric Autos
 @endsection
 
 @section('metas')
-<meta name="description" value="" />
+<meta name="description" value="About Electric Autos, the electric used car directory with thousands of cars for sale." />
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
 <meta name="og:description" value="" />
 <meta name="og:title" value="" />

@@ -22,3 +22,5 @@ Route::get('/seller-faqs', ['as' => 'seller-faqs', 'uses' => 'HomeController@faq
 Route::get('/blog', ['as' => 'blog.index', 'uses' => 'BlogController@index']);
 Route::get('/blog/{slug}', ['as' => 'blog.post', 'uses' => 'BlogController@post']);
 Route::get('/cars', ['as' => 'cars.index', 'uses' => 'CarsController@index']);
+Route::get('/cars/{brand}', ['as' => 'cars.brand.index', 'uses' => 'CarsController@brand']);
+Route::get('/cars/{brand}/{slug}', ['as' => 'cars.brand.car', 'uses' => 'CarsController@post']);
