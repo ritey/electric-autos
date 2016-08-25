@@ -40,13 +40,13 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="{{ route('home') }}">Home</a></li>
-					<li><a href="{{ route('cars.index') }}">Autos</a></li>
-					<li class="dropdown">
+					<li class="{{ active_class(if_uri(['/']), 'active') }}"><a href="{{ route('home') }}">Home</a></li>
+					<li class="{{ active_class(if_uri_pattern(['cars','cars/*']), 'active') }}"><a href="{{ route('cars.index') }}">Autos</a></li>
+					<li class="{{ active_class(if_uri(['about','contact']), 'active') }} dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="{{ route('about') }}">About us</a></li>
-							<li><a href="{{ route('contact') }}">Contact us</a></li>
+							<li class="{{ active_class(if_uri(['about']), 'active') }}"><a href="{{ route('about') }}">About us</a></li>
+							<li class="{{ active_class(if_uri(['contact']), 'active') }}"><a href="{{ route('contact') }}">Contact us</a></li>
 							<li><a href="#">Something else here</a></li>
 							<li role="separator" class="divider"></li>
 							<li class="dropdown-header">Nav header</li>
