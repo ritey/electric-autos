@@ -5,12 +5,12 @@ Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | U
 @endsection
 
 @section('metas')
-<meta name="description" value="" />
+<meta name="description" value="Directory of used electric cars, filter for specific used electric cars by make, model, mileage etc" />
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
-<meta name="og:description" value="" />
-<meta name="og:title" value="" />
-<meta name="twitter:description" value="" />
-<meta name="twitter:title" value="" />
+<meta name="og:description" value="Directory of used electric cars, filter for specific used electric cars by make, model, mileage etc" />
+<meta name="og:title" value="Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars" />
+<meta name="twitter:description" value="Directory of used electric cars, filter for specific used electric cars by make, model, mileage etc" />
+<meta name="twitter:title" value="Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars" />
 @endsection
 
 @section('content')
@@ -49,7 +49,29 @@ Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | U
 
 			@endforeach
 
+			<div class="col-sm-12 col-md-12 text-center">
+
+				@include('partials.advert')
+
+			</div>
+
+			@foreach($vars['cars'] as $car)
+
+				<div class="col-sm-6 col-md-4">
+
+					@include('partials.card', ['car' => $car])
+
+				</div>
+
+			@endforeach
+
 			<div class="col-sm-12 col-md-12">
+
+			</div>
+
+			<div class="col-sm-12 col-md-12 text-center">
+
+				@include('partials.advert')
 
 			</div>
 

@@ -22,7 +22,7 @@ class CarsController extends BaseController
 		return view('pages.cars-post',compact('vars'));
 	}
 
-	public function post($slug)
+	public function post($brand = '', $slug)
 	{
 		$vars = [
 			'featured' => ['1',2,3],
