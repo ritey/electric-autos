@@ -8,10 +8,9 @@ class CarsController extends BaseController
 	public function index()
 	{
 		$vars = [
-			'featured' => ['1',2,3],
-			'latest' => ['1',2,3],
+			'cars' => ['1',2,3,4,5,6,7,8,9],
 		];
-		return view('pages.blog-index',compact('vars'));
+		return view('pages.cars-index',compact('vars'));
 	}
 
 	public function brand($brand)
@@ -20,7 +19,7 @@ class CarsController extends BaseController
 			'featured' => ['1',2,3],
 			'latest' => ['1',2,3],
 		];
-		return view('pages.blog-post',compact('vars'));
+		return view('pages.cars-post',compact('vars'));
 	}
 
 	public function post($slug)
@@ -29,6 +28,6 @@ class CarsController extends BaseController
 			'featured' => ['1',2,3],
 			'latest' => ['1',2,3],
 		];
-		return view('pages.blog-post',compact('vars'));
+		return view('pages.cars-post',compact('vars'));
 	}
 }

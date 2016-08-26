@@ -36,7 +36,7 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 
 								<p>0 cars for sale</p>
 
-								<p><a href="#" class="btn btn-success">Browse All Cars</a> Or <a href="#" class="btn btn-primary">Sell Your Car</a></p>
+								<p><a href="{{ route('cars.index') }}" class="btn btn-success">Browse All Cars</a> Or <a href="{{ route('start-selling') }}" class="btn btn-primary">Sell Your Car</a></p>
 							</div>
 
 						</div>

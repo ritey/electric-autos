@@ -32,6 +32,21 @@ class CreateUsersTable extends Migration
             $table->timestamp('updated_at')->nullable();
         });
 
+        Schema::create('makes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+        });
+
+        Schema::create('models', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('make_id');
+            $table->string('name');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+        });
+
         Schema::create('resources', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('enabled')->default(1)->index();
@@ -103,6 +118,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::drop('makes');
+        Schema::drop('models');
         Schema::drop('users');
         Schema::drop('user_types');
         Schema::drop('resources');
