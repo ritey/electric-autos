@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository as Cache;
+use CoderStudios\Library\VehicleDetails;
+use CoderStudios\Library\Resource;
+use CoderStudios\Models\Makes;
 
 class HomeController extends BaseController
 {
@@ -27,24 +30,27 @@ class HomeController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache)
+	public function __construct(Request $request, Cache $cache, VehicleDetails $vehicle, Resource $resource, Makes $makes)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
 		$this->basename = class_basename($this);
 		$this->request = $request;
 		$this->cache = $cache;
+		$this->vehicle = $vehicle;
+		$this->resource = $resource;
+		$this->makes = $makes;
 	}
 
 	public function home()
 	{
+		//$this->vehicle->scrape();
 		$key = $this->getKeyName(__function__);
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
 			$vars = [
-				'featured' => ['1',2,3],
-				'latest' => ['1',2,3],
+				'latest' => $this->resource->latest()->get(),
 			];
 			$view = view('pages.home', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));

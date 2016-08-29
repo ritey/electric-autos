@@ -95,6 +95,8 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 
 	</section>
 
+	@if(isset($vars['featured']))
+
 	<section class="section-pad">
 
 		<div class="container">
@@ -129,6 +131,10 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 
 	</section>
 
+	@endif
+
+	@if(isset($vars['latest']))
+
 	<section class="section-pad alternative">
 
 		<div class="container">
@@ -162,6 +168,8 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 		</div>
 
 	</section>
+
+	@endif
 
 @endsection
 

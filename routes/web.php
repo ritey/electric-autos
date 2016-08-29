@@ -19,8 +19,10 @@ Route::get('/privacy', ['as' => 'privacy', 'uses' => 'HomeController@privacy']);
 Route::get('/start-selling', ['as' => 'start-selling', 'uses' => 'HomeController@start']);
 Route::get('/seller-faqs', ['as' => 'seller-faqs', 'uses' => 'HomeController@faqs']);
 
+Route::get('/image.png', ['as' => 'image', 'uses' => 'ImageController@index']);
+
 Route::get('/blog', ['as' => 'blog.index', 'uses' => 'BlogController@index']);
 Route::get('/blog/{slug}', ['as' => 'blog.post', 'uses' => 'BlogController@post']);
-Route::get('/cars', ['as' => 'cars.index', 'uses' => 'CarsController@index']);
-Route::get('/cars/{brand}', ['as' => 'cars.brand.index', 'uses' => 'CarsController@brand']);
-Route::get('/cars/{brand}/{slug}', ['as' => 'cars.brand.car', 'uses' => 'CarsController@post']);
+Route::get('/used-cars', ['as' => 'cars.index', 'uses' => 'CarsController@index']);
+Route::get('/used-cars/{brand}', ['as' => 'cars.brand.index', 'uses' => 'CarsController@brand']);
+Route::get('/used-cars/{brand}/{slug}', ['as' => 'cars.brand.car', 'uses' => 'CarsController@post']);

@@ -4,7 +4,7 @@ namespace CoderStudios\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tweets extends Model
+class Uploads extends Model
 {
 
     /**
@@ -19,7 +19,7 @@ class Tweets extends Model
     *
     * @var  string
     */
-    protected $table = 'tweets';
+    protected $table = 'uploads';
 
     /**
     * The attributes that should be hidden from arrays.
@@ -56,49 +56,12 @@ class Tweets extends Model
     */
     protected $fillable = [
         'enabled',
-        'name',
-        'tweet',
-        'tweeted_at',
-        'next_at',
+        'user_id',
+        'folder',
+        'extension',
+        'filename',
+        'maskname',
         'updated_at',
     ];
-
-   	/**
-	 * Enabled filter
-	 * @param  $query
-	 * @param  $enabled
-	 * @return collection
-	 */
-	public function scopeEnabled($query, $enabled = 1)
-	{
-		$query->where('enabled','=',$enabled);
-	}
-
-	/**
-	 * Ordered filter
-	 * @param  $query
-	 * @param  $field
-	 * @param  $direction
-	 * @return collection
-	 */
-	public function scopeOrdered($query, $field = 'sort_order' , $direction = 'ASC')
-	{
-		$query->orderBy($field,$direction);
-	}
-
-	/**
-	 * Set enabled attribute
-	 * @param  $value
-	 * @return collection
-	 */
-	public function setEnabledAttribute($value)
-	{
-		if (empty($value)) {
-			$this->attributes['enabled'] = 0;
-		} else {
-			$this->attributes['enabled'] = $value;
-		}
-	}
-
 
 }

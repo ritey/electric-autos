@@ -16,11 +16,36 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->uuid('user_id');
-            $table->integer('user_type_id');
+            $table->integer('user_type_id')->default(1)->nullable()->index();
+            $table->integer('dealer_id')->nullable()->index();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+        });
+
+        Schema::create('dealers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->uuid('dealer_id')->nullable()->index();
+            $table->integer('package_id')->nullable()->index();
+            $table->string('name',128);
+            $table->string('email',128)->nullable();
+            $table->string('phone',32)->nullable();
+            $table->string('mobile',32)->nullable();
+            $table->string('location',64)->nullable();
+            $table->string('website',96)->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+        });
+
+        Schema::create('packages', function (Blueprint $table) {
+            $table->increments('id');
+            $table->boolean('serialized')->default(0);
+            $table->string('package_group')->index();
+            $table->string('name')->index();
+            $table->text('value');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
         });
@@ -52,7 +77,11 @@ class CreateUsersTable extends Migration
             $table->boolean('enabled')->default(1)->index();
             $table->boolean('sold')->default(0)->index();
             $table->integer('sort_order')->default(0)->index();
-            $table->integer('car_type_id')->index();
+            $table->integer('car_type_id')->index()->nullable();
+            $table->integer('user_id')->index();
+            $table->integer('dealer_id')->index();
+            $table->integer('make_id')->index();
+            $table->integer('model_id')->index();
             $table->string('name',128);
             $table->float('price')->nullable()->index();
             $table->string('fuel',8)->nullable()->index();
@@ -106,7 +135,8 @@ class CreateUsersTable extends Migration
             $table->string('tweet',140)->nullable();
             $table->timestamp('tweeted_at')->nullable();
             $table->timestamp('next_at')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
 
     }
@@ -118,6 +148,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::drop('dealers');
+        Schema::drop('packages');
         Schema::drop('makes');
         Schema::drop('models');
         Schema::drop('users');

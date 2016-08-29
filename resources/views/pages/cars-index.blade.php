@@ -23,7 +23,7 @@ Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | U
 
 	<div class="row">
 
-		<div class="col-sm-4">
+		<div class="col-sm-3">
 
 			<h3>Filters</h3>
 
@@ -31,7 +31,7 @@ Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | U
 
 		</div>
 
-		<div class="col-sm-8">
+		<div class="col-sm-9">
 
 			<div class="col-sm-12 col-md-12">
 
