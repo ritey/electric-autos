@@ -7,6 +7,7 @@ use Illuminate\Contracts\Cache\Repository as Cache;
 use CoderStudios\Library\VehicleDetails;
 use CoderStudios\Library\Resource;
 use CoderStudios\Models\Makes;
+use CoderStudios\Models\Models;
 
 class HomeController extends BaseController
 {
@@ -30,7 +31,7 @@ class HomeController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache, VehicleDetails $vehicle, Resource $resource, Makes $makes)
+	public function __construct(Request $request, Cache $cache, VehicleDetails $vehicle, Resource $resource, Models $models)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
@@ -39,7 +40,7 @@ class HomeController extends BaseController
 		$this->cache = $cache;
 		$this->vehicle = $vehicle;
 		$this->resource = $resource;
-		$this->makes = $makes;
+		$this->models = $models;
 	}
 
 	public function home()

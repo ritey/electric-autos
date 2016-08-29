@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use CoderStudios\Models\Makes;
+use CoderStudios\Models\Models;
 use CoderStudios\Library\Resource;
 
 class CarsController extends BaseController
@@ -14,7 +15,7 @@ class CarsController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes)
+	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes, Models $models)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
@@ -23,12 +24,16 @@ class CarsController extends BaseController
 		$this->cache = $cache;
 		$this->resource = $resource;
 		$this->makes = $makes;
+		$this->models = $models;
 	}
 
 	public function index()
 	{
 		$vars = [
-			'cars' => $this->resource->latest(12)->get(),
+			'cars' 	=> $this->resource->latest(12)->get(),
+			'brand' => '',
+			'makes' => $this->makes->orderBy('name','ASC')->get(),
+			'models'	=> '',
 		];
 		return view('pages.cars-index',compact('vars'));
 	}
@@ -48,7 +53,9 @@ class CarsController extends BaseController
 
 			$vars = [
 				'brand' => $brand,
+				'models'	=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
 				'cars' => $this->resource->branded($brand->id,12)->get(),
+				'makes' => $this->makes->orderBy('name','ASC')->get(),
 			];
 			$view = view('pages.cars-index',compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
@@ -71,6 +78,8 @@ class CarsController extends BaseController
 			}
 
 			$vars = [
+				'makes' => $this->makes->orderBy('name','ASC')->get(),
+				'models'	=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
 				'brand' => $brand,
 				'car' => $car,
 				'back_url' => '',
