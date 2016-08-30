@@ -123,6 +123,15 @@ class VehicleDetails {
 			'http://www.pistonheads.com/classifieds?Category=used-cars&M=2654&M=2655&M=1202',
 		];
 
+		$folders = Storage::directories('uploads');
+
+		foreach($folders as $folder) {
+			Storage::deleteDirectory($folder);
+		}
+
+		$this->upload->truncate();
+		$this->resource->truncate();
+
 		foreach($pages as $type) {
 
 			$crawler = $this->scraper->request('GET',$type);

@@ -1,4 +1,4 @@
-<h1>Advert</h1>
+<p class="text-center">Advert</p>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- electronic autos -->
 <ins class="adsbygoogle"

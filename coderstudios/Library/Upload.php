@@ -16,4 +16,9 @@ class Upload {
 		return $this->upload->create($data);
 	}
 
+	public function all()
+	{
+		return $this->upload->all();
+	}
+
 }
