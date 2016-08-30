@@ -43,4 +43,9 @@ class Resource {
 	{
 		return $this->resource->truncate();
 	}
+
+	public function paginate($perPage = 12)
+	{
+		return $this->resource->paginate($perPage);
+	}
 }

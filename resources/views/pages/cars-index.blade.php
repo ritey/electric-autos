@@ -17,69 +17,63 @@ Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | U
 
 @include('partials.section-title', ['title' => 'Electric car classifieds'])
 
-<section class="">
+<section class="section-pad">
 
-<div class="container">
+	<div class="container">
 
-	<div class="row">
+		<div class="row">
 
-		<div class="col-sm-3">
+			<div class="col-sm-3">
 
-			<h3>Filters</h3>
+				<h3>Filters</h3>
 
-			@include('partials.search-form')
-
-		</div>
-
-		<div class="col-sm-9">
-
-			<div class="col-sm-12 col-md-12">
-
-				<h3>{{ count($vars['cars']) }} Used electric cars</h3>
+				@include('partials.search-form')
 
 			</div>
 
-			@foreach($vars['cars'] as $car)
+			<div class="col-sm-9">
 
-				<div class="col-sm-6 col-md-4">
+				<div class="col-sm-12 col-md-12">
 
-					@include('partials.card', ['car' => $car])
+					<h3>{{ $vars['total_cars'] }} Used electric cars</h3>
 
 				</div>
 
-			@endforeach
+				@foreach($vars['cars'] as $collection)
 
-			<div class="col-sm-12 col-md-12 text-center">
+					@foreach($collection as $car)
 
-				@include('partials.advert')
+						<div class="col-sm-6 col-md-4">
 
-			</div>
+							@include('partials.card', ['car' => $car])
 
-			@foreach($vars['cars'] as $car)
+						</div>
 
-				<div class="col-sm-6 col-md-4">
+					@endforeach
 
-					@include('partials.card', ['car' => $car])
+					<div class="col-sm-12 col-md-12 text-center">
+
+						@include('partials.advert')
+
+					</div>
+
+				@endforeach
+
+				<div class="row">
+
+					<div class="col-sm-12 text-center">
+
+						{!! $vars['cars_collection']->links() !!}
+
+					</div>
 
 				</div>
-
-			@endforeach
-
-			<div class="col-sm-12 col-md-12">
-
-			</div>
-
-			<div class="col-sm-12 col-md-12 text-center">
-
-				@include('partials.advert')
 
 			</div>
 
 		</div>
 
 	</div>
-
-</div>
 
 </section>
 

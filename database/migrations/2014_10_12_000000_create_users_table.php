@@ -91,7 +91,7 @@ class CreateUsersTable extends Migration
             $table->string('gearbox')->nullable()->index();
             $table->integer('doors')->nullable()->index();
             $table->string('slug',128)->nullable()->index();
-            $table->string('mileage',12)->nullable()->index();
+            $table->string('mileage',32)->nullable()->index();
             $table->text('content')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();

@@ -1,16 +1,16 @@
 @extends('layouts.master')
 
 @section('page_title')
-About Electric Autos
+Electric Autos Blog
 @endsection
 
 @section('metas')
-<meta name="description" value="" />
+<meta name="description" value="Electric Autos Blog" />
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
-<meta name="og:description" value="" />
-<meta name="og:title" value="" />
-<meta name="twitter:description" value="" />
-<meta name="twitter:title" value="" />
+<meta name="og:description" value="Electric Autos Blog" />
+<meta name="og:title" value="Electric Autos Blog" />
+<meta name="twitter:description" value="Electric Autos Blog" />
+<meta name="twitter:title" value="Electric Autos Blog" />
 @endsection
 
 @section('content')

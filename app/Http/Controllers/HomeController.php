@@ -75,6 +75,21 @@ class HomeController extends BaseController
 		return $view;
 	}
 
+	public function cookie()
+	{
+		$key = $this->getKeyName(__function__);
+		if ($this->cache->has($key)) {
+			$view = $this->cache->get($key);
+		} else {
+			$vars = [
+				''
+			];
+			$view = view('pages.cookie', compact('vars'))->render();
+			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
+		}
+		return $view;
+	}
+
 	public function contact()
 	{
 		$key = $this->getKeyName(__function__);

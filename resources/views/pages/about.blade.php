@@ -7,10 +7,10 @@ About Electric Autos
 @section('metas')
 <meta name="description" value="About Electric Autos, the electric used car directory with thousands of cars for sale." />
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
-<meta name="og:description" value="" />
-<meta name="og:title" value="" />
-<meta name="twitter:description" value="" />
-<meta name="twitter:title" value="" />
+<meta name="og:description" value="About Electric Autos, the electric used car directory with thousands of cars for sale." />
+<meta name="og:title" value="About Electric Autos" />
+<meta name="twitter:description" value="About Electric Autos, the electric used car directory with thousands of cars for sale." />
+<meta name="twitter:title" value="About Electric Autos" />
 @endsection
 
 @section('content')

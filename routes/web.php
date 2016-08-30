@@ -15,7 +15,8 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 Route::get('/about', ['as' => 'about', 'uses' => 'HomeController@about']);
 Route::get('/contact', ['as' => 'contact', 'uses' => 'HomeController@contact']);
 Route::get('/terms', ['as' => 'terms', 'uses' => 'HomeController@terms']);
-Route::get('/privacy', ['as' => 'privacy', 'uses' => 'HomeController@privacy']);
+Route::get('/privacy-policy', ['as' => 'privacy', 'uses' => 'HomeController@privacy']);
+Route::get('/cookie-policy', ['as' => 'cookie', 'uses' => 'HomeController@cookie']);
 Route::get('/start-selling', ['as' => 'start-selling', 'uses' => 'HomeController@start']);
 Route::get('/seller-faqs', ['as' => 'seller-faqs', 'uses' => 'HomeController@faqs']);
 
