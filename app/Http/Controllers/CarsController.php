@@ -63,7 +63,7 @@ class CarsController extends BaseController
 		return $view;
 	}
 
-	public function post($brand = '', $slug)
+	public function post($brand = '', $model = '', $slug)
 	{
 		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $slug);
 		if ($this->cache->has($key)) {

@@ -123,15 +123,6 @@ class VehicleDetails {
 			'http://www.pistonheads.com/classifieds?Category=used-cars&M=2654&M=2655&M=1202',
 		];
 
-		$folders = Storage::directories('uploads');
-
-		foreach($folders as $folder) {
-			Storage::deleteDirectory($folder);
-		}
-
-		$this->upload->truncate();
-		$this->resource->truncate();
-
 		foreach($pages as $type) {
 
 			$crawler = $this->scraper->request('GET',$type);
@@ -141,7 +132,6 @@ class VehicleDetails {
 			$ads = $dom->filter('div.result-contain')->each( function (Crawler $node, $i) {
 
 				$details = [];
-
 				$item = $node->filter('div.ad-listing div.listing-headline a > h3');
 				$details['title'] = '';
 				$details['price'] = '';
@@ -154,7 +144,15 @@ class VehicleDetails {
 				}
 
 				$item = $node->filter('div.ad-listing div.listing-headline .price');
+				$details['currency'] = 'Pound';
 				if (count($item)) {
+					$details['currency'] = 'Pound';
+					if (strpos($item->text(), '€')) {
+						$details['currency'] = 'Euro';
+					}
+					if (strpos($item->text(), '£')) {
+						$details['currency'] = 'Pound';
+					}
 					$details['price'] = str_replace('€','',str_replace('£','',$item->text()));
 				}
 
@@ -186,8 +184,18 @@ class VehicleDetails {
 					$resource['name'] = !empty($ad['title']) ? $ad['title'] : '';
 					$resource['slug'] = $this->makeSlug($resource['name']);
 					$resource['price'] = $ad['price'];
-					$resource['make_id'] = 1;
+					$resource['currency'] = $ad['currency'];
+					$resource['make_id'] = 8;
 					$resource['model_id'] = 1;
+					if (strpos(strtolower($resource['name']),' model s ')) {
+						$resource['model_id'] = 11;
+					}
+					if (strpos(strtolower($resource['name']),' model x ')) {
+						$resource['model_id'] = 12;
+					}
+					if (strpos(strtolower($resource['name']),' roadster ')) {
+						$resource['model_id'] = 13;
+					}
 					$resource['price'] = str_replace(',','',$ad['price']);
 					$resource['mileage'] = isset($ad['specs'][0]) ? $ad['specs'][0] : '';
 					$resource['gearbox'] = isset($ad['specs'][3]) ? $ad['specs'][3] : '';
@@ -199,22 +207,42 @@ class VehicleDetails {
 					$resource['content'] = $this->strip($dom->text());
 
 					$dom = $crawler2->filter('.contact-panel--about__dealer');
-					$dealer['name'] = $this->strip($dom->text());
+					$dealer['name'] = '';
+					if (count($dom)) {
+						$dealer['name'] = $this->strip($dom->text());
+					}
 
 					$dom = $crawler2->filter('.contact-panel--about__location');
 					$dealer['location'] = $this->strip($dom->text());
 
 					$dom = $crawler2->filter('.phone-numbers');
-					$phone = explode(' ',trim(str_replace('Call:','',$this->strip($dom->text()))));
-
-					$dealer['phone'] = isset($phone[0]) ? $phone[0] : '';
-					$dealer['mobile'] = isset($phone[2]) ? $phone[2] : '';
+					$dealer['phone'] = '';
+					$dealer['mobile'] = '';
+					if (count($dom)) {
+						$phone = explode(' ',trim(str_replace('Call:','',$this->strip($dom->text()))));
+						$dealer['phone'] = isset($phone[0]) ? $phone[0] : '';
+						$dealer['mobile'] = isset($phone[2]) ? $phone[2] : '';
+					}
 
 					$dom = $crawler2->filter('.contact-panel--about__dealer-link');
-					$dealer['website'] = $this->strip($dom->attr('href'));
+					$dealer['website'] = '';
+					if (count($dom)) {
+						$dealer['website'] = $this->strip($dom->attr('href'));
+					}
 
-					if (!$existing_dealer = $this->dealer->dealerExists($dealer['name'])) {
+					//dd(['ad' => $ad, 'resource' => $resource, 'dealer' => $dealer]);
+
+					if (!empty($dealer['name'])) {
+						$resource['private'] = 0;
+						if (!$existing_dealer = $this->dealer->dealerExists($dealer['name'])) {
+							$dealer['dealer_id'] = $this->Uuid(openssl_random_pseudo_bytes(16));
+							$existing_dealer = $this->dealer->create($dealer);
+						}
+					} else {
+						// Private sellers are still created as a dealer, just Private in name
+						$dealer['name'] = 'Private-' . mt_rand(1,100) . '-' . date('YmdHis');
 						$dealer['dealer_id'] = $this->Uuid(openssl_random_pseudo_bytes(16));
+						$resource['private'] = 1;
 						$existing_dealer = $this->dealer->create($dealer);
 					}
 

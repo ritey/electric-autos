@@ -57,6 +57,7 @@ class Resources extends Model
     protected $fillable = [
         'enabled',
         'sold',
+        'private',
         'sort_order',
         'car_type_id',
         'user_id',
@@ -73,6 +74,7 @@ class Resources extends Model
         'doors',
         'slug',
         'mileage',
+        'currency',
         'content',
         'updated_at',
     ];
@@ -91,6 +93,11 @@ class Resources extends Model
     public function make()
     {
         return $this->belongsTo('CoderStudios\Models\Makes','make_id','id');
+    }
+
+    public function model()
+    {
+        return $this->belongsTo('CoderStudios\Models\Models','model_id','id');
     }
 
     public function dealer()

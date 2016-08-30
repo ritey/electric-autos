@@ -45,7 +45,7 @@ class HomeController extends BaseController
 
 	public function home()
 	{
-		$this->vehicle->scrape();
+		//$this->vehicle->scrape();
 		$key = $this->getKeyName(__function__);
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);

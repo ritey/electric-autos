@@ -38,4 +38,9 @@ class Resource {
 	{
 		return $this->resource->enabled()->where('slug',$slug)->first();
 	}
+
+	public function truncate()
+	{
+		return $this->resource->truncate();
+	}
 }

@@ -21,4 +21,9 @@ class Upload {
 		return $this->upload->all();
 	}
 
+	public function truncate()
+	{
+		return $this->upload->truncate();
+	}
+
 }
