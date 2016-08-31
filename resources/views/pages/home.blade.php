@@ -106,7 +106,7 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 				<div class="col-sm-12">
 
 					<div class="addon-header">
-						<h2>Featured electric cars</h2>
+						<h2>Featured electric cars for sale</h2>
 					</div>
 
 					<div class="row">
@@ -144,7 +144,7 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 				<div class="col-sm-12">
 
 					<div class="addon-header">
-						<h2>Latest electric autos</h2>
+						<h2>Latest electric autos for sale</h2>
 					</div>
 
 					<div class="row">

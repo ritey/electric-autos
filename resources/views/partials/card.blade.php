@@ -28,7 +28,7 @@
 				Price
 			</li>
 			<li class="list-group-item">
-				<span class="badge">{{ $car->miles or 'Mileage' }}</span>
+				<span class="badge">{{ $car->mileage or 'Mileage' }}</span>
 				Mileage
 			</li>
 			<li class="list-group-item">
