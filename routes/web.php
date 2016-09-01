@@ -23,6 +23,8 @@ Route::get('/start-selling', ['as' => 'start-selling', 'uses' => 'HomeController
 Route::get('/start-selling/car-details', ['as' => 'start-selling.details', 'uses' => 'AdvertController@details']);
 Route::get('/seller-faqs', ['as' => 'seller-faqs', 'uses' => 'HomeController@faqs']);
 
+Route::get('/sitemap.xml', ['as' => 'sitemap', 'uses' => 'SitemapController@sitemap']);
+
 Route::get('/image.png', ['as' => 'image', 'uses' => 'ImageController@index']);
 
 Route::get('/blog', ['as' => 'blog.index', 'uses' => 'BlogController@index']);

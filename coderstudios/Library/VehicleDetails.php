@@ -73,7 +73,7 @@ class VehicleDetails {
 
 	private function makeSlug($text)
 	{
-		return str_replace(',','',str_replace(')','',str_replace('(','',str_replace('/','-',str_replace(' ','-',$text)))));
+		return str_replace('*','-',str_replace('&','-',str_replace(',','',str_replace(')','',str_replace('(','',str_replace('/','-',str_replace(' ','-',$text)))))));
 	}
 
 	protected function getDoc($path)
