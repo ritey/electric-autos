@@ -56,8 +56,8 @@
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="">Create an account</a></li>
-					<li><a href="">Login</a></li>
+					<li><a href="{{ route('register') }}">Create an account</a></li>
+					<li><a href="{{ route('login') }}">Login</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>

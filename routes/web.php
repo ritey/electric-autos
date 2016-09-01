@@ -12,12 +12,15 @@
 */
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
+Route::get('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+Route::get('/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
 Route::get('/about', ['as' => 'about', 'uses' => 'HomeController@about']);
 Route::get('/contact', ['as' => 'contact', 'uses' => 'HomeController@contact']);
 Route::get('/terms', ['as' => 'terms', 'uses' => 'HomeController@terms']);
 Route::get('/privacy-policy', ['as' => 'privacy', 'uses' => 'HomeController@privacy']);
 Route::get('/cookie-policy', ['as' => 'cookie', 'uses' => 'HomeController@cookie']);
 Route::get('/start-selling', ['as' => 'start-selling', 'uses' => 'HomeController@start']);
+Route::get('/start-selling/car-details', ['as' => 'start-selling.details', 'uses' => 'AdvertController@details']);
 Route::get('/seller-faqs', ['as' => 'seller-faqs', 'uses' => 'HomeController@faqs']);
 
 Route::get('/image.png', ['as' => 'image', 'uses' => 'ImageController@index']);
