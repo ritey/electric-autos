@@ -92,7 +92,7 @@ Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | U
 
 				</div>
 
-				<p>{{ $vars['car']->content }}</p>
+				{!! str_replace('incl.</p><p>','incl.',"<p>" . str_replace( ".", '.</p><p>', $vars['car']->content) . "</p>") !!}
 
 			</div>
 
