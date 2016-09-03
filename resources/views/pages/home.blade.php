@@ -28,11 +28,11 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 						<div class="row text-center">
 
 							<div class="heading">
-								<h1>Electric cars for sale</h1>
+								<h1>Electric and hybrid cars for sale</h1>
 							</div>
 
 							<div class="intro">
-								<p>Browse the current electric autos for sale using the filters below. Sell your electric car for FREE.</p>
+								<p>Browse the current electric and hybrid autos for sale using the filters below. Sell your hybrid/electric car for FREE.</p>
 
 								<p>0 cars for sale</p>
 
@@ -63,25 +63,25 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.brand.index' , ['brand' => 'tesla']) }}">Tesla</a>
+							<a href="{{ route('cars.brand.index' , ['brand' => 'tesla']) }}" title="Electric Tesla for sale">Tesla</a>
 
 						</div>
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.brand.index' , ['brand' => 'toyota']) }}">Toyota</a>
+							<a href="{{ route('cars.brand.index' , ['brand' => 'toyota']) }}" title="Electric Toyota for sale">Toyota</a>
 
 						</div>
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.brand.index' , ['brand' => 'bmw']) }}">BMW</a>
+							<a href="{{ route('cars.brand.index' , ['brand' => 'bmw']) }}" title="Electric BMW for sale">BMW</a>
 
 						</div>
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.brand.index' , ['brand' => 'volkswagen']) }}">Volkswagen</a>
+							<a href="{{ route('cars.brand.index' , ['brand' => 'volkswagen']) }}" title="Electric Volkswagen for sale">Volkswagen</a>
 
 						</div>
 
@@ -106,7 +106,7 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 				<div class="col-sm-12">
 
 					<div class="addon-header">
-						<h2>Featured electric cars for sale</h2>
+						<h2>Featured electric and hybrid cars for sale</h2>
 					</div>
 
 					<div class="row">
@@ -144,7 +144,7 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 				<div class="col-sm-12">
 
 					<div class="addon-header">
-						<h2>Latest electric autos for sale</h2>
+						<h2>Latest electric and hybrid autos for sale</h2>
 					</div>
 
 					<div class="row">
@@ -171,6 +171,37 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 
 	@endif
 
+	<section class="section-pad">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-sm-12">
+
+					<div class="addon-header">
+						<h2>Buying electric cars and selling electric cars</h2>
+					</div>
+
+					<div class="row">
+
+						<div class="col-sm-12">
+
+							<p>The <strong>UK electric car</strong> scene is growing quickly with a range of <strong>hybrid electric cars</strong> and full <strong>electric cars</strong> now available.</p>
+
+							<p>Hybrid and plugin electric cars use batteries to help reduce CO2 emissions, hybrid cars also use the common combustion engine.</p>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
 @endsection
 
 @section('footer')
