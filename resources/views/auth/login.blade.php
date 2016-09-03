@@ -23,65 +23,59 @@ Login to Electric Autos
 
 			<div class="col-sm-12 col-md-12">
 
-				<div class="">
+				<div class="row">
 
-					<div class="row">
+					<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 
-						<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+						<div class="box login">
 
-							<div class="box login">
+							<div class="login-description text-center">
+								Welcome Back
+								<p>You can sign in with your email.</p>
+							</div>
+							<form action="{{ route('login') }}" method="POST" class="form">
+								{!! csrf_field() !!}
 
-								<div class="login-description text-center">
-									Welcome Back
-									<p>You can sign in with your email.</p>
+								<div class="form-group">
+
+									<div class="group-control">
+
+										<input type="text" name="username" id="username" value="" class="form-control" placeholder="Username" required="" aria-required="true" autofocus="">
+									</div>
 								</div>
-								<form action="" method="post" class="form">
-									<input type="hidden" name="" value="" />
 
-									<div class="form-group">
+								<div class="form-group">
 
-										<div class="group-control">
+									<div class="group-control">
 
-											<input type="text" name="username" id="username" value="" class="form-control" placeholder="Username" required="" aria-required="true" autofocus="">
-										</div>
+										<input type="password" name="password" id="password" value="" placeholder="Password" class="form-control" required="" aria-required="true">
 									</div>
 
-									<div class="form-group">
+								</div>
 
-										<div class="group-control">
+								<div class="checkbox">
 
-											<input type="password" name="password" id="password" value="" placeholder="Password" class="form-control" required="" aria-required="true">
-										</div>
+									<label>
+										<input id="remember" type="checkbox" name="remember" value="yes">
+										Remember me </label>
+								</div>
 
-									</div>
+								<div class="form-group text-right">
 
-									<div class="checkbox">
+									<button type="submit" class="btn btn-success">Log in </button>
 
-										<label>
-											<input id="remember" type="checkbox" name="remember" value="yes">
-											Remember me </label>
-									</div>
+								</div>
 
-									<div class="form-group text-right">
+							</form>
 
-										<button type="submit" class="btn btn-success">Log in </button>
+						</div>
 
-									</div>
+						<div class="form-links">
 
-								</form>
-
-							</div>
-
-							<div class="form-links">
-								<ul>
-									<li>
-										<a href="{{ route('password-reset') }}">Forgot your password?</a>
-									</li>
-									<li>
-										<a href="{{ route('register') }}">Don't have an account?</a>
-									</li>
-								</ul>
-							</div>
+							<ul>
+								<li><a href="{{ route('password-reset') }}">Forgot your password?</a></li>
+								<li><a href="{{ route('register') }}">Don't have an account?</a></li>
+							</ul>
 
 						</div>
 

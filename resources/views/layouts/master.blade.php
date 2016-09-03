@@ -110,6 +110,7 @@
 					<ul class="list-unstyled">
 						<li><a href="{{ route('terms') }}">Terms &amp; Conditions</a></li>
 						<li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
+						<li><a href="{{ route('cookie') }}">Cookie Policy</a></li>
 						<li><a href="{{ route('seller-faqs') }}">Sellers FAQ</a></li>
 					</ul>
 
