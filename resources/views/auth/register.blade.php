@@ -15,7 +15,7 @@ Register an account on Electric Autos
 
 @section('content')
 
-<section class="">
+<section class="main">
 
 	<div class="container">
 
@@ -147,7 +147,6 @@ Register an account on Electric Autos
 											</div>
 										</div>
 									</div>
-									<input type="hidden" name="69e78be0c4b064e597177097e85cd8c5" value="1">
 								</form>
 							</div>
 						</div>

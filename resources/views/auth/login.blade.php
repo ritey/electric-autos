@@ -1,21 +1,21 @@
 @extends('layouts.master')
 
 @section('page_title')
-About Electric Autos
+Login to Electric Autos
 @endsection
 
 @section('metas')
-<meta name="description" value="About Electric Autos, the electric used car directory with thousands of cars for sale." />
+<meta name="description" value="Create an account and login to Electric Autos to manage your car adverts" />
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
-<meta name="og:description" value="About Electric Autos, the electric used car directory with thousands of cars for sale." />
-<meta name="og:title" value="About Electric Autos" />
-<meta name="twitter:description" value="About Electric Autos, the electric used car directory with thousands of cars for sale." />
-<meta name="twitter:title" value="About Electric Autos" />
+<meta name="og:description" value="Create an account and login to Electric Autos to manage your car adverts." />
+<meta name="og:title" value="Login to Electric Autos" />
+<meta name="twitter:description" value="Create an account and login to Electric Autos to manage your car adverts" />
+<meta name="twitter:title" value="Login to Electric Autos" />
 @endsection
 
 @section('content')
 
-<section class="">
+<section class="main">
 
 	<div class="container">
 
@@ -29,7 +29,7 @@ About Electric Autos
 
 						<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 
-							<div class="">
+							<div class="box login">
 
 								<div class="login-description text-center">
 									Welcome Back
@@ -58,13 +58,13 @@ About Electric Autos
 									<div class="checkbox">
 
 										<label>
-											<input id="remember" type="checkbox" name="remember" class="form-control" value="yes">
+											<input id="remember" type="checkbox" name="remember" value="yes">
 											Remember me </label>
 									</div>
 
 									<div class="form-group text-right">
 
-										<button type="submit" class="btn btn-success btn-lg btn-block btn-login">Log in </button>
+										<button type="submit" class="btn btn-success">Log in </button>
 
 									</div>
 
@@ -75,13 +75,10 @@ About Electric Autos
 							<div class="form-links">
 								<ul>
 									<li>
-										<a href="/profile/edit?view=reset">Forgot your password?</a>
+										<a href="{{ route('password-reset') }}">Forgot your password?</a>
 									</li>
 									<li>
-										<a href="/profile/edit?view=remind">Forgot your username?</a>
-									</li>
-									<li>
-										<a href="/create-an-account">Don't have an account?</a>
+										<a href="{{ route('register') }}">Don't have an account?</a>
 									</li>
 								</ul>
 							</div>

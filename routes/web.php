@@ -13,6 +13,8 @@
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 Route::get('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+Route::post('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
+Route::get('/password-reset', ['as' => 'password-reset', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
 Route::get('/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
 Route::get('/about', ['as' => 'about', 'uses' => 'HomeController@about']);
 Route::get('/contact', ['as' => 'contact', 'uses' => 'HomeController@contact']);

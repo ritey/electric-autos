@@ -13,6 +13,144 @@ body {
 	padding-bottom:40px;
 }
 
+.box {
+	background: #fff;
+	padding: 20px;
+	border-radius: 2px;
+	margin-bottom: 30px;
+}
+
+section.main {
+	padding: 100px 0 70px;
+}
+
+.login.box {
+	padding: 53px 70px 30px;
+	margin-bottom: 40px;
+	margin-top: 0;
+}
+
+.login {
+
+}
+
+	.login .login-description {
+		font-size: 24px;
+		line-height: 1;
+		margin-bottom: 30px;
+		color: #66ad44;
+		font-weight: 400;
+	}
+
+.login .login-description p {
+	font-size:14px;
+	color:#9f9f9f;
+	margin-top:22px;
+}
+.login .group-control input {
+	border:1px solid #f0f0f0;
+	outline:0;
+	min-height:46px;
+}
+.login .group-control input:focus {
+	border:1px solid #b7e4a3;
+	outline:0;
+	box-shadow:none;
+}
+.login .form-group button.btn.btn-success {
+	box-shadow:0 2px #508836;
+	color:#fff;
+	margin-left:10px;
+	display:inline-block;
+	width:auto;
+	margin-top:3px;
+}
+.login .checkbox label {
+	color:#c8c8c8;
+}
+.login .checkbox label input {
+	border-color:#c8c8c8;
+}
+
+
+.registration .form-heading {
+	margin-bottom:23px;
+}
+.registration .form-heading h3 {
+	color:#66ad44;
+	font-size:24px;
+	font-weight:400;
+	margin-bottom:15px;
+	margin-top:0;
+}.registration
+.registration .form-heading p {
+	font-size:14px;
+	line-height:20px;
+	color:#9f9f9f;
+}
+.registration .form-group {
+	margin-bottom:25px;
+}
+.registration .form-group label {
+	font-weight:400;
+	color:#747373;
+}
+.registration .form-group .btn.btn-lg {
+	border-radius:4px;
+	box-shadow:0 2px #696969;
+	color:#fff;
+	font-weight:400;
+	padding:8px 20px;
+	font-size:16px;
+}
+.registration .form-group .btn.btn-success {
+	box-shadow:0 2px #508836;
+	color:#fff;
+	margin-left:10px;
+}
+.registration .group-control input {
+	border:1px solid #f0f0f0;
+	outline:0;
+	min-height:46px;
+}
+.registration .group-control input:focus {
+	border:1px solid #b7e4a3;
+	outline:0;
+	box-shadow:none;
+}
+.registration .sign-in-text {
+	margin-top:12px;
+	color:#c8c8c8;
+	font-size:14px;
+}
+.registration .sign-in-text a {
+	color:#8dc63f;
+}
+.registration .register-buttons {
+	margin-top:22px;
+}
+
+.form-links {
+	margin-top:30px;
+}
+.form-links ul {
+	list-style:none;
+	padding:0;
+	margin:0 -5px;
+	text-align:center;
+}
+.form-links ul>li {
+	display:inline-block;
+	margin:0 5px;
+}
+.form-links ul>li a {
+	color:#9f9f9f;
+	font-size:16px;
+}
+.form-links ul>li a:hover {
+	color:#79ab37;
+}
+
 .hero {
 	background-color: #414857;
 	color:#fff;

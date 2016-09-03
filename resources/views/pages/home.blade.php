@@ -1,16 +1,16 @@
 @extends('layouts.master')
 
 @section('page_title')
-Electric Autos | Used Electric Cars For Sale | Second hand electric cars
+Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric cars | Second hand hybrid Cars
 @endsection
 
 @section('metas')
 <meta name="description" value="Electric and hybrid new and used cars for sale. Find the right used electric car for you at electric autos." />
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
 <meta name="og:description" value="Electric and hybrid new and used cars for sale. Find the right used electric car for you at electric autos." />
-<meta name="og:title" value="Electric Autos | Used Electric Cars For Sale | Second hand electric cars" />
+<meta name="og:title" value="Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric cars | Second hand hybrid Cars" />
 <meta name="twitter:description" value="Electric and hybrid new and used cars for sale. Find the right used electric car for you at electric autos." />
-<meta name="twitter:title" value="Electric Autos | Used Electric Cars For Sale | Second hand electric cars" />
+<meta name="twitter:title" value="Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric cars | Second hand hybrid Cars" />
 @endsection
 
 @section('content')
@@ -36,7 +36,7 @@ Electric Autos | Used Electric Cars For Sale | Second hand electric cars
 
 								<p>0 cars for sale</p>
 
-								<p><a href="{{ route('cars.index') }}" class="btn btn-success">Browse All Cars</a> Or <a href="{{ route('start-selling') }}" class="btn btn-primary">Sell Your Car</a></p>
+								<p><a href="{{ route('cars.index') }}" class="btn btn-success" title="Browse all hybrid and electric cars for sale">Browse All Cars</a> Or <a href="{{ route('start-selling') }}" class="btn btn-primary" title="Sell your hybrid or electric car">Sell Your Car</a></p>
 							</div>
 
 						</div>
