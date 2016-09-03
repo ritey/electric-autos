@@ -36,11 +36,10 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ route('home') }}">Electric Autos</a>
+				<a class="navbar-brand" href="{{ route('home') }}"><img src="/images/text-logo-400x50.png" alt="Electric Autos" height="20"></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="{{ active_class(if_uri(['/']), 'active') }}"><a href="{{ route('home') }}">Home</a></li>
 					<li class="{{ active_class(if_uri_pattern(['cars','cars/*']), 'active') }}"><a href="{{ route('cars.index') }}">Autos</a></li>
 					<li class="{{ active_class(if_uri(['about','contact']), 'active') }} dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="caret"></span></a>
