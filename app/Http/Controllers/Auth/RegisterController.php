@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
         if ($user) {
-            event(new Registered($request->only('email')));
+            event(new Registered(['email' => $data['email']]));
         }
         return $user;
     }
