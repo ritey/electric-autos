@@ -24,6 +24,10 @@ section.main {
 	padding: 100px 0 70px;
 }
 
+#logout-form {
+	display:none;
+}
+
 .login.box {
 	padding: 53px 70px 30px;
 	margin-bottom: 40px;

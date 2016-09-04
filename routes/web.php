@@ -13,9 +13,14 @@
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 Route::get('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+Route::post('/logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 Route::post('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
 Route::get('/password-reset', ['as' => 'password-reset', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
 Route::get('/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
+Route::post('/register', ['as' => 'register-post', 'uses' => 'Auth\RegisterController@register']);
+
+Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'AccountController@dashboard']);
+
 Route::get('/about', ['as' => 'about', 'uses' => 'HomeController@about']);
 Route::get('/contact', ['as' => 'contact', 'uses' => 'HomeController@contact']);
 Route::get('/terms', ['as' => 'terms', 'uses' => 'HomeController@terms']);
@@ -26,7 +31,6 @@ Route::get('/start-selling/car-details', ['as' => 'start-selling.details', 'uses
 Route::get('/seller-faqs', ['as' => 'seller-faqs', 'uses' => 'HomeController@faqs']);
 
 Route::get('/sitemap.xml', ['as' => 'sitemap', 'uses' => 'SitemapController@sitemap']);
-
 Route::get('/image.png', ['as' => 'image', 'uses' => 'ImageController@index']);
 
 Route::get('/blog', ['as' => 'blog.index', 'uses' => 'BlogController@index']);

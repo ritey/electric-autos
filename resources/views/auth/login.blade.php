@@ -33,6 +33,9 @@ Login to Electric Autos
 								Welcome Back
 								<p>You can sign in with your email.</p>
 							</div>
+
+							@include('partials.errors')
+
 							<form action="{{ route('login') }}" method="POST" class="form">
 								{!! csrf_field() !!}
 
@@ -40,7 +43,7 @@ Login to Electric Autos
 
 									<div class="group-control">
 
-										<input type="text" name="username" id="username" value="" class="form-control" placeholder="Username" required="" aria-required="true" autofocus="">
+										<input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control" placeholder="Email" required="" aria-required="true" autofocus="">
 									</div>
 								</div>
 

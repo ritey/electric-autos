@@ -58,6 +58,7 @@ class Users extends Authenticatable
     */
     protected $fillable = [
         'user_type_id',
+        'user_id',
         'dealer_id',
         'name',
         'email',

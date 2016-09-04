@@ -36,7 +36,10 @@ Register an account on Electric Autos
 
 							</div>
 
-							<form action="" method="post" class="form" enctype="multipart/form-data">
+							@include('partials.errors')
+
+							<form action="{{ route('register-post') }}" method="POST" class="form">
+								{!! csrf_field() !!}
 
 								<div class="row">
 
@@ -47,7 +50,7 @@ Register an account on Electric Autos
 											<label for="name" class="">Name<span class="star">&nbsp;*</span></label>
 
 											<div class="group-control">
-												<input type="text" name="name" id="name" value="" class="form-control" aria-required="true">
+												<input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" aria-required="true">
 											</div>
 
 										</div>
@@ -74,11 +77,11 @@ Register an account on Electric Autos
 
 										<div class="form-group">
 
-											<label for="confirm_password" class="">Confirm Password<span class="star">&nbsp;*</span></label>
+											<label for="password_confirmation" class="">Confirm Password<span class="star">&nbsp;*</span></label>
 
 											<div class="group-control">
 
-												<input type="password" name="confirm_password" id="confirm_password" value="" class="form-control" required="required" aria-required="true">
+												<input type="password" name="password_confirmation" id="password_confirmation" value="" class="form-control" required="required" aria-required="true">
 
 											</div>
 
@@ -94,7 +97,7 @@ Register an account on Electric Autos
 
 											<div class="group-control">
 
-												<input type="email" name="email" class="form-control" id="email" value="" required="required" aria-required="true">
+												<input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}" required="required" aria-required="true">
 
 											</div>
 
@@ -106,11 +109,11 @@ Register an account on Electric Autos
 
 										<div class="form-group">
 
-											<label for="confirm_email" class="">Confirm email Address<span class="star">&nbsp;*</span></label>
+											<label for="email_confirmation" class="">Confirm email Address<span class="star">&nbsp;*</span></label>
 
 											<div class="group-control">
 
-												<input type="email" name="confirm_email" class="form-control" id="confirm_email" value="" required="required" aria-required="true">
+												<input type="email" name="email_confirmation" class="form-control" id="email_confirmation" value="{{ old('name') }}" required="required" aria-required="true">
 
 											</div>
 
