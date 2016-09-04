@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use CoderStudios\Traits\UUID;
+use App\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -63,11 +64,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Users::create([
+        $user = Users::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'user_id' => $this->Uuid(openssl_random_pseudo_bytes(16)),
             'password' => bcrypt($data['password']),
         ]);
+        if ($user) {
+            event(new Registered($request->only('email')));
+        }
+        return $user;
     }
 }

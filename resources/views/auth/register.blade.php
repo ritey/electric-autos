@@ -136,7 +136,7 @@ Register an account on Electric Autos
 										<div class="form-group text-right">
 
 											<a class="btn btn-default" href="{{ route('home') }}" title="Cancel">Cancel</a>
-											<button type="submit" class="btn btn-success">Registration</button>
+											<button type="submit" class="btn btn-success">Register</button>
 
 										</div>
 

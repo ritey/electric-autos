@@ -8,6 +8,7 @@ use CoderStudios\Library\VehicleDetails;
 use CoderStudios\Library\Resource;
 use CoderStudios\Models\Makes;
 use CoderStudios\Models\Models;
+use Mail;
 
 class HomeController extends BaseController
 {
@@ -45,6 +46,14 @@ class HomeController extends BaseController
 
 	public function home()
 	{
+
+		$data['email'] = 'dave@ritey.com';
+
+        Mail::send(['html' => 'emails.new_user_html','text' => 'emails.new_user'], ['data' => $data], function($message) use ($data)
+        {
+            $message->to($data['email'], $data['email'])->subject('Thanks for registering on Electric Autos');
+        });
+
 		//$this->vehicle->scrape();
 		$key = $this->getKeyName(__function__);
 		if ($this->cache->has($key)) {
