@@ -18,6 +18,11 @@ class Resource {
 		return $this->resource->create($data);
 	}
 
+	public function update($id, array $data)
+	{
+		return $this->resource->where('id',$id)->first()->update($data);
+	}
+
 	public function get($id) {
 		$resource = $this->resource->where('id',$id)->first();
 

@@ -126,6 +126,13 @@ class VehicleDetails {
 			'http://www.pistonheads.com/classifieds?Category=used-cars&FuelType=ELE&M=2175',
 		];
 
+		$folders = Storage::directories('uploads');
+		foreach($folders as $folder) {
+			Storage::deleteDirectory($folder);
+		}
+		$this->upload->truncate();
+		$this->resource->truncate();
+
 		foreach($pages as $type) {
 
 			$crawler = $this->scraper->request('GET',$type);
@@ -195,6 +202,12 @@ class VehicleDetails {
 					if (strpos(strtolower(' ' . $resource['name']),'bmw')) {
 						$resource['make_id'] = 1;
 					}
+					if (strpos(strtolower(' ' . $resource['name']),'i8')) {
+						$resource['make_id'] = 1;
+					}
+					if (strpos(strtolower(' ' . $resource['name']),'i3')) {
+						$resource['make_id'] = 1;
+					}
 					if (strpos(strtolower(' ' . $resource['name']),'tesla')) {
 						$resource['make_id'] = 8;
 					}
@@ -226,6 +239,14 @@ class VehicleDetails {
 
 					if ($resource['make_id'] == 9 && strpos(strtolower($resource['name']),' prius ')) {
 						$resource['model_id'] = 14;
+					}
+
+					if ($resource['make_id'] == 9 && strpos(strtolower($resource['name']),' prius+ ')) {
+						$resource['model_id'] = 14;
+					}
+
+					if ($resource['make_id'] == 11 && strpos(strtolower($resource['name']),' golf ')) {
+						$resource['model_id'] = 16;
 					}
 
 					$resource['price'] = str_replace(',','',$ad['price']);
@@ -285,6 +306,11 @@ class VehicleDetails {
 
 					$created_resource = $this->resource->create($resource);
 
+					$data = [
+						'slug' => $resource['slug'] . '-' . $created_resource->id,
+					];
+
+					$this->resource->update($created_resource->id, $data);
 
 					//dd($dealer);
 
