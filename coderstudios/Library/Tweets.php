@@ -64,7 +64,7 @@ class Tweets {
 		}
 
 		if (is_object($value) && $result = $value->text() ) {
-			return str_replace('like','',str_replace('likes','',$result));
+			return str_replace('kedvelés','',str_replace('like','',str_replace('likes','',$result)));
 		}
 
 		return $result;
