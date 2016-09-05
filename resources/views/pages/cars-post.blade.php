@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('page_title')
-Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars
+{{ $vars['car']->make()->first()->name }} > {{ $vars['car']->model()->first()->name }} > | {{ $vars['car']->name }}
 @endsection
 
 @section('metas')
