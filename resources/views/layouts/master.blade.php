@@ -88,13 +88,13 @@
 
 						<div class="col-sm-6 col-md-6">
 
-							<a class="social-icon" href="https://www.facebook.com/Electric-Autos-1767600990124746/" target="_blank"><i class="fa fa-facebook"></i> <span>2</span> <small>Likes</small></a>
+							<a class="social-icon" href="https://www.facebook.com/Electric-Autos-1767600990124746/" target="_blank"><i class="fa fa-facebook"></i> <span>{{ $likes }}</span> <small>{{ str_plural('Like', $likes) }}</small></a>
 
 						</div>
 
 						<div class="col-sm-6 col-md-6">
 
-							<a class="social-icon" href="http://www.twitter.com/electricautosuk" target="_blank"><i class="fa fa-twitter"></i> <span>2</span> <small>Followers</small></a>
+							<a class="social-icon" href="http://www.twitter.com/electricautosuk" target="_blank"><i class="fa fa-twitter"></i> <span>{{ $followers }}</span> <small>{{ str_plural('Follower', $followers) }}</small></a>
 
 						</div>
 
