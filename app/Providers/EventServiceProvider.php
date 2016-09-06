@@ -17,6 +17,9 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\EmailNewUser',
             'App\Listeners\EmailAdmin',
         ],
+        'App\Events\ContactSent' => [
+            'App\Listeners\EmailContactDetails',
+        ],
     ];
 
     /**

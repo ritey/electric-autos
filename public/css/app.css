@@ -34,6 +34,19 @@ section.main {
 	margin-top: 0;
 }
 
+.block {
+    display: block !important;
+}
+
+form .row {
+    margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+
 .login {
 
 }

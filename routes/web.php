@@ -22,7 +22,10 @@ Route::post('/register', ['as' => 'register-post', 'uses' => 'Auth\RegisterContr
 Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'AccountController@dashboard']);
 
 Route::get('/about', ['as' => 'about', 'uses' => 'HomeController@about']);
+
 Route::get('/contact', ['as' => 'contact', 'uses' => 'HomeController@contact']);
+Route::post('/contact', ['as' => 'contact.send', 'uses' => 'HomeController@sendContact']);
+
 Route::get('/terms', ['as' => 'terms', 'uses' => 'HomeController@terms']);
 Route::get('/privacy-policy', ['as' => 'privacy', 'uses' => 'HomeController@privacy']);
 Route::get('/cookie-policy', ['as' => 'cookie', 'uses' => 'HomeController@cookie']);

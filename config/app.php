@@ -179,6 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         HieuLe\Active\ActiveServiceProvider::class,
+        /*Bogardo\Mailgun\MailgunServiceProvider::class,*/
+        Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
     ],
 
     /*
@@ -227,6 +229,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Active' => HieuLe\Active\Facades\Active::class,
+        /*'Mailgun'   => Bogardo\Mailgun\Facades\Mailgun::class,*/
+        'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
 
     ],
 
