@@ -191,6 +191,8 @@ Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric c
 
 							<p>Hybrid and plugin electric cars use batteries to help reduce CO2 emissions, hybrid cars also use the common combustion engine.</p>
 
+							<p>If you're looking for <strong>used electric cars</strong> you've come to the right website, browse our directory of <a href="{{ route('cars.index') }}" title="Used electric cars for sale">used electric cars</a>.</p>
+
 						</div>
 
 					</div>

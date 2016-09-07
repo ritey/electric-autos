@@ -29,9 +29,9 @@ class CarsController extends BaseController
 
 	public function index()
 	{
-			$cars = $this->resource->paginate();
-			$half = number_format(ceil($cars->count() / 2));
-			$chunks = $cars->chunk($half);
+		$cars = $this->resource->paginate();
+		$half = number_format(ceil($cars->count() / 2));
+		$chunks = $cars->chunk($half);
 
 		$vars = [
 			'cars_collection' 	=> $cars,
@@ -57,15 +57,16 @@ class CarsController extends BaseController
 				Abort(404);
 			}
 
-			$cars = $this->resource->branded($brand->id,12)->get();
+			$cars = $this->resource->branded($brand->id,12)->paginate();
 			$half = number_format(ceil($cars->count() / 2));
 			$chunks = $cars->chunk($half);
 
 			$vars = [
+				'cars_collection' 	=> $cars,
+				'cars' => $chunks,
 				'total_cars' => $cars->count(),
 				'brand' => $brand,
 				'models'	=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
-				'cars' => $chunks,
 				'makes' => $this->makes->orderBy('name','ASC')->get(),
 			];
 			$view = view('pages.cars-index',compact('vars'))->render();
