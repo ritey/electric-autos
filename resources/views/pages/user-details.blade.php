@@ -62,8 +62,8 @@ Start selling with Electric Autos
 					<div class="col-sm-12">
 
 						<div class="progress">
-							<div class="progress-bar" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-								Step 2
+							<div class="progress-bar" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width: 99%;">
+								Step 3
 							</div>
 						</div>
 
@@ -71,7 +71,8 @@ Start selling with Electric Autos
 
 				</div>
 
-				<form class="form form-horizontal" method="GET" action="{{ route('start-selling.user-details') }}">
+				<form class="form form-horizontal" method="post" action="{{ route('start-selling.complete') }}">
+					{!! csrf_field() !!}
 
 					@include('partials.errors')
 
@@ -101,7 +102,7 @@ Start selling with Electric Autos
 						<label for="name" class="col-sm-3 control-label">Ad headline</label>
 						<div class="col-sm-9">
 							<input type="text" name="name" id="name" class="form-control" value="">
-							<p class="help-block">Something like: {{ $vars['vehicle']['title'] or '' }}</p>
+							<p class="help-block">{{ $vars['vehicle']['title'] }}</p>
 						</div>
 
 					</div>

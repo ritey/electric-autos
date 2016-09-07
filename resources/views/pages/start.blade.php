@@ -71,13 +71,15 @@ Start selling with Electric Autos
 
 				</div>
 
-				<form class="form form-horizontal">
+				<form class="form form-horizontal" method="GET" action="{{ route('start-selling.details') }}">
+
+					@include('partials.errors')
 
 					<div class="form-group">
 
 						<label for="reg" class="col-sm-3 control-label">Car registration</label>
 						<div class="col-sm-6">
-							<input type="text" name="reg" id="reg" class="form-control">
+							<input type="text" name="reg" id="reg" class="form-control" required="required" value="{{ old('reg') }}">
 						</div>
 
 					</div>
@@ -86,7 +88,7 @@ Start selling with Electric Autos
 
 						<label for="mileage" class="col-sm-3 control-label">Mileage</label>
 						<div class="col-sm-6">
-							<input type="text" name="mileage" id="mileage" class="form-control">
+							<input type="text" name="mileage" id="mileage" class="form-control" required="required" value="{{ old('mileage') }}">
 						</div>
 
 					</div>
@@ -111,7 +113,7 @@ Start selling with Electric Autos
 
 				<p>We ask for your car registration to help populate some of the vehicle data, we will not display the vehicle registration on the finished advert.</p>
 
-				<p>Be accurate with your car mileage.</p>
+				<p>Please be accurate with your car mileage.</p>
 
 			</div>
 

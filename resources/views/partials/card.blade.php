@@ -1,7 +1,7 @@
 <div class="item">
 	<figure>
 		<a href="{{ route('cars.brand.car', ['brand' => strtolower($car->make()->first()->name), 'model' => strtolower($car->model()->first()->name), 'slug' => $car->slug]) }}">
-		@if (is_object($car) && $car->images())
+		@if (is_object($car) && $car->images()->count())
 		<img src="{{ route('image') }}?folder={{ $car->id }}&filename={{ urlencode($car->images()->first()->maskname . '.' . $car->images()->first()->extension) }}&width=370&height=300" alt="">
 		@else
 		<img src="/images/holder.png" alt="">

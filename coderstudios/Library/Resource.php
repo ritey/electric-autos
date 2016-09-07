@@ -44,6 +44,16 @@ class Resource {
 		return $this->resource->enabled()->where('slug',$slug)->first();
 	}
 
+	public function mine($user_id)
+	{
+		return $this->resource->where('user_id',$user_id)->get();
+	}
+
+	public function myAd($user_id, $slug = '')
+	{
+		return $this->resource->where('user_id',$user_id)->where('slug',$slug)->first();
+	}
+
 	public function truncate()
 	{
 		return $this->resource->truncate();

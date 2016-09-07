@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository as Cache;
+use Auth;
+use CoderStudios\Library\Resource;
 
 class AccountController extends BaseController
 {
@@ -27,13 +29,15 @@ class AccountController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache)
+	public function __construct(Request $request, Cache $cache, Resource $resource)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
 		$this->basename = class_basename($this);
 		$this->request = $request;
 		$this->cache = $cache;
+		$this->resource = $resource;
+		$this->middleware('auth');
 	}
 
 	public function dashboard()
@@ -43,9 +47,26 @@ class AccountController extends BaseController
 			$view = $this->cache->get($key);
 		} else {
 			$vars = [
-
+				'user' => Auth::user(),
+				'ads' => $this->resource->mine(Auth::user()->id),
 			];
 			$view = view('pages.dashboard', compact('vars'))->render();
+			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
+		}
+		return $view;
+	}
+
+	public function upgrade()
+	{
+		$key = $this->getKeyName(__function__);
+		if ($this->cache->has($key)) {
+			$view = $this->cache->get($key);
+		} else {
+			$vars = [
+				'user' => Auth::user(),
+				'ads' => $this->resource->mine(Auth::user()->id),
+			];
+			$view = view('pages.upgrade', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
 		return $view;

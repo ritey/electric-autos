@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('page_title')
-Start selling with Electric Autos
+My ad
 @endsection
 
 @section('metas')
@@ -15,37 +15,7 @@ Start selling with Electric Autos
 
 @section('content')
 
-@include('partials.section-title', ['title' => 'Start selling your car'])
-
-<section class="section-pad">
-
-	<div class="container">
-
-		<div class="row">
-
-			<div class="col-md-4 col-sm-12 text-center">
-
-				<h3><i class="fa fa-users"></i> Reach more buyers</h3>
-
-			</div>
-
-			<div class="col-md-4 col-sm-12 text-center">
-
-				<h3><i class="fa fa-trophy"></i> No 1 Electric car site</h3>
-
-			</div>
-
-			<div class="col-md-4 col-sm-12 text-center">
-
-				<h3><i class="fa fa-clock-o"></i> Sell your car faster</h3>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</section>
+@include('partials.section-title', ['title' => 'My ad'])
 
 <section class="">
 
@@ -55,23 +25,9 @@ Start selling with Electric Autos
 
 			<div class="col-md-8 col-sm-12">
 
-				<h4>Sell my car in 3 simple steps</h4>
+				<h2>Be as accurate as you can to help sell your car</h2>
 
-				<div class="row">
-
-					<div class="col-sm-12">
-
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-								Step 2
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-
-				<form class="form form-horizontal" method="GET" action="{{ route('start-selling.user-details') }}">
+				<form class="form form-horizontal" method="POST" action="{{ route('ad.save', ['slug' => $vars['vehicle']['slug']]) }}">
 
 					@include('partials.errors')
 
@@ -79,7 +35,7 @@ Start selling with Electric Autos
 
 						<label for="price" class="col-sm-3 control-label">Asking price</label>
 						<div class="col-sm-9">
-							<input type="text" name="price" id="price" class="form-control">
+							<input type="text" name="price" id="price" class="form-control" value="{{ $vars['vehicle']['price'] }}">
 						</div>
 
 					</div>
@@ -100,8 +56,7 @@ Start selling with Electric Autos
 
 						<label for="name" class="col-sm-3 control-label">Ad headline</label>
 						<div class="col-sm-9">
-							<input type="text" name="name" id="name" class="form-control" value="">
-							<p class="help-block">Something like: {{ $vars['vehicle']['title'] or '' }}</p>
+							<input type="text" name="name" id="name" class="form-control" value="{{ $vars['vehicle']['name'] }}">
 						</div>
 
 					</div>
@@ -110,7 +65,7 @@ Start selling with Electric Autos
 
 						<label for="content" class="col-sm-3 control-label">Description</label>
 						<div class="col-sm-9">
-							<textarea name="content" id="content" rows="8" class="form-control"></textarea>
+							<textarea name="content" id="content" rows="8" class="form-control">{{ $vars['vehicle']['content'] }}</textarea>
 						</div>
 
 					</div>
@@ -124,8 +79,8 @@ Start selling with Electric Autos
 								<label for="gearbox" class="col-sm-6 control-label">Gearbox</label>
 								<div class="col-sm-6">
 									<select name="gearbox" id="gearbox" class="form-control">
-										<option value="automatic">Automatic</option>
-										<option value="manual">Manual</option>
+										<option value="automatic" {{ $vars['vehicle']['gearbox'] == 'automatic' ? 'selected' : '' }}>Automatic</option>
+										<option value="manual" {{ $vars['vehicle']['gearbox'] == 'manual' ? 'selected' : '' }}>Manual</option>
 									</select>
 								</div>
 
@@ -162,6 +117,30 @@ Start selling with Electric Autos
 
 							</div>
 
+							<div class="form-group">
+
+								<div class="col-sm-offset-2 col-sm-10">
+							    	<div class="checkbox">
+										<label for="sold">
+											<input id="sold" name="sold" value="1" type="checkbox" {{ $vars['vehicle']['sold'] == '1' ? 'checked' : '' }}> Sold
+										</label>
+									</div>
+							    </div>
+
+							</div>
+
+							<div class="form-group">
+
+								<div class="col-sm-offset-2 col-sm-10">
+							    	<div class="checkbox">
+										<label for="enabled">
+											<input id="enabled" name="enabled" value="1" type="checkbox" {{ $vars['vehicle']['enabled'] == '1' ? 'checked' : '' }}> Enabled
+										</label>
+									</div>
+							    </div>
+
+							</div>
+
 						</div>
 
 					</div>
@@ -170,7 +149,7 @@ Start selling with Electric Autos
 
 						<div class="col-sm-12">
 
-							<button type="submit" class="btn btn-primary pull-right">Next</button>
+							<button type="submit" class="btn btn-primary pull-right">Save</button>
 
 						</div>
 
@@ -181,12 +160,6 @@ Start selling with Electric Autos
 			</div>
 
 			<div class="col-md-4 col-sm-12">
-
-				<h4>Selling tips</h4>
-
-				<p>We ask for your car registration to help populate some of the vehicle data, we will not display the vehicle registration on the finished advert.</p>
-
-				<p>Be accurate with your car mileage.</p>
 
 			</div>
 

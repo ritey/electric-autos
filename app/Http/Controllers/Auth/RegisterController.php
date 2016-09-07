@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use CoderStudios\Models\Users;
+use CoderStudios\Library\Resource;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use CoderStudios\Traits\UUID;
 use App\Events\Registered;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -36,9 +38,10 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Resource $resource)
     {
         $this->middleware('guest');
+        $this->resource = $resource;
     }
 
     /**
@@ -72,6 +75,13 @@ class RegisterController extends Controller
         ]);
         if ($user) {
             event(new Registered(['email' => $data['email']]));
+        }
+        if (Session::get('vehicle_id')) {
+            $data = [
+                'user_id' => $user->id,
+            ];
+            $this->resource->update(Session::get('vehicle_id'),$data);
+            Session::forget('vehicle_id');
         }
         return $user;
     }

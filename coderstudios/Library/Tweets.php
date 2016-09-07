@@ -22,6 +22,7 @@ class Tweets {
 
 		$result = 1;
 		$scraper = new Scraper();
+		$value = '';
 
 		try {
 			$crawler = $scraper->request('GET','https://twitter.com/electricautosuk');
@@ -29,6 +30,10 @@ class Tweets {
 			$value = $dom->filter('li.ProfileNav-item--followers a > span.ProfileNav-value');
 		} catch (\Exception $e) {
 
+		}
+
+		if (empty($value)) {
+			dd($value);
 		}
 
 		if (is_object($value) && $result = $value->text() ) {
@@ -61,6 +66,10 @@ class Tweets {
 			$value = $dom->filter('span');
 		} catch (\Exception $e) {
 
+		}
+
+		if (empty($value)) {
+			dd($value);
 		}
 
 		if (is_object($value) && $result = $value->text() ) {

@@ -36,7 +36,7 @@
 			<div class="col-md-8">
 
 				<figure>
-					@if (is_object($vars['car']) && $vars['car']->images())
+					@if (is_object($vars['car']) && $vars['car']->images()->count())
 					<img src="{{ route('image') }}?folder={{ $vars['car']->id }}&filename={{ urlencode($vars['car']->images()->first()->maskname . '.' . $vars['car']->images()->first()->extension) }}&width=470&height=400" alt="">
 					@else
 					<img src="/images/holder.png" alt="">
@@ -101,7 +101,11 @@
 				<h2>Price {{ $vars['car']->price }}</h2>
 
 				<h3>Contact seller</h3>
-				<p>Call: {{ $vars['car']->dealer->phone }}
+				@if($vars['car']->dealer)
+				<p>Call: {{ $vars['car']->dealer->phone }}</p>
+				@else
+				<p></p>
+				@endif
 
 				<div class="col-sm-12 col-md-12 text-center">
 

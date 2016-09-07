@@ -20,6 +20,10 @@ Route::get('/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@
 Route::post('/register', ['as' => 'register-post', 'uses' => 'Auth\RegisterController@register']);
 
 Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'AccountController@dashboard']);
+Route::get('/dashboard/upgrade', ['as' => 'upgrade', 'uses' => 'AccountController@upgrade']);
+Route::get('/dashboard/ads/create', ['as' => 'ad.create', 'uses' => 'AdvertController@create']);
+Route::get('/dashboard/ads/{slug}', ['as' => 'ad.edit', 'uses' => 'AdvertController@edit']);
+Route::post('/dashboard/ads/{slug}', ['as' => 'ad.save', 'uses' => 'AdvertController@save']);
 
 Route::get('/about', ['as' => 'about', 'uses' => 'HomeController@about']);
 
@@ -31,6 +35,8 @@ Route::get('/privacy-policy', ['as' => 'privacy', 'uses' => 'HomeController@priv
 Route::get('/cookie-policy', ['as' => 'cookie', 'uses' => 'HomeController@cookie']);
 Route::get('/start-selling', ['as' => 'start-selling', 'uses' => 'HomeController@start']);
 Route::get('/start-selling/car-details', ['as' => 'start-selling.details', 'uses' => 'AdvertController@details']);
+Route::get('/start-selling/user-details', ['as' => 'start-selling.user-details', 'uses' => 'AdvertController@saveVehicle']);
+Route::get('/start-selling/complete', ['as' => 'start-selling.complete', 'uses' => 'AdvertController@saveUser']);
 Route::get('/seller-faqs', ['as' => 'seller-faqs', 'uses' => 'HomeController@faqs']);
 
 Route::get('/sitemap.xml', ['as' => 'sitemap', 'uses' => 'SitemapController@sitemap']);

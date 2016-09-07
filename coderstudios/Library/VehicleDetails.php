@@ -8,6 +8,8 @@ use Symfony\Component\DomCrawler\Crawler;
 use CoderStudios\Library\Dealer;
 use CoderStudios\Library\Resource;
 use CoderStudios\Library\Upload;
+use CoderStudios\Models\Models;
+use CoderStudios\Models\Makes;
 use CoderStudios\Traits\UUID;
 use Storage;
 
@@ -15,12 +17,14 @@ class VehicleDetails {
 
 	use UUID;
 
-	public function __construct(Scraper $scraper, Dealer $dealer, Resource $resource, Upload $upload)
+	public function __construct(Scraper $scraper, Dealer $dealer, Resource $resource, Upload $upload, Makes $makes, Models $models)
 	{
 		$this->scraper = $scraper;
 		$this->dealer = $dealer;
 		$this->resource = $resource;
 		$this->upload = $upload;
+		$this->makes = $makes;
+		$this->models = $models;
 	}
 
 	public function fetch($reg)
@@ -42,7 +46,9 @@ class VehicleDetails {
 		$details['body'] = isset($body[3]) ? trim(str_replace($details['doors'],'',str_replace('Door','',$body[3]))) : '';
 		$details['colour'] = isset($body[5]) ? $body[5] : '';
 		$details['registered'] = isset($body[7]) ? $body[7] : '';
-		$details['year'] = isset($body[7]) ? $this->stripMonths($body[7]) : '';
+		$details['year'] = isset($body[7]) ? trim($this->stripMonths($body[7])) : '';
+		$details['make_id'] = $this->matchMake($details['title']);
+		$details['model_id'] = $this->matchModel($details['make_id'],$details['title']);
 		return $details;
 
 	}
@@ -71,7 +77,7 @@ class VehicleDetails {
 		return trim(preg_replace('/\s+/',' ',$text));
 	}
 
-	private function makeSlug($text)
+	public function makeSlug($text)
 	{
 		return str_replace('*','-',str_replace('&','-',str_replace(',','',str_replace(')','',str_replace('(','',str_replace('/','-',str_replace(' ','-',$text)))))));
 	}
@@ -114,6 +120,48 @@ class VehicleDetails {
 		$resource = null;
 		$image = null;
 		return true;
+	}
+
+	public function matchMake($title)
+	{
+		$make_id = 0;
+		$makes = $this->makes->get();
+		$title_parts = explode(' ',$title);
+		foreach($title_parts as $word) {
+			foreach($makes as $make) {
+				if (strtolower($word) == strtolower($make->name)) {
+					$make_id = $make->id;
+					break;
+				}
+			}
+		}
+		return $make_id;
+	}
+
+	public function matchModel($make_id, $title)
+	{
+		$model_id = 0;
+		$models = $this->models->where('make_id',$make_id)->get();
+		$title_parts = explode(' ',$title);
+
+		foreach($models as $model) {
+			if (strpos(' '.strtolower($title), strtolower($model->name))) {
+				$model_id = $model->id;
+			}
+		}
+
+		if ($model_id == 0) {
+			foreach($title_parts as $word) {
+				foreach($models as $model) {
+					if (strtolower($word) == strtolower($model->name)) {
+						$model_id = $model->id;
+						dd($model->name);
+						break;
+					}
+				}
+			}
+		}
+		return $model_id;
 	}
 
 	public function scrape()
