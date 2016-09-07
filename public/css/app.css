@@ -46,6 +46,12 @@ form .row {
   margin-bottom: 15px;
 }
 
+.margin-bottom-60 {
+    margin-bottom: 60px !important;
+}
+.height-300 {
+    height: 300px !important;
+}
 
 .login {
 
