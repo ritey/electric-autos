@@ -36,7 +36,9 @@ class CarsController extends BaseController
 		$vars = [
 			'cars_collection' 	=> $cars,
 			'cars' 	=> $chunks,
-			'total_cars' => $cars->count(),
+			'total_cars' => $cars->total(),
+			'total_page_total' => $cars->count(),
+			'page' => $cars->currentPage(),
 			'brand' => '',
 			'makes' => $this->makes->orderBy('name','ASC')->get(),
 			'models'	=> '',
@@ -64,7 +66,9 @@ class CarsController extends BaseController
 			$vars = [
 				'cars_collection' 	=> $cars,
 				'cars' => $chunks,
-				'total_cars' => $cars->count(),
+				'total_cars' => $cars->total(),
+				'total_page_total' => $cars->count(),
+				'page' => $cars->currentPage(),
 				'brand' => $brand,
 				'models'	=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
 				'makes' => $this->makes->orderBy('name','ASC')->get(),

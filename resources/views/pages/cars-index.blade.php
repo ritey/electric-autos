@@ -35,7 +35,18 @@ Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | U
 
 				<div class="col-sm-12 col-md-12">
 
-					<h3>{{ $vars['total_cars'] }} Used electric cars</h3>
+					<h3>{{ $vars['total_cars'] }} Used electric cars in total</h3>
+					<p>Page {{ $vars['page'] }} displaying {{ $vars['total_page_total'] }}</p>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-sm-12 text-center">
+
+						{!! $vars['cars_collection']->links() !!}
+
+					</div>
 
 				</div>
 
