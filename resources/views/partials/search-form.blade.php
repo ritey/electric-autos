@@ -104,7 +104,7 @@
 	<div class="form-group">
 		<label for="max_year">Year (to)</label>
 		<select name="max_year" id="max_year" class="form-control">
-			<option value="">Year (<tbody></tbody>)</option>
+			<option value="">Year (to)</option>
 			@for ($i = date('Y'); $i > (date('Y')-10); $i--)
 			<option value="{{ $i }}">{{ $i }}</option>
 			@endfor

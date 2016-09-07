@@ -22,7 +22,7 @@ About Electric Autos
 			<div class="row text-center">
 
 				<div class="heading">
-					<h1>About electric cars</h1>
+					<h1>About Electric Autos</h1>
 				</div>
 
 				<div class="intro">
