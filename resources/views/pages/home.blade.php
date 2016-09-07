@@ -34,7 +34,7 @@ Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric c
 							<div class="intro">
 								<p>Browse the current electric and hybrid autos for sale using the filters below. Sell your hybrid/electric car for FREE.</p>
 
-								<p>0 cars for sale</p>
+								<p><strong>{{ $vars['total_cars'] or '0' }} used electric cars</strong> for sale</p>
 
 								<p><a href="{{ route('cars.index') }}" class="btn btn-success" title="Browse all hybrid and electric cars for sale">Browse All Cars</a> Or <a href="{{ route('start-selling') }}" class="btn btn-primary" title="Sell your hybrid or electric car">Sell Your Car</a></p>
 							</div>

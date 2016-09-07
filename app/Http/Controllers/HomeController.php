@@ -53,6 +53,7 @@ class HomeController extends BaseController
 			$view = $this->cache->get($key);
 		} else {
 			$vars = [
+				'total_cars' => $this->resource->totalResources(),
 				'latest' => $this->resource->latest()->get(),
 			];
 			$view = view('pages.home', compact('vars'))->render();

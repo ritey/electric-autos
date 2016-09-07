@@ -49,6 +49,11 @@ class Resource {
 		return $this->resource->truncate();
 	}
 
+	public function totalResources()
+	{
+		return $this->resource->enabled()->count();
+	}
+
 	public function all()
 	{
 		return $this->resource->enabled()->get();
