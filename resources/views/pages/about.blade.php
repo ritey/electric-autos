@@ -27,7 +27,7 @@ About Electric Autos
 
 				<div class="intro">
 
-					<p>A new generation electric car directory of used and new electric cars.</p>
+					<p>A new generation electric car directory of used and nearly new electric cars.</p>
 
 				</div>
 
@@ -46,12 +46,27 @@ About Electric Autos
 				<div class="col-sm-12">
 
 					<div class="addon-header text-center">
-						<h2>Meet the team</h1>
+						<h2>Meet the founder</h1>
 					</div>
 
 					<div class="row">
 
+						<div class="col-sm-4 col-sm-offset-4 text-center">
 
+							<div class="thumbnail">
+
+								<img src="/images/david-wright.jpeg" alt="David Wright" />
+
+								<div class="caption">
+
+									<h3>David Wright</h3>
+									<p>All round automotive enthusiast and coffee fan</p>
+
+								</div>
+
+							</div>
+
+						</div>
 
 					</div>
 
@@ -77,7 +92,12 @@ About Electric Autos
 
 					<div class="row">
 
+						<div class="col-sm-8 col-sm-offset-2">
 
+							<h3>01/09/2016 - Site launched</h3>
+							<p>New Electric Autos website goes live offering potential owners to browse available used electric cars for sale and private and trade sellers the ability to list their used electric cars in the biggest online directory of electric cars.</p>
+
+						</div>
 
 					</div>
 
