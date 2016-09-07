@@ -31,7 +31,7 @@ Login to Electric Autos
 
 							<div class="login-description text-center">
 								Welcome Back
-								<p>You can sign in with your email.</p>
+								<p>You can sign in with your email address.</p>
 							</div>
 
 							@include('partials.errors')
@@ -59,8 +59,8 @@ Login to Electric Autos
 								<div class="checkbox">
 
 									<label>
-										<input id="remember" type="checkbox" name="remember" value="yes">
-										Remember me </label>
+										<input id="remember" type="checkbox" name="remember" value="yes"> Remember me
+									</label>
 								</div>
 
 								<div class="form-group text-right">

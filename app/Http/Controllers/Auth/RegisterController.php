@@ -56,7 +56,8 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|confirmed|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-        ]);
+            'agree' => 'required'
+        ], [ 'agree.required' => 'You must agree to the terms and conditions to continue'] );
     }
 
     /**

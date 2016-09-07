@@ -50,7 +50,7 @@ Register an account on Electric Autos
 											<label for="name" class="">Name<span class="star">&nbsp;*</span></label>
 
 											<div class="group-control">
-												<input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" aria-required="true">
+												<input type="text" name="name" id="name" value="{{ old('name') }}" required="required" class="form-control" aria-required="true">
 											</div>
 
 										</div>
@@ -113,7 +113,27 @@ Register an account on Electric Autos
 
 											<div class="group-control">
 
-												<input type="email" name="email_confirmation" class="form-control" id="email_confirmation" value="{{ old('name') }}" required="required" aria-required="true">
+												<input type="email" name="email_confirmation" class="form-control" id="email_confirmation" value="{{ old('email_confirmation') }}" required="required" aria-required="true">
+
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+
+								<div class="row">
+
+									<div class="col-sm-12 text-center">
+
+										<div class="form-group">
+
+											<div class="checkbox">
+
+												<label for="agree">
+													<input type="checkbox" name="agree" id="agree" value="1" />I agree to the <a target="_blank" href="{{ route('terms') }}" required="required">terms and conditions</a>
+												</label>
 
 											</div>
 

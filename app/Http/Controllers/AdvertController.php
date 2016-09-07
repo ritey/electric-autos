@@ -8,6 +8,8 @@ use CoderStudios\Requests\AdRequest;
 use CoderStudios\Requests\VehicleRequest;
 use CoderStudios\Library\VehicleDetails;
 use CoderStudios\Library\Resource;
+use CoderStudios\Models\Makes;
+use CoderStudios\Models\Models;
 use Session;
 use Auth;
 
@@ -33,7 +35,7 @@ class AdvertController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache,VehicleDetails $vehicle, Resource $resource)
+	public function __construct(Request $request, Cache $cache,VehicleDetails $vehicle, Resource $resource, Makes $makes, Models $models)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
@@ -42,6 +44,8 @@ class AdvertController extends BaseController
 		$this->cache = $cache;
 		$this->vehicle = $vehicle;
 		$this->resource = $resource;
+		$this->makes = $makes;
+		$this->models = $models;
 	}
 
 	public function details(AdRequest $request)
@@ -61,6 +65,8 @@ class AdvertController extends BaseController
 		} else {
 			$vars = [
 				'vehicle' => $vehicle,
+				'models'	=> $this->models->where('make_id',$vehicle['make_id'])->orderBy('name','ASC')->get(),
+				'makes' => $this->makes->orderBy('name','ASC')->get(),
 			];
 			$view = view('pages.advert-details', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
@@ -82,8 +88,8 @@ class AdvertController extends BaseController
 	        'private' 	=> 1,
 	        'user_id' 	=> 0,
 	        'dealer_id' => 0,
-	        'make_id'	=> $vehicle['make_id'],
-	        'model_id'	=> $vehicle['model_id'],
+	        'make_id'	=> $request->input('make_id'),
+	        'model_id'	=> $request->input('model_id'),
 	        'name'		=> $request->input('name'),
 	        'price'		=> $request->input('price'),
 	        'fuel'		=> 'Electric',
@@ -138,6 +144,8 @@ class AdvertController extends BaseController
 			$view = $this->cache->get($key);
 		} else {
 			$vars = [
+				'models'	=> $this->models->where('make_id',$vehicle['make_id'])->orderBy('name','ASC')->get(),
+				'makes' => $this->makes->orderBy('name','ASC')->get(),
 				'vehicle' => $vehicle,
 			];
 			$view = view('pages.ad.edit', compact('vars'))->render();

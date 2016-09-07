@@ -75,6 +75,77 @@ My ad
 						<div class="col-md-6 col-sm-12">
 
 							<div class="form-group">
+								<label for="make_id" class="col-sm-6 control-label">Make</label>
+								<div class="col-sm-6">
+									<select name="make_id" id="make_id" class="form-control">
+										<option value="">All</option>
+										@foreach($vars['makes'] as $make)
+											@if ($vars['vehicle']['make_id'] == $make->id)
+												<option selected value="{{ $make->id }}">{{ $make->name }}</option>
+											@else
+												<option value="{{ $make->id }}">{{ $make->name }}</option>
+											@endif
+										@endforeach
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="model_id" class="col-sm-6 control-label">Model</label>
+								<div class="col-sm-6">
+									<select name="model_id" id="model_id" class="form-control">
+										<option value="">All</option>
+										@if(!empty($vars['models']))
+										@foreach($vars['models'] as $item)
+											@if ($vars['vehicle']['model_id'] == $item->id)
+												<option selected value="{{ $item->id }}">{{ $item->name }}</option>
+											@else
+												<option value="{{ $item->id }}">{{ $item->name }}</option>
+											@endif
+										@endforeach
+										@endif
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+
+								<div class="col-sm-offset-6 col-sm-6">
+							    	<div class="checkbox">
+										<label for="sold">
+											<input id="sold" name="sold" value="1" type="checkbox" {{ $vars['vehicle']['sold'] == '1' ? 'checked' : '' }}> Sold
+										</label>
+									</div>
+							    </div>
+
+							</div>
+
+							<div class="form-group">
+
+								<div class="col-sm-offset-6 col-sm-6">
+							    	<div class="checkbox">
+										<label for="enabled">
+											<input id="enabled" name="enabled" value="1" type="checkbox" {{ $vars['vehicle']['enabled'] == '1' ? 'checked' : '' }}> Enabled
+										</label>
+									</div>
+							    </div>
+
+							</div>
+
+						</div>
+
+						<div class="col-md-6 col-sm-12">
+
+							<div class="form-group">
+
+								<label for="colour" class="col-sm-6 control-label">Colour</label>
+								<div class="col-sm-6">
+									<input type="text" name="colour" id="colour" value="{{ $vars['vehicle']['colour'] or '' }}" class="form-control">
+								</div>
+
+							</div>
+
+							<div class="form-group">
 
 								<label for="gearbox" class="col-sm-6 control-label">Gearbox</label>
 								<div class="col-sm-6">
@@ -101,43 +172,6 @@ My ad
 										@endfor
 									</select>
 								</div>
-
-							</div>
-
-						</div>
-
-						<div class="col-md-6 col-sm-12">
-
-							<div class="form-group">
-
-								<label for="colour" class="col-sm-6 control-label">Colour</label>
-								<div class="col-sm-6">
-									<input type="text" name="colour" id="colour" value="{{ $vars['vehicle']['colour'] or '' }}" class="form-control">
-								</div>
-
-							</div>
-
-							<div class="form-group">
-
-								<div class="col-sm-offset-2 col-sm-10">
-							    	<div class="checkbox">
-										<label for="sold">
-											<input id="sold" name="sold" value="1" type="checkbox" {{ $vars['vehicle']['sold'] == '1' ? 'checked' : '' }}> Sold
-										</label>
-									</div>
-							    </div>
-
-							</div>
-
-							<div class="form-group">
-
-								<div class="col-sm-offset-2 col-sm-10">
-							    	<div class="checkbox">
-										<label for="enabled">
-											<input id="enabled" name="enabled" value="1" type="checkbox" {{ $vars['vehicle']['enabled'] == '1' ? 'checked' : '' }}> Enabled
-										</label>
-									</div>
-							    </div>
 
 							</div>
 

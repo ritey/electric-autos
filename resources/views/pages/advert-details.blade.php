@@ -78,7 +78,7 @@ Start selling with Electric Autos
 					<div class="form-group">
 
 						<label for="price" class="col-sm-3 control-label">Asking price</label>
-						<div class="col-sm-9">
+						<div class="col-sm-9  col-md-4">
 							<input type="text" name="price" id="price" class="form-control">
 						</div>
 
@@ -87,7 +87,7 @@ Start selling with Electric Autos
 					<div class="form-group">
 
 						<label for="currency" class="col-sm-3 control-label">Currency</label>
-						<div class="col-sm-9">
+						<div class="col-sm-9 col-md-4">
 							<select name="currency" id="" class="form-control">
 								<option value="Pound">Pounds</option>
 								<option value="Euro">Euros</option>
@@ -116,6 +116,44 @@ Start selling with Electric Autos
 					</div>
 
 					<div class="row">
+
+						<div class="col-md-6 col-sm-12">
+
+							<div class="form-group">
+								<label for="make_id" class="col-sm-6 control-label">Make</label>
+								<div class="col-sm-6">
+									<select name="make_id" id="make_id" class="form-control">
+										<option value="">All</option>
+										@foreach($vars['makes'] as $make)
+											@if ($vars['vehicle']['make_id'] == $make->id)
+												<option selected value="{{ $make->id }}">{{ $make->name }}</option>
+											@else
+												<option value="{{ $make->id }}">{{ $make->name }}</option>
+											@endif
+										@endforeach
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="model_id" class="col-sm-6 control-label">Model</label>
+								<div class="col-sm-6">
+									<select name="model_id" id="model_id" class="form-control">
+										<option value="">All</option>
+										@if(!empty($vars['models']))
+										@foreach($vars['models'] as $item)
+											@if ($vars['vehicle']['model_id'] == $item->id)
+												<option selected value="{{ $item->id }}">{{ $item->name }}</option>
+											@else
+												<option value="{{ $item->id }}">{{ $item->name }}</option>
+											@endif
+										@endforeach
+										@endif
+									</select>
+								</div>
+							</div>
+
+						</div>
 
 						<div class="col-md-6 col-sm-12">
 
@@ -149,10 +187,6 @@ Start selling with Electric Autos
 
 							</div>
 
-						</div>
-
-						<div class="col-md-6 col-sm-12">
-
 							<div class="form-group">
 
 								<label for="colour" class="col-sm-6 control-label">Colour</label>
@@ -184,9 +218,9 @@ Start selling with Electric Autos
 
 				<h4>Selling tips</h4>
 
-				<p>We ask for your car registration to help populate some of the vehicle data, we will not display the vehicle registration on the finished advert.</p>
+				<p>Writing a good description really helps a potential buyer choose their next car so make sure you include as much detail as possible. Too short a description might not get the attention your car deserves.</p>
 
-				<p>Be accurate with your car mileage.</p>
+				<p>Being accurate with the vehicle details helps prospective buyers find the exact car their looking for.</p>
 
 			</div>
 

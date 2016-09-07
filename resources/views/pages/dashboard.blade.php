@@ -63,6 +63,17 @@ Dashboard
 
 						</table>
 
+						@if (!empty($vars['ads']))
+
+						<div class="text-center">
+
+							{!! $vars['ads']->links() !!}
+
+						</div>
+
+						@endif
+
+
 					</div>
 
 					<div class="col-sm-4">

@@ -83,7 +83,7 @@ class CreateUsersTable extends Migration
             $table->integer('make_id')->index();
             $table->integer('model_id')->index();
             $table->string('name',128);
-            $table->float('price')->nullable()->index();
+            $table->string('price',16)->nullable()->index();
             $table->string('fuel',8)->nullable()->index();
             $table->string('year',4)->nullable()->index();
             $table->string('colour',12)->nullable()->index();
