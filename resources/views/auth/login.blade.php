@@ -30,7 +30,7 @@ Login to Electric Autos
 						<div class="box login">
 
 							<div class="login-description text-center">
-								Welcome Back
+								Welcome back
 								<p>You can sign in with your email address.</p>
 							</div>
 

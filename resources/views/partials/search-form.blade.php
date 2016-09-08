@@ -1,10 +1,12 @@
-<form method="get" action="#" class="">
+<form method="GET" action="{{ $vars['search_route'] }}" class="form">
 	<div class="form-group">
 		<label for="make">Make</label>
 		<select name="make" id="make" class="form-control">
 			<option value="">All</option>
 			@foreach($vars['makes'] as $make)
 				@if (isset($vars['brand']) && !empty($vars['brand']) && $vars['brand']->name == $make->name)
+					<option selected value="{{ $make->id }}">{{ $make->name }}</option>
+				@elseif ($make->id == $vars['request']->input('make'))
 					<option selected value="{{ $make->id }}">{{ $make->name }}</option>
 				@else
 					<option value="{{ $make->id }}">{{ $make->name }}</option>
@@ -20,6 +22,8 @@
 			@foreach($vars['models'] as $item)
 				@if (isset($vars['brand']) && $vars['brand']->name == $item->name)
 					<option selected value="{{ $item->id }}">{{ $item->name }}</option>
+				@elseif ($item->id == $vars['request']->input('model'))
+					<option selected value="{{ $item->id }}">{{ $item->name }}</option>
 				@else
 					<option value="{{ $item->id }}">{{ $item->name }}</option>
 				@endif
@@ -33,15 +37,31 @@
 			<option value="">Price (min)</option>
 			<option value="500">&pound;500</option>
 			@for($i=1000;$i<=20000;$i+=1000)
+			@if ($i == $vars['request']->input('min_price'))
+			<option value="{{ $i }}" selected>&pound;{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">&pound;{{ $i }}</option>
+			@endif
 			@endfor
 			@for($i=25000;$i<=150000;$i+=5000)
+			@if ($i == $vars['request']->input('min_price'))
+			<option value="{{ $i }}" selected>&pound;{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">&pound;{{ $i }}</option>
+			@endif
 			@endfor
 			@for($i=175000;$i<=500000;$i+=25000)
+			@if ($i == $vars['request']->input('min_price'))
+			<option value="{{ $i }}" selected>&pound;{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">&pound;{{ $i }}</option>
+			@endif
 			@endfor
+			@if ('1000000' == $vars['request']->input('min_price'))
+			<option selected value="1000000">&pound;1000000</option>
+			@else
 			<option value="1000000">&pound;1000000</option>
+			@endif
 		</select>
 	</div>
 	<div class="form-group">
@@ -50,14 +70,31 @@
 			<option value="">Price (max)</option>
 			<option value="500">&pound;500</option>
 			@for($i=1000;$i<=20000;$i+=1000)
+			@if ($i == $vars['request']->input('max_price'))
+			<option value="{{ $i }}" selected>&pound;{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">&pound;{{ $i }}</option>
+			@endif
 			@endfor
 			@for($i=25000;$i<=150000;$i+=5000)
+			@if ($i == $vars['request']->input('max_price'))
+			<option value="{{ $i }}" selected>&pound;{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">&pound;{{ $i }}</option>
+			@endif
 			@endfor
 			@for($i=175000;$i<=500000;$i+=25000)
-			<option value="1000000">&pound;1,000,000</option>
+			@if ($i == $vars['request']->input('max_price'))
+			<option value="{{ $i }}" selected>&pound;{{ $i }}</option>
+			@else
+			<option value="{{ $i }}">&pound;{{ $i }}</option>
+			@endif
 			@endfor
+			@if ('1000000' == $vars['request']->input('max_price'))
+			<option selected value="1000000">&pound;1000000</option>
+			@else
+			<option value="1000000">&pound;1000000</option>
+			@endif
 		</select>
 	</div>
 	<div class="form-group">
@@ -66,13 +103,25 @@
 			<option value="">Mileage (min)</option>
 			<option value="500">500</option>
 			@for($i=1000;$i<=20000;$i+=1000)
+			@if ($i == $vars['request']->input('min_mileage'))
+			<option value="{{ $i }}" selected>{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">{{ $i }}</option>
+			@endif
 			@endfor
 			@for($i=25000;$i<=100000;$i+=5000)
+			@if ($i == $vars['request']->input('min_mileage'))
+			<option value="{{ $i }}" selected>{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">{{ $i }}</option>
+			@endif
 			@endfor
 			@for($i=125000;$i<=175000;$i+=25000)
+			@if ($i == $vars['request']->input('min_mileage'))
+			<option value="{{ $i }}" selected>{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">{{ $i }}</option>
+			@endif
 			@endfor
 		</select>
 	</div>
@@ -82,13 +131,25 @@
 			<option value="">Mileage (max)</option>
 			<option value="500">500</option>
 			@for($i=1000;$i<=20000;$i+=1000)
+			@if ($i == $vars['request']->input('max_mileage'))
+			<option value="{{ $i }}" selected>{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">{{ $i }}</option>
+			@endif
 			@endfor
 			@for($i=25000;$i<=100000;$i+=5000)
+			@if ($i == $vars['request']->input('max_mileage'))
+			<option value="{{ $i }}" selected>{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">{{ $i }}</option>
+			@endif
 			@endfor
 			@for($i=125000;$i<=175000;$i+=25000)
+			@if ($i == $vars['request']->input('max_mileage'))
+			<option value="{{ $i }}" selected>{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">{{ $i }}</option>
+			@endif
 			@endfor
 		</select>
 	</div>
@@ -97,7 +158,11 @@
 		<select name="min_year" id="min_year" class="form-control">
 			<option value="">Year (from)</option>
 			@for ($i = date('Y'); $i > (date('Y')-10); $i--)
+			@if ($i == $vars['request']->input('min_year'))
+			<option value="{{ $i }}" selected>{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">{{ $i }}</option>
+			@endif
 			@endfor
 		</select>
 	</div>
@@ -106,7 +171,11 @@
 		<select name="max_year" id="max_year" class="form-control">
 			<option value="">Year (to)</option>
 			@for ($i = date('Y'); $i > (date('Y')-10); $i--)
+			@if ($i == $vars['request']->input('max_year'))
+			<option value="{{ $i }}" selected>{{ $i }}</option>
+			@else
 			<option value="{{ $i }}">{{ $i }}</option>
+			@endif
 			@endfor
 		</select>
 	</div>

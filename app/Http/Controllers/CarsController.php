@@ -29,19 +29,33 @@ class CarsController extends BaseController
 
 	public function index()
 	{
-		$cars = $this->resource->paginate();
+		$cars = $this->resource->filter($this->request)->paginate();
 		$half = number_format(ceil($cars->count() / 2));
+		if ($half < 6) {
+			$half = 6;
+		}
 		$chunks = $cars->chunk($half);
 
+		$models = '';
+		$brand = '';
+
+		if ($this->request->input('make')) {
+			$models = $this->models->where('make_id',$this->request->input('make'))->orderBy('name','ASC')->get();
+			$brand = $this->makes->where('id',$this->request->input('make'))->first();
+		}
+
 		$vars = [
-			'cars_collection' 	=> $cars,
-			'cars' 	=> $chunks,
-			'total_cars' => $cars->total(),
-			'total_page_total' => $cars->count(),
-			'page' => $cars->currentPage(),
-			'brand' => '',
-			'makes' => $this->makes->orderBy('name','ASC')->get(),
-			'models'	=> '',
+			'request'				=> $this->request,
+			'cars_collection'		=> $cars,
+			'cars'					=> $chunks,
+			'total_cars'			=> $this->resource->totalEnabled(),
+			'total_cars_found'		=> $cars->total(),
+			'total_page_total'		=> $cars->count(),
+			'page'					=> $cars->currentPage(),
+			'brand'					=> $brand,
+			'makes'					=> $this->makes->orderBy('name','ASC')->get(),
+			'models'				=> $models,
+			'search_route'			=> route('cars.index'),
 		];
 		return view('pages.cars-index',compact('vars'));
 	}
@@ -64,14 +78,18 @@ class CarsController extends BaseController
 			$chunks = $cars->chunk($half);
 
 			$vars = [
+				'request'	=> $this->request,
 				'cars_collection' 	=> $cars,
 				'cars' => $chunks,
-				'total_cars' => $cars->total(),
+				'total_cars' => $this->resource->totalEnabled(),
+				'total_cars_found' => $cars->total(),
 				'total_page_total' => $cars->count(),
 				'page' => $cars->currentPage(),
 				'brand' => $brand,
 				'models'	=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
 				'makes' => $this->makes->orderBy('name','ASC')->get(),
+				'search_route' => route('cars.brand.index', ['brand' => $brand]),
+
 			];
 			$view = view('pages.cars-index',compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));

@@ -46,6 +46,7 @@ class AdvertController extends BaseController
 		$this->resource = $resource;
 		$this->makes = $makes;
 		$this->models = $models;
+		$this->middleware('auth',['except' => ['details','saveVehicle']]);
 	}
 
 	public function details(AdRequest $request)

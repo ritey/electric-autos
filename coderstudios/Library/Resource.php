@@ -29,6 +29,44 @@ class Resource {
 		return $resource;
 	}
 
+	public function totalEnabled()
+	{
+		return $this->resource->enabled()->count();
+	}
+
+	public function filter($request)
+	{
+		$result = $this->resource->enabled();
+		if ($request->input('make')) {
+			$result = $result->where('make_id',$request->input('make'));
+		}
+		if ($request->input('model')) {
+			$result = $result->where('model_id',$request->input('model'));
+		}
+		if ($request->input('min_price')) {
+			$result = $result->where('price','>=',$request->input('min_price'));
+		}
+		if ($request->input('max_price')) {
+			$result = $result->where('price','<=',$request->input('max_price'));
+		}
+		if ($request->input('max_price')) {
+			$result = $result->where('price','<=',$request->input('max_price'));
+		}
+		if ($request->input('min_mileage')) {
+			$result = $result->where('mileage','<=',$request->input('min_mileage'));
+		}
+		if ($request->input('max_mileage')) {
+			$result = $result->where('mileage','<=',$request->input('max_mileage'));
+		}
+		if ($request->input('min_year')) {
+			$result = $result->where('year','<=',$request->input('min_year'));
+		}
+		if ($request->input('max_year')) {
+			$result = $result->where('year','<=',$request->input('max_year'));
+		}
+		return $result;
+	}
+
 	public function latest($amount = 3)
 	{
 		return $this->resource->enabled()->orderBy('created_at','DESC')->take($amount);
