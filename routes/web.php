@@ -46,5 +46,5 @@ Route::get('/blog', ['as' => 'blog.index', 'uses' => 'BlogController@index']);
 Route::get('/blog/{slug}', ['as' => 'blog.post', 'uses' => 'BlogController@post']);
 Route::get('/used-cars', ['as' => 'cars.index', 'uses' => 'CarsController@index']);
 Route::get('/used-cars/{brand}', ['as' => 'cars.brand.index', 'uses' => 'CarsController@brand']);
-Route::get('/used-cars/{brand}/{model}', ['as' => 'cars.search.index', 'uses' => 'CarsController@brand']);
-Route::get('/used-cars/{brand}/{model}/{slug}', ['as' => 'cars.brand.car', 'uses' => 'CarsController@post']);
+Route::get('/used-cars/{brand}/{version?}', ['as' => 'cars.search.index', 'uses' => 'CarsController@model']);
+Route::get('/used-cars/{brand}/{version}/{slug}', ['as' => 'cars.brand.car', 'uses' => 'CarsController@post']);

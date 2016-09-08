@@ -20,7 +20,7 @@
 			<option value="">All</option>
 			@if(!empty($vars['models']))
 			@foreach($vars['models'] as $item)
-				@if (isset($vars['brand']) && $vars['brand']->name == $item->name)
+				@if (isset($vars['model']) && is_object($vars['model']) && $vars['model']->name == $item->name)
 					<option selected value="{{ $item->id }}">{{ $item->name }}</option>
 				@elseif ($item->id == $vars['request']->input('model'))
 					<option selected value="{{ $item->id }}">{{ $item->name }}</option>

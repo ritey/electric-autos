@@ -29,7 +29,7 @@ class CarsController extends BaseController
 
 	public function index()
 	{
-		$cars = $this->resource->filter($this->request)->paginate();
+		$cars = $this->resource->filter($this->request)->paginate(env('APP_PER_PAGE',15));
 		$half = number_format(ceil($cars->count() / 2));
 		if ($half < 6) {
 			$half = 6;
@@ -40,6 +40,16 @@ class CarsController extends BaseController
 		$brand = '';
 
 		if ($this->request->input('make')) {
+
+			if ($this->request->input('make') && $this->request->input('model')) {
+
+				$params = [
+					'brand' => $this->makes->where('id',$this->request->input('make'))->value('name'),
+					'model' => $this->models->where('id',$this->request->input('model'))->value('name'),
+				];
+
+				return redirect()->route('cars.search.index', $params);
+			}
 			$models = $this->models->where('make_id',$this->request->input('make'))->orderBy('name','ASC')->get();
 			$brand = $this->makes->where('id',$this->request->input('make'))->first();
 		}
@@ -73,22 +83,124 @@ class CarsController extends BaseController
 				Abort(404);
 			}
 
-			$cars = $this->resource->branded($brand->id,12)->paginate();
+			if ($this->request->input('make')) {
+
+				if ($this->request->input('make') && $this->request->input('model')) {
+
+					$params = $this->request->all();
+					$params['brand'] = $this->makes->where('id',$this->request->input('make'))->value('name');
+					$params['model'] = $this->models->where('id',$this->request->input('model'))->value('name');
+					unset($params['make']);
+					unset($params['model']);
+
+					return redirect()->route('cars.search.index', $params);
+				} else {
+
+					$params = $this->request->all();
+					$params['brand'] = $this->makes->where('id',$this->request->input('make'))->value('name');
+					unset($params['make']);
+
+					return redirect()->route('cars.search.index', $params);
+				}
+				$models = $this->models->where('make_id',$this->request->input('make'))->orderBy('name','ASC')->get();
+				$brand = $this->makes->where('id',$this->request->input('make'))->first();
+			}
+
+			$search_route = route('cars.brand.index', ['brand' => $brand->name]);
+			//if (is_object($model)) {
+			//	$search_route = route('cars.brand.index', ['brand' => $brand->name, 'model' => $model->name]);
+			//}
+
+			$cars = $this->resource->branded($brand->id,12)->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
+			if ($half < 6) {
+				$half = 6;
+			}
 			$chunks = $cars->chunk($half);
 
 			$vars = [
-				'request'	=> $this->request,
-				'cars_collection' 	=> $cars,
-				'cars' => $chunks,
-				'total_cars' => $this->resource->totalEnabled(),
-				'total_cars_found' => $cars->total(),
-				'total_page_total' => $cars->count(),
-				'page' => $cars->currentPage(),
-				'brand' => $brand,
-				'models'	=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
-				'makes' => $this->makes->orderBy('name','ASC')->get(),
-				'search_route' => route('cars.brand.index', ['brand' => $brand]),
+				'request'				=> $this->request,
+				'cars_collection'		=> $cars,
+				'cars'					=> $chunks,
+				'total_cars'			=> $this->resource->totalEnabled(),
+				'total_cars_found'		=> $cars->total(),
+				'total_page_total'		=> $cars->count(),
+				'page'					=> $cars->currentPage(),
+				'brand'					=> $brand,
+				'models'				=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
+				'makes'					=> $this->makes->orderBy('name','ASC')->get(),
+				'search_route'			=> $search_route,
+
+			];
+			$view = view('pages.cars-index',compact('vars'))->render();
+			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
+		}
+		return $view;
+	}
+
+	public function model($brand, $model = '')
+	{
+
+		if ($this->request->input('make') && $this->request->input('model')) {
+
+			$params = $this->request->all();
+			$params['brand'] = $this->makes->where('id',$this->request->input('make'))->value('name');
+			$params['version'] = $this->models->where('id',$this->request->input('model'))->value('name');
+
+			unset($params['make']);
+			unset($params['model']);
+
+			return redirect()->route('cars.search.index', $params);
+		} elseif ($this->request->input('make')) {
+
+			$params = $this->request->all();
+			$params['brand'] = $this->makes->where('id',$this->request->input('make'))->value('name');
+			unset($params['make']);
+			unset($params['model']);
+			return redirect()->route('cars.brand.index', $params);
+
+		}
+
+		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $model);
+		if ($this->cache->has($key)) {
+			$view = $this->cache->get($key);
+		} else {
+
+			$brand = $this->makes->whereRaw('LOWER(name) = ?',[strtolower($brand)])->first();
+
+			if ($model != '') {
+				$model = $this->models->whereRaw('LOWER(name) = ?',[strtolower($model)])->first();
+			}
+
+			if (!$brand) {
+				Abort(404);
+			}
+
+			$search_route = route('cars.brand.index', ['brand' => $brand->name]);
+			if (is_object($model)) {
+				$search_route = route('cars.search.index', ['brand' => $brand->name, 'version' => $model->name]);
+			}
+
+			$cars = $this->resource->branded($brand->id,12)->paginate(env('APP_PER_PAGE',15));
+			$half = number_format(ceil($cars->count() / 2));
+			if ($half < 6) {
+				$half = 6;
+			}
+			$chunks = $cars->chunk($half);
+
+			$vars = [
+				'request'				=> $this->request,
+				'cars_collection'		=> $cars,
+				'cars'					=> $chunks,
+				'total_cars'			=> $this->resource->totalEnabled(),
+				'total_cars_found'		=> $cars->total(),
+				'total_page_total'		=> $cars->count(),
+				'page'					=> $cars->currentPage(),
+				'brand'					=> $brand,
+				'models'				=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
+				'model'					=> $model,
+				'makes'					=> $this->makes->orderBy('name','ASC')->get(),
+				'search_route'			=> $search_route,
 
 			];
 			$view = view('pages.cars-index',compact('vars'))->render();

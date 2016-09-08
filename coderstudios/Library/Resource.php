@@ -107,7 +107,7 @@ class Resource {
 		return $this->resource->enabled()->get();
 	}
 
-	public function paginate($perPage = 12)
+	public function paginate($perPage = 15)
 	{
 		return $this->resource->paginate($perPage);
 	}
