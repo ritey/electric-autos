@@ -50,6 +50,8 @@ Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | U
 
 				</div>
 
+				<p id="results" class="sc-only"></p>
+
 				@foreach($vars['cars'] as $collection)
 
 					@foreach($collection as $car)

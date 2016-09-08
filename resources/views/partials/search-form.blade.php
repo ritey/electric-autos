@@ -1,4 +1,4 @@
-<form method="GET" action="{{ $vars['search_route'] }}" class="form">
+<form method="GET" action="{{ $vars['search_route'] }}#results" class="form">
 	<div class="form-group">
 		<label for="make">Make</label>
 		<select name="make" id="make" class="form-control">
