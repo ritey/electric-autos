@@ -77,6 +77,11 @@ class Resource {
 		return $this->resource->enabled()->where('make_id',$brand_id)->orderBy('created_at','DESC')->take($amount);
 	}
 
+	public function modeled($brand_id, $model_id, $amount = 3)
+	{
+		return $this->resource->enabled()->where('make_id',$brand_id)->where('model_id',$model_id)->orderBy('created_at','DESC')->take($amount);
+	}
+
 	public function whereSlug($slug = '')
 	{
 		return $this->resource->enabled()->where('slug',$slug)->first();

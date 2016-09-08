@@ -182,6 +182,9 @@ class CarsController extends BaseController
 			}
 
 			$cars = $this->resource->branded($brand->id,12)->paginate(env('APP_PER_PAGE',15));
+			if ($model != '') {
+				$cars = $this->resource->modeled($brand->id,$model->id, 12)->paginate(env('APP_PER_PAGE',15));
+			}
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {
 				$half = 6;
