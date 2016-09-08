@@ -14,7 +14,7 @@
 			@endforeach
 		</select>
 	</div>
-	<div class="form-group">
+	<div class="form-group" id="model-container">
 		<label for="model">Model</label>
 		<select name="model" id="model" class="form-control">
 			<option value="">All</option>

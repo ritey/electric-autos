@@ -48,3 +48,5 @@ Route::get('/used-cars', ['as' => 'cars.index', 'uses' => 'CarsController@index'
 Route::get('/used-cars/{brand}', ['as' => 'cars.brand.index', 'uses' => 'CarsController@brand']);
 Route::get('/used-cars/{brand}/{version?}', ['as' => 'cars.search.index', 'uses' => 'CarsController@model']);
 Route::get('/used-cars/{brand}/{version}/{slug}', ['as' => 'cars.brand.car', 'uses' => 'CarsController@post']);
+
+Route::get('/makes/{make_id}/models', ['as' => 'make.models', 'uses' => 'ApiController@makesModels']);

@@ -89,3 +89,24 @@ Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | U
 </section>
 
 @endsection
+
+@section('footer')
+<script type="text/javascript">
+$('document').ready(function(){
+	$('#make').on('change', function() {
+
+		var models = $.get({
+			'url': '/makes/'+$(this).val()+'/models',
+			'success': function(data) {
+				$html = '<label for="model">Model</label><select name="model" id="model" class="form-control"><option value="">All</option>';
+				for(var i=0;i<data.length;i++) {
+					$html = $html + '<option value="'+data[i].id+'">'+data[i].name+'</option>'
+				}
+				$html = $html + '</select>';
+				$('#model-container').html($html);
+			},
+		});
+	});
+});
+</script>
+@endsection
