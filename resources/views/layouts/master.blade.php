@@ -42,7 +42,11 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="{{ active_class(if_uri_pattern(['cars','cars/*']), 'active') }}"><a href="{{ route('cars.index') }}">Autos</a></li>
+                    @if (Auth::guest())
 					<li class="{{ active_class(if_uri_pattern(['start-selling','start-selling/*']), 'active') }}"><a href="{{ route('start-selling') }}">Sell</a></li>
+					@else
+					<li class="{{ active_class(if_uri_pattern(['start-selling','start-selling/*']), 'active') }}"><a href="{{ route('ad.create') }}">Sell</a></li>
+					@endif
 					<li class="{{ active_class(if_uri(['about','contact']), 'active') }} dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="caret"></span></a>
 						<ul class="dropdown-menu">
