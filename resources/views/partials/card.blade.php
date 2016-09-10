@@ -24,11 +24,11 @@
 				Year
 			</li>
 			<li class="list-group-item">
-				<span class="badge">{{ $car->price or 'Price' }}</span>
+				<span class="badge">{{ $car->currency == 'Pound' ? '&pound;' : '' }}{{ $car->currency == 'Euro' ? '&euro;' : '' }}{{ $car->price or 'Price' }}</span>
 				Price
 			</li>
 			<li class="list-group-item">
-				<span class="badge">{{ $car->mileage or 'Mileage' }}</span>
+				<span class="badge">{{ $car->mileage or 'Mileage' }} {{ strtolower($car->length_measure) }}</span>
 				Mileage
 			</li>
 			<li class="list-group-item">

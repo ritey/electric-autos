@@ -7,6 +7,7 @@ use Illuminate\Contracts\Cache\Repository as Cache;
 use CoderStudios\Models\Makes;
 use CoderStudios\Models\Models;
 use CoderStudios\Library\Resource;
+use Session;
 
 class CarsController extends BaseController
 {
@@ -53,6 +54,8 @@ class CarsController extends BaseController
 			$models = $this->models->where('make_id',$this->request->input('make'))->orderBy('name','ASC')->get();
 			$brand = $this->makes->where('id',$this->request->input('make'))->first();
 		}
+
+		Session::put('back_url', $this->request->fullUrl());
 
 		$vars = [
 			'request'				=> $this->request,
@@ -118,6 +121,8 @@ class CarsController extends BaseController
 			}
 			$chunks = $cars->chunk($half);
 
+			Session::put('back_url', $this->request->fullUrl());
+
 			$vars = [
 				'request'				=> $this->request,
 				'cars_collection'		=> $cars,
@@ -170,6 +175,7 @@ class CarsController extends BaseController
 
 			if ($model != '') {
 				$model = $this->models->whereRaw('LOWER(name) = ?',[strtolower($model)])->first();
+				$this->request->request->add(['model' => $model->id]);
 			}
 
 			if (!$brand) {
@@ -181,15 +187,16 @@ class CarsController extends BaseController
 				$search_route = route('cars.search.index', ['brand' => $brand->name, 'version' => $model->name]);
 			}
 
-			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->paginate(env('APP_PER_PAGE',15));
-			if ($model != '') {
-				$cars = $this->resource->modeled($brand->id,$model->id, env('APP_PER_PAGE',15))->paginate(env('APP_PER_PAGE',15));
-			}
+			$this->request->request->add(['make' => $brand->id]);
+
+			$cars = $this->resource->filter($this->request)->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {
 				$half = 6;
 			}
 			$chunks = $cars->chunk($half);
+
+			Session::put('back_url', $this->request->fullUrl());
 
 			$vars = [
 				'request'				=> $this->request,
@@ -218,7 +225,6 @@ class CarsController extends BaseController
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
-
 			$brand = $this->makes->whereRaw('LOWER(name) = ?',[strtolower($brand)])->first();
 			$car = $this->resource->whereSlug($slug);
 
@@ -227,11 +233,11 @@ class CarsController extends BaseController
 			}
 
 			$vars = [
-				'makes' => $this->makes->orderBy('name','ASC')->get(),
+				'makes'		=> $this->makes->orderBy('name','ASC')->get(),
 				'models'	=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
-				'brand' => $brand,
-				'car' => $car,
-				'back_url' => '',
+				'brand'		=> $brand,
+				'car'		=> $car,
+				'back_url'	=> Session::get('back_url'),
 			];
 			$view = view('pages.cars-post',compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
