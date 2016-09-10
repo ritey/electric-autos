@@ -111,7 +111,7 @@ class CarsController extends BaseController
 			//	$search_route = route('cars.brand.index', ['brand' => $brand->name, 'model' => $model->name]);
 			//}
 
-			$cars = $this->resource->branded($brand->id,12)->paginate(env('APP_PER_PAGE',15));
+			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {
 				$half = 6;
@@ -181,9 +181,9 @@ class CarsController extends BaseController
 				$search_route = route('cars.search.index', ['brand' => $brand->name, 'version' => $model->name]);
 			}
 
-			$cars = $this->resource->branded($brand->id,12)->paginate(env('APP_PER_PAGE',15));
+			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->paginate(env('APP_PER_PAGE',15));
 			if ($model != '') {
-				$cars = $this->resource->modeled($brand->id,$model->id, 12)->paginate(env('APP_PER_PAGE',15));
+				$cars = $this->resource->modeled($brand->id,$model->id, env('APP_PER_PAGE',15))->paginate(env('APP_PER_PAGE',15));
 			}
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {

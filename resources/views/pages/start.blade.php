@@ -95,6 +95,22 @@ Start selling with Electric Autos
 
 					<div class="form-group">
 
+						<label class="col-sm-3 control-label">Distance measure</label>
+						<div class="col-sm-6">
+							<div class="radio">
+								<label for="distance_miles" class="radio-inline">
+									<input type="radio" id="distance_miles" name="distance" value="Miles"> Miles
+								</label>
+								<label for="distance_km" class="radio-inline">
+									<input type="radio" id="distance_km" name="distance" value="KM"> Kilometers
+								</label>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="form-group">
+
 						<div class="col-sm-12">
 
 							<button type="submit" class="btn btn-primary pull-right">Next</button>

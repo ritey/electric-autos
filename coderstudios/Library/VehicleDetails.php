@@ -82,6 +82,16 @@ class VehicleDetails {
 		return str_replace('*','-',str_replace('&','-',str_replace(',','',str_replace(')','',str_replace('(','',str_replace('/','-',str_replace(' ','-',$text)))))));
 	}
 
+	public function makeMileage($text)
+	{
+		return trim(str_replace(',','',str_replace('kilometer','',str_replace('kilometers','',str_replace('miles','',$text)))));
+	}
+
+	public function makePrice($text)
+	{
+		return str_replace(',','',$text);
+	}
+
 	protected function getDoc($path)
 	{
 		$ch =  curl_init($path);
@@ -297,8 +307,16 @@ class VehicleDetails {
 						$resource['model_id'] = 16;
 					}
 
-					$resource['price'] = str_replace(',','',$ad['price']);
+					$resource['price'] = $this->makePrice($ad['price']);
 					$resource['mileage'] = isset($ad['specs'][0]) ? $ad['specs'][0] : '';
+					$resource['length_measure'] = 'Miles';
+					if (strpos(strtolower($resource['mileage']), 'km')) {
+						$resource['length_measure'] = 'KM';
+					}
+					if (strpos(strtolower($resource['mileage']), 'kilometer')) {
+						$resource['length_measure'] = 'KM';
+					}
+					$resource['mileage'] = $this->makeMileage($resource['mileage']);
 					$resource['gearbox'] = isset($ad['specs'][3]) ? $ad['specs'][3] : '';
 					$resource['year'] = substr($ad['title'], strlen($ad['title'])-5, 4);
 

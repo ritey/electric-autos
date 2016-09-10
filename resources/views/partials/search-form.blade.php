@@ -101,26 +101,30 @@
 		<label for="min_mileage">Mileage (min)</label>
 		<select name="min_mileage" id="min_mileage" class="form-control">
 			<option value="">Mileage (min)</option>
+			@if ('500' == $vars['request']->input('min_mileage'))
+			<option selected value="500">500</option>
+			@else
 			<option value="500">500</option>
+			@endif
 			@for($i=1000;$i<=20000;$i+=1000)
 			@if ($i == $vars['request']->input('min_mileage'))
-			<option value="{{ $i }}" selected>{{ $i }}</option>
+			<option value="{{ $i }}" selected>{{ number_format($i,0,'.',',') }}</option>
 			@else
-			<option value="{{ $i }}">{{ $i }}</option>
+			<option value="{{ $i }}">{{ number_format($i,0,'.',',') }}</option>
 			@endif
 			@endfor
 			@for($i=25000;$i<=100000;$i+=5000)
 			@if ($i == $vars['request']->input('min_mileage'))
-			<option value="{{ $i }}" selected>{{ $i }}</option>
+			<option value="{{ $i }}" selected>{{ number_format($i,0,'.',',') }}</option>
 			@else
-			<option value="{{ $i }}">{{ $i }}</option>
+			<option value="{{ $i }}">{{ number_format($i,0,'.',',') }}</option>
 			@endif
 			@endfor
 			@for($i=125000;$i<=175000;$i+=25000)
 			@if ($i == $vars['request']->input('min_mileage'))
-			<option value="{{ $i }}" selected>{{ $i }}</option>
+			<option value="{{ $i }}" selected>{{ number_format($i,0,'.',',') }}</option>
 			@else
-			<option value="{{ $i }}">{{ $i }}</option>
+			<option value="{{ $i }}">{{ number_format($i,0,'.',',') }}</option>
 			@endif
 			@endfor
 		</select>
@@ -132,23 +136,23 @@
 			<option value="500">500</option>
 			@for($i=1000;$i<=20000;$i+=1000)
 			@if ($i == $vars['request']->input('max_mileage'))
-			<option value="{{ $i }}" selected>{{ $i }}</option>
+			<option value="{{ $i }}" selected>{{ number_format($i,0,'.',',') }}</option>
 			@else
-			<option value="{{ $i }}">{{ $i }}</option>
+			<option value="{{ $i }}">{{ number_format($i,0,'.',',') }}</option>
 			@endif
 			@endfor
 			@for($i=25000;$i<=100000;$i+=5000)
 			@if ($i == $vars['request']->input('max_mileage'))
-			<option value="{{ $i }}" selected>{{ $i }}</option>
+			<option value="{{ $i }}" selected>{{ number_format($i,0,'.',',') }}</option>
 			@else
-			<option value="{{ $i }}">{{ $i }}</option>
+			<option value="{{ $i }}">{{ number_format($i,0,'.',',') }}</option>
 			@endif
 			@endfor
 			@for($i=125000;$i<=175000;$i+=25000)
 			@if ($i == $vars['request']->input('max_mileage'))
-			<option value="{{ $i }}" selected>{{ $i }}</option>
+			<option value="{{ $i }}" selected>{{ number_format($i,0,'.',',') }}</option>
 			@else
-			<option value="{{ $i }}">{{ $i }}</option>
+			<option value="{{ $i }}">{{ number_format($i,0,'.',',') }}</option>
 			@endif
 			@endfor
 		</select>

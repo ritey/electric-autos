@@ -74,6 +74,7 @@ class Resources extends Model
         'doors',
         'slug',
         'mileage',
+        'length_measure',
         'currency',
         'content',
         'updated_at',
@@ -88,6 +89,16 @@ class Resources extends Model
     public function scopeEnabled($query, $enabled = 1)
     {
         $query->where('enabled','=',$enabled);
+    }
+
+    public function getMileageAttribute($value)
+    {
+        return number_format($value);
+    }
+
+    public function getPriceAttribute($value)
+    {
+        return number_format($value);
     }
 
     public function make()

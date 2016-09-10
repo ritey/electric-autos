@@ -4,8 +4,10 @@
 
 		<div class="row">
 
-			<div class="heading">
+			<div class="col-sm-12">
+
 				<h1>{{ $title }}</h1>
+
 			</div>
 
 		</div>

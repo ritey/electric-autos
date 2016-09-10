@@ -83,7 +83,7 @@ class CreateUsersTable extends Migration
             $table->integer('make_id')->index();
             $table->integer('model_id')->index();
             $table->string('name',128);
-            $table->string('price',16)->nullable()->index();
+            $table->decimal('price',8,2)->nullable()->index();
             $table->string('fuel',8)->nullable()->index();
             $table->string('year',4)->nullable()->index();
             $table->string('colour',12)->nullable()->index();
@@ -91,7 +91,7 @@ class CreateUsersTable extends Migration
             $table->string('gearbox')->nullable()->index();
             $table->integer('doors')->nullable()->index();
             $table->string('slug',128)->nullable()->index();
-            $table->string('mileage',32)->nullable()->index();
+            $table->integer('mileage')->nullable()->index();
             $table->text('content')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();

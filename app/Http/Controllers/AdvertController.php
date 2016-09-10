@@ -56,7 +56,8 @@ class AdvertController extends BaseController
 			$vehicle = $this->vehicle->fetch($request->input('reg'));
 		}
 
-		$vehicle['mileage'] = $request->input('mileage');
+		$vehicle['mileage'] = $this->vehicle->makeMileage($request->input('mileage'));
+		$vehicle['distance'] = $request->input('distance');
 
 		Session::put('vehicle',$vehicle);
 
@@ -65,9 +66,9 @@ class AdvertController extends BaseController
 			$view = $this->cache->get($key);
 		} else {
 			$vars = [
-				'vehicle' => $vehicle,
+				'vehicle'	=> $vehicle,
 				'models'	=> $this->models->where('make_id',$vehicle['make_id'])->orderBy('name','ASC')->get(),
-				'makes' => $this->makes->orderBy('name','ASC')->get(),
+				'makes'		=> $this->makes->orderBy('name','ASC')->get(),
 			];
 			$view = view('pages.advert-details', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
@@ -81,28 +82,26 @@ class AdvertController extends BaseController
 		$vehicle = Session::get('vehicle');
 
 		$resource = [
-			/*'enabled',
-	        'sold',
-	        'car_type_id',*/
-	        'enabled' 	=> 0,
-	        'sort_order' => 1,
-	        'private' 	=> 1,
-	        'user_id' 	=> 0,
-	        'dealer_id' => 0,
-	        'make_id'	=> $request->input('make_id'),
-	        'model_id'	=> $request->input('model_id'),
-	        'name'		=> $request->input('name'),
-	        'price'		=> $request->input('price'),
-	        'fuel'		=> 'Electric',
-	        'year'		=> trim($vehicle['year']),
-	        'colour'	=> $vehicle['colour'],
-	        'reg'		=> $vehicle['reg'],
-	        'gearbox'	=> $request->input('gearbox'),
-	        'doors'		=> $request->input('doors'),
-	        'slug'		=> $this->vehicle->makeSlug($request->input('name')),
-	        'mileage'	=> $vehicle['mileage'],
-	        'currency'	=> $request->input('currency'),
-	        'content'	=> $request->input('content'),
+	        'enabled' 			=> 0,
+	        'sort_order' 		=> 1,
+	        'private' 			=> 1,
+	        'user_id' 			=> 0,
+	        'dealer_id' 		=> 0,
+	        'make_id'			=> $request->input('make_id'),
+	        'model_id'			=> $request->input('model_id'),
+	        'name'				=> trim($request->input('name')),
+	        'price'				=> $this->vehicle->makePrice($request->input('price')),
+	        'fuel'				=> $request->input('fuel'),
+	        'year'				=> trim($vehicle['year']),
+	        'colour'			=> trim($vehicle['colour']),
+	        'reg'				=> $vehicle['reg'],
+	        'gearbox'			=> $request->input('gearbox'),
+	        'doors'				=> $request->input('doors'),
+	        'slug'				=> $this->vehicle->makeSlug($request->input('name')),
+	        'mileage'			=> $vehicle['mileage'],
+	        'length_measure'	=> $vehicle['distance'],
+	        'currency'			=> $request->input('currency'),
+	        'content'			=> $request->input('content'),
 		];
 
 		$result = $this->resource->create($resource);

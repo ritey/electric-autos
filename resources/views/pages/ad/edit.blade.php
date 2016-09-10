@@ -110,6 +110,31 @@ My ad
 
 							<div class="form-group">
 
+								<label for="mileage" class="col-sm-6 control-label">Mileage</label>
+								<div class="col-sm-6">
+									<input type="text" name="mileage" id="mileage" class="form-control" required="required" value="{{ $vars['vehicle']['mileage'] }}">
+								</div>
+
+							</div>
+
+							<div class="form-group">
+
+								<label class="col-sm-6 control-label">Distance measure</label>
+								<div class="col-sm-6">
+									<div class="radio">
+										<label for="distance_miles" class="radio-inline">
+											<input type="radio" id="distance_miles" name="distance" value="Miles"> Miles
+										</label>
+										<label for="distance_km" class="radio-inline">
+											<input type="radio" id="distance_km" name="distance" value="KM"> Kilometers
+										</label>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-group">
+
 								<div class="col-sm-offset-6 col-sm-6">
 							    	<div class="checkbox">
 										<label for="sold">

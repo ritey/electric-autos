@@ -153,6 +153,15 @@ Start selling with Electric Autos
 								</div>
 							</div>
 
+							<div class="form-group">
+								<label for="fuel" class="col-sm-6 control-label">Fuel</label>
+								<div class="col-sm-6">
+									<select name="fuel" id="fuel" class="form-control">
+										<option value="Electric">Electric</option>
+										<option value="Hybrid">Hybrid</option>
+									</select>
+								</div>
+							</div>
 						</div>
 
 						<div class="col-md-6 col-sm-12">
@@ -174,7 +183,7 @@ Start selling with Electric Autos
 								<label for="year" class="col-sm-6 control-label">Year</label>
 								<div class="col-sm-6">
 									<select name="year" id="year" class="form-control">
-										<option value="">Year (from)</option>
+										<option value="">Year</option>
 										@for ($i = date('Y'); $i > (date('Y')-10); $i--)
 										@if(isset($vars['vehicle']['year']) && $vars['vehicle']['year'] == $i)
 										<option value="{{ $i }}" selected>{{ $i }}</option>

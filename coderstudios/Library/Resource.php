@@ -49,17 +49,14 @@ class Resource {
 		if ($request->input('max_price')) {
 			$result = $result->where('price','<=',$request->input('max_price'));
 		}
-		if ($request->input('max_price')) {
-			$result = $result->where('price','<=',$request->input('max_price'));
-		}
 		if ($request->input('min_mileage')) {
-			$result = $result->where('mileage','<=',$request->input('min_mileage'));
+			$result = $result->where('mileage','>=',$request->input('min_mileage'));
 		}
 		if ($request->input('max_mileage')) {
 			$result = $result->where('mileage','<=',$request->input('max_mileage'));
 		}
 		if ($request->input('min_year')) {
-			$result = $result->where('year','<=',$request->input('min_year'));
+			$result = $result->where('year','>=',$request->input('min_year'));
 		}
 		if ($request->input('max_year')) {
 			$result = $result->where('year','<=',$request->input('max_year'));

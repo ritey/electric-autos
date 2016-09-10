@@ -24,8 +24,9 @@ class AdRequest extends Request {
 	public function rules()
 	{
 		$rules = [
-			'reg' => 'required',
-			'mileage' => 'required',
+			'reg' 		=> 'required',
+			'mileage' 	=> 'required',
+			'distance' 	=> 'required',
 			/*'g-recaptcha-response' => 'required|recaptcha',*/
 		];
 
