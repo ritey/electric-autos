@@ -37,7 +37,7 @@
 
 				<figure>
 					@if (is_object($vars['car']) && $vars['car']->images()->count())
-					<img src="{{ route('image') }}?folder={{ $vars['car']->id }}&filename={{ urlencode($vars['car']->images()->first()->maskname . '.' . $vars['car']->images()->first()->extension) }}&width=400&height=300" alt="">
+					<img src="{{ route('image') }}?folder={{ $vars['car']->id }}&filename={{ urlencode($vars['car']->images()->first()->maskname . '.' . $vars['car']->images()->first()->extension) }}&width=400&height=300" alt="{{ $vars['car']->make()->first()->name }} {{ $vars['car']->model()->first()->name }} image">
 					@else
 					<img src="/images/holder.png" alt="">
 					@endif
@@ -46,7 +46,7 @@
 				<div class="thumbs">
 				@if (is_object($vars['car']) && $vars['car']->images()->count())
 					@foreach($vars['car']->images()->get() as $image)
-						<img src="{{ route('image') }}?folder={{ $vars['car']->id }}&filename={{ urlencode($image->maskname . '.' . $image->extension) }}&width=80&height=80" alt="">
+						<img src="{{ route('image') }}?folder={{ $vars['car']->id }}&filename={{ urlencode($image->maskname . '.' . $image->extension) }}&width=80&height=80" alt="{{ $vars['car']->make()->first()->name }} {{ $vars['car']->model()->first()->name }} image {{ $loop->iteration }}">
 					@endforeach
 				@endif
 				</div>
