@@ -154,7 +154,7 @@
 @section('footer')
 <script type="text/javascript">
 	$('.thumbs > img').on('click', function() {
-		$('figure > img').attr('src',$(this).attr('src').replace('80','400').replace('80','300'));
+		$('figure > img').attr('src',$(this).attr('src').replace('width=80','width=400').replace('height=80','height=300'));
 	});
 </script>
 @endsection

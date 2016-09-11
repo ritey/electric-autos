@@ -10,6 +10,7 @@ use CoderStudios\Models\Makes;
 use CoderStudios\Models\Models;
 use CoderStudios\Requests\ContactRequest;
 use App\Events\ContactSent;
+use Session;
 
 class HomeController extends BaseController
 {
@@ -47,6 +48,7 @@ class HomeController extends BaseController
 
 	public function home()
 	{
+		Session::put('back_url', $this->request->fullUrl());
 		//$this->vehicle->scrape();
 		$key = $this->getKeyName(__function__);
 		if ($this->cache->has($key)) {
