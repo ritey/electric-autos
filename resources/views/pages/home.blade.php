@@ -193,7 +193,7 @@ Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric c
 
 							<p>If you're looking for <strong>used electric cars</strong> you've come to the right website, browse our directory of <a href="{{ route('cars.index') }}" title="Used electric cars for sale">used electric cars</a>.</p>
 
-							<p>Electric cars or electric vehicles also known as EV (electric vehicles) can be found in a range of sizes, city EV's and full size EV's. City EV's would be cars like the <a href="{{ route('cars.search.index', ['brand' => 'Nissan', 'version' => 'Lead']) }}">Nissan Leaf</a> and a full size EV would be something like a <a href="{{ route('cars.search.index', ['brand' => 'Tesla', 'version' => 'Model S']) }}">Tesla Model S</a></p>
+							<p>Electric cars or electric vehicles also known as EV (electric vehicles) can be found in a range of sizes, city EV's and full size EV's. City EV's would be cars like the <a href="{{ route('cars.search.index', ['brand' => 'Nissan', 'version' => 'Leaf']) }}">Nissan Leaf</a> and a full size EV would be something like a <a href="{{ route('cars.search.index', ['brand' => 'Tesla', 'version' => 'Model S']) }}">Tesla Model S</a>.</p>
 
 						</div>
 
