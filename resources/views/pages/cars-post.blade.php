@@ -27,6 +27,9 @@
 
 				<p><a href="{{ $vars['back_url'] }}" class="btn btn-info"><i class="fa fa-angle-double-left"></i> Back to results</a></p>
 
+				<h2 class="hidden-md hidden-lg">Price {{ $vars['car']->currency == 'Pound' ? '&pound;' : '' }}{{ $vars['car']->currency == 'Euro' ? '&euro;' : '' }}{{ $vars['car']->price }}</h2>
+
+
 			</div>
 
 		</div>
@@ -112,13 +115,15 @@
 
 				</div>
 
+				<h4>{{ $vars['car']->make()->first()->name }} {{ $vars['car']->model()->first()->name }} description</h4>
+
 				{!! str_replace('incl.</p><p>','incl.',"<p>" . str_replace( ".", '.</p><p>', $vars['car']->content) . "</p>") !!}
 
 			</div>
 
 			<div class="col-md-4">
 
-				<h2>Price {{ $vars['car']->currency == 'Pound' ? '&pound;' : '' }}{{ $vars['car']->currency == 'Euro' ? '&euro;' : '' }}{{ $vars['car']->price }}</h2>
+				<h2 class="hidden-sm hidden-xs">Price {{ $vars['car']->currency == 'Pound' ? '&pound;' : '' }}{{ $vars['car']->currency == 'Euro' ? '&euro;' : '' }}{{ $vars['car']->price }}</h2>
 
 				<h3>Contact seller</h3>
 				@if($vars['car']->dealer)

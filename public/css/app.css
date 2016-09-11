@@ -212,12 +212,14 @@ form .row {
 }
 
 	.details ul {
-
+		margin-top:20px;
+		margin-bottom:20px;
 	}
 
 		.details ul li {
-			width:420px;
+			width:330px;
 			text-align:right;
+			font-weight:bold;
 		}
 
 			.details ul li span {
