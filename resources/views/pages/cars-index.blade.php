@@ -52,25 +52,43 @@ Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | U
 
 				<p id="results" class="sc-only"></p>
 
-				@foreach($vars['cars'] as $collection)
+				@if(count($vars['cars']))
 
-					@foreach($collection as $car)
+					@foreach($vars['cars'] as $collection)
 
-						<div class="col-sm-6 col-md-4">
+						@foreach($collection as $car)
 
-							@include('partials.card', ['car' => $car])
+							<div class="col-sm-6 col-md-4">
+
+								@include('partials.card', ['car' => $car])
+
+							</div>
+
+						@endforeach
+
+						<div class="col-sm-12 col-md-12 text-center">
+
+							@include('partials.advert')
 
 						</div>
 
 					@endforeach
 
-					<div class="col-sm-12 col-md-12 text-center">
+				@else
 
-						@include('partials.advert')
+					<div class="col-sm-12">
+
+						<h3>No cars found</h3>
+						<p>Try browsing a manufacturer below or change the filters to the side.</p>
+						<ul>
+							@foreach($vars['makes'] as $brand)
+							<li><a href="{{ route('cars.brand.index', ['brand' => $brand->name ]) }}">{{ $brand->name }}</a></li>
+							@endforeach
+						</ul>
 
 					</div>
 
-				@endforeach
+				@endif
 
 				<div class="row">
 
