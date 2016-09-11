@@ -37,15 +37,24 @@
 
 				<figure>
 					@if (is_object($vars['car']) && $vars['car']->images()->count())
-					<img src="{{ route('image') }}?folder={{ $vars['car']->id }}&filename={{ urlencode($vars['car']->images()->first()->maskname . '.' . $vars['car']->images()->first()->extension) }}&width=470&height=400" alt="">
+					<img src="{{ route('image') }}?folder={{ $vars['car']->id }}&filename={{ urlencode($vars['car']->images()->first()->maskname . '.' . $vars['car']->images()->first()->extension) }}&width=400&height=300" alt="">
 					@else
 					<img src="/images/holder.png" alt="">
 					@endif
 				</figure>
 
+				<div class="thumbs">
+				@if (is_object($vars['car']) && $vars['car']->images()->count())
+					@foreach($vars['car']->images()->get() as $image)
+						<img src="{{ route('image') }}?folder={{ $vars['car']->id }}&filename={{ urlencode($image->maskname . '.' . $image->extension) }}&width=80&height=80" alt="">
+					@endforeach
+				@endif
+				</div>
+
 				<div class="details">
 
 					<ul class="list-unstyled">
+						@if($vars['car']->colour)
 						<li>
 							<span>
 								<i class="fa fa-eyedropper"></i>
@@ -53,6 +62,8 @@
 							</span>
 							{{ $vars['car']->colour }}
 						</li>
+						@endif
+						@if($vars['car']->year)
 						<li>
 							<span>
 								<i class="fa fa-calendar"></i>
@@ -60,6 +71,8 @@
 							</span>
 							{{ $vars['car']->year }}
 						</li>
+						@endif
+						@if($vars['car']->mileage)
 						<li>
 							<span>
 								<i class="fa fa-tachometer"></i>
@@ -67,6 +80,8 @@
 							</span>
 							{{ $vars['car']->mileage }}
 						</li>
+						@endif
+						@if($vars['car']->fuel)
 						<li>
 							<span>
 								<i class="fa fa-battery-half"></i>
@@ -74,6 +89,8 @@
 							</span>
 							{{ $vars['car']->fuel }}
 						</li>
+						@endif
+						@if($vars['car']->doors)
 						<li>
 							<span>
 								<i class="fa fa-car"></i>
@@ -81,6 +98,8 @@
 							</span>
 							{{ $vars['car']->doors }}
 						</li>
+						@endif
+						@if($vars['car']->gearbox)
 						<li>
 							<span>
 								<i class="fa fa-gear"></i>
@@ -88,6 +107,7 @@
 							</span>
 							{{ $vars['car']->gearbox }}
 						</li>
+						@endif
 					</ul>
 
 				</div>
@@ -98,7 +118,7 @@
 
 			<div class="col-md-4">
 
-				<h2>Price {{ $vars['car']->price }}</h2>
+				<h2>Price {{ $vars['car']->currency == 'Pound' ? '&pound;' : '' }}{{ $vars['car']->currency == 'Euro' ? '&euro;' : '' }}{{ $vars['car']->price }}</h2>
 
 				<h3>Contact seller</h3>
 				@if($vars['car']->dealer)
@@ -129,4 +149,12 @@
 
 </section>
 
+@endsection
+
+@section('footer')
+<script type="text/javascript">
+	$('.thumbs > img').on('click', function() {
+		$('figure > img').attr('src',$(this).attr('src').replace('80','400').replace('80','300'));
+	});
+</script>
 @endsection

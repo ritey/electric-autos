@@ -204,6 +204,10 @@ form .row {
 	padding-bottom:70px;
 }
 
+.thumbs img {
+	cursor:pointer;
+}
+
 .details {
 }
 
@@ -212,10 +216,22 @@ form .row {
 	}
 
 		.details ul li {
-
+			width:420px;
+			text-align:right;
 		}
 
 			.details ul li span {
+				float:left;
+			}
+
+			.details ul li span i {
+				float:left;
+				padding-right:4px;
+				padding-top:2px;
+			}
+
+			.details ul li span span {
+				float:left;
 			}
 
 .item {
