@@ -72,6 +72,7 @@ Start selling with Electric Autos
 				</div>
 
 				<form class="form form-horizontal" method="GET" action="{{ route('start-selling.user-details') }}">
+					{!! csrf_field() !!}
 
 					@include('partials.errors')
 

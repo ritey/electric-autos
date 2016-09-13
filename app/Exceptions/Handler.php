@@ -44,6 +44,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+
+            return redirect($request->fullUrl())->with('csrf_error',"Opps! Seems you haven't used the site for a longtime. Please try again");
+        }
+
         return parent::render($request, $exception);
     }
 

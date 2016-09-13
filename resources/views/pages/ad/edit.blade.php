@@ -17,6 +17,8 @@ My ad
 
 @include('partials.section-title', ['title' => 'My ad'])
 
+@include('partials.message',['success_message' => ''])
+
 <section class="">
 
 	<div class="container">
@@ -25,9 +27,10 @@ My ad
 
 			<div class="col-md-8 col-sm-12">
 
-				<h2>Be as accurate as you can to help sell your car</h2>
+				<h2 class="addon-header">Be as accurate as you can to help sell your car</h2>
 
 				<form class="form form-horizontal" method="POST" action="{{ route('ad.save', ['slug' => $vars['vehicle']['slug']]) }}">
+					{!! csrf_field() !!}
 
 					@include('partials.errors')
 

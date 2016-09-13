@@ -27,7 +27,13 @@
 
 				<p><a href="{{ $vars['back_url'] }}" class="btn btn-info"><i class="fa fa-angle-double-left"></i> Back to results</a></p>
 
-				<h2 class="hidden-md hidden-lg">Price {{ $vars['car']->currency == 'Pound' ? '&pound;' : '' }}{{ $vars['car']->currency == 'Euro' ? '&euro;' : '' }}{{ $vars['car']->price }}</h2>
+				<h2 class="hidden-md hidden-lg">
+					@if($vars['car']->sold
+					NOW SOLD
+					@else
+					Price {{ $vars['car']->currency == 'Pound' ? '&pound;' : '' }}{{ $vars['car']->currency == 'Euro' ? '&euro;' : '' }}{{ $vars['car']->price }}
+					@endif
+				</h2>
 
 
 			</div>
@@ -123,8 +129,13 @@
 
 			<div class="col-md-4">
 
-				<h2 class="hidden-sm hidden-xs">Price {{ $vars['car']->currency == 'Pound' ? '&pound;' : '' }}{{ $vars['car']->currency == 'Euro' ? '&euro;' : '' }}{{ $vars['car']->price }}</h2>
-
+				<h2 class="hidden-sm hidden-xs">
+					@if($vars['car']->sold
+					NOW SOLD
+					@else
+					Price {{ $vars['car']->currency == 'Pound' ? '&pound;' : '' }}{{ $vars['car']->currency == 'Euro' ? '&euro;' : '' }}{{ $vars['car']->price }}
+					@endif
+				</h2>
 				<h3>Contact seller</h3>
 				@if($vars['car']->dealer)
 				<p>Call: {{ $vars['car']->dealer->phone }}</p>
