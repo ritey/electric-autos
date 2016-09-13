@@ -101,6 +101,15 @@ class Resources extends Model
         return number_format($value);
     }
 
+    public function setEnabledAttribute($value)
+    {
+        if (empty($value)) {
+            $this->attributes['enabled'] = 0;
+        } else {
+            $this->attributes['enabled'] = $value;
+        }
+    }
+
     public function make()
     {
         return $this->belongsTo('CoderStudios\Models\Makes','make_id','id');

@@ -126,10 +126,10 @@ My ad
 								<div class="col-sm-6">
 									<div class="radio">
 										<label for="distance_miles" class="radio-inline">
-											<input type="radio" id="distance_miles" name="distance" value="Miles"> Miles
+											<input type="radio" id="distance_miles" name="distance" value="Miles" {{ $vars['vehicle']['length_measure'] == 'Miles' ? 'checked' : '' }}> Miles
 										</label>
 										<label for="distance_km" class="radio-inline">
-											<input type="radio" id="distance_km" name="distance" value="KM"> Kilometers
+											<input type="radio" id="distance_km" name="distance" value="KM" {{ $vars['vehicle']['length_measure'] == 'KM' ? 'checked' : '' }}> Kilometers
 										</label>
 									</div>
 								</div>
@@ -201,6 +201,16 @@ My ad
 									</select>
 								</div>
 
+							</div>
+
+							<div class="form-group">
+								<label for="fuel" class="col-sm-6 control-label">Fuel</label>
+								<div class="col-sm-6">
+									<select name="fuel" id="fuel" class="form-control">
+										<option value="Electric" {{ $vars['vehicle']['fuel'] == 'Electric' ? 'selected' : '' }}>Electric</option>
+										<option value="Hybrid" {{ $vars['vehicle']['fuel'] == 'Hybrid' ? 'selected' : '' }}>Hybrid</option>
+									</select>
+								</div>
 							</div>
 
 						</div>

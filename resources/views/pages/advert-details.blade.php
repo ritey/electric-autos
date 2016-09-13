@@ -80,7 +80,7 @@ Start selling with Electric Autos
 
 						<label for="price" class="col-sm-3 control-label">Asking price</label>
 						<div class="col-sm-9  col-md-4">
-							<input type="text" name="price" id="price" class="form-control">
+							<input type="text" name="price" id="price" class="form-control" value="{{ old('price') }}">
 						</div>
 
 					</div>
@@ -101,7 +101,7 @@ Start selling with Electric Autos
 
 						<label for="name" class="col-sm-3 control-label">Ad headline</label>
 						<div class="col-sm-9">
-							<input type="text" name="name" id="name" class="form-control" value="">
+							<input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
 							<p class="help-block">Something like: {{ $vars['vehicle']['title'] or '' }}</p>
 						</div>
 
@@ -111,7 +111,7 @@ Start selling with Electric Autos
 
 						<label for="content" class="col-sm-3 control-label">Description</label>
 						<div class="col-sm-9">
-							<textarea name="content" id="content" rows="8" class="form-control"></textarea>
+							<textarea name="content" id="content" rows="8" class="form-control">{{ old('content') }}</textarea>
 						</div>
 
 					</div>
@@ -126,7 +126,7 @@ Start selling with Electric Autos
 									<select name="make_id" id="make_id" class="form-control">
 										<option value="">All</option>
 										@foreach($vars['makes'] as $make)
-											@if ($vars['vehicle']['make_id'] == $make->id)
+											@if ($vars['vehicle']['make_id'] == $make->id || $make->id == old('make_id'))
 												<option selected value="{{ $make->id }}">{{ $make->name }}</option>
 											@else
 												<option value="{{ $make->id }}">{{ $make->name }}</option>
@@ -143,7 +143,7 @@ Start selling with Electric Autos
 										<option value="">All</option>
 										@if(!empty($vars['models']))
 										@foreach($vars['models'] as $item)
-											@if ($vars['vehicle']['model_id'] == $item->id)
+											@if ($vars['vehicle']['model_id'] == $item->id || $item->id == old('model_id'))
 												<option selected value="{{ $item->id }}">{{ $item->name }}</option>
 											@else
 												<option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -158,8 +158,8 @@ Start selling with Electric Autos
 								<label for="fuel" class="col-sm-6 control-label">Fuel</label>
 								<div class="col-sm-6">
 									<select name="fuel" id="fuel" class="form-control">
-										<option value="Electric">Electric</option>
-										<option value="Hybrid">Hybrid</option>
+										<option value="Electric" {{ old('fuel') == 'Electric' ? 'selected' : '' }}>Electric</option>
+										<option value="Hybrid" {{ old('fuel') == 'Hybrid' ? 'selected' : '' }}>Hybrid</option>
 									</select>
 								</div>
 							</div>
@@ -172,8 +172,8 @@ Start selling with Electric Autos
 								<label for="gearbox" class="col-sm-6 control-label">Gearbox</label>
 								<div class="col-sm-6">
 									<select name="gearbox" id="gearbox" class="form-control">
-										<option value="automatic">Automatic</option>
-										<option value="manual">Manual</option>
+										<option value="automatic" {{ old('gearbox') == 'automatic' ? 'selected' : '' }}>Automatic</option>
+										<option value="manual" {{ old('gearbox') == 'manual' ? 'selected' : '' }}>Manual</option>
 									</select>
 								</div>
 
@@ -186,7 +186,7 @@ Start selling with Electric Autos
 									<select name="year" id="year" class="form-control">
 										<option value="">Year</option>
 										@for ($i = date('Y'); $i > (date('Y')-10); $i--)
-										@if(isset($vars['vehicle']['year']) && $vars['vehicle']['year'] == $i)
+										@if(isset($vars['vehicle']['year']) && $vars['vehicle']['year'] == $i || $i == old('year'))
 										<option value="{{ $i }}" selected>{{ $i }}</option>
 										@else
 										<option value="{{ $i }}">{{ $i }}</option>
@@ -201,7 +201,7 @@ Start selling with Electric Autos
 
 								<label for="colour" class="col-sm-6 control-label">Colour</label>
 								<div class="col-sm-6">
-									<input type="text" name="colour" id="colour" value="{{ $vars['vehicle']['colour'] or '' }}" class="form-control">
+									<input type="text" name="colour" id="colour" value="{{ $vars['vehicle']['colour'] or old('colour') }}" class="form-control">
 								</div>
 
 							</div>

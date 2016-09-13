@@ -157,7 +157,7 @@ class AdvertController extends BaseController
 	{
 		$vehicle = $this->resource->myAd(Auth::User()->id,$slug);
 		$resource = [
-	        'enabled' 			=> $request->input('enabled'),
+	        'enabled' 			=> $request->input('enabled') == 1 ? 1 : 0,
 	        'make_id'			=> $request->input('make_id'),
 	        'model_id'			=> $request->input('model_id'),
 	        'name'				=> trim($request->input('name')),
@@ -172,6 +172,7 @@ class AdvertController extends BaseController
 	        'length_measure'	=> $request->input('distance'),
 	        'currency'			=> $request->input('currency'),
 	        'content'			=> $request->input('content'),
+	        'sold'				=> $request->input('sold') == 1 ? 1 : 0,
 		];
 
 		$result = $this->resource->update($vehicle->id, $resource);
