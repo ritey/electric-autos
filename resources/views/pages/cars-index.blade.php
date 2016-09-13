@@ -13,9 +13,11 @@ Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | U
 <meta name="twitter:title" value="Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars" />
 @endsection
 
-@section('content')
+@section('title')
+Electric car classifieds
+@endsection
 
-@include('partials.section-title', ['title' => 'Electric car classifieds'])
+@section('content')
 
 <section class="section-pad">
 

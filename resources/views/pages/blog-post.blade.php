@@ -13,9 +13,11 @@ Electric Autos Blog
 <meta name="twitter:title" value="Electric Autos Blog" />
 @endsection
 
-@section('content')
+@section('title')
+$vars['article']->name
+@endsection
 
-@include('partials.section-title', ['title' => $vars['article']->name])
+@section('content')
 
 <section class="">
 

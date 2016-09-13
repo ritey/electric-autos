@@ -13,9 +13,11 @@ Electric Autos Cookie Policy
 <meta name="twitter:title" value="Cookie Policy for using the Electric Autos website" />
 @endsection
 
-@section('content')
+@section('title')
+Cookie policy
+@endsection
 
-@include('partials.section-title', ['title' => 'Cookie Policy'])
+@section('content')
 
 <section class="section-pad">
 

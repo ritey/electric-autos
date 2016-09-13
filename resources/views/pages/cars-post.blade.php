@@ -13,9 +13,11 @@
 <meta name="twitter:title" value="Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars" />
 @endsection
 
-@section('content')
+@section('title')
+$vars['car']->name
+@endsection
 
-@include('partials.section-title', ['title' => $vars['car']->name])
+@section('content')
 
 <section class="section-pad">
 

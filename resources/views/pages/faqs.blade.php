@@ -13,9 +13,11 @@ Electric Autos Seller FAQs
 <meta name="twitter:title" value="Electric Autos Seller FAQs" />
 @endsection
 
-@section('content')
+@section('title')
+Seller FAQs
+@endsection
 
-@include('partials.section-title', ['title' => 'Seller FAQs'])
+@section('content')
 
 <section class="section-pad">
 

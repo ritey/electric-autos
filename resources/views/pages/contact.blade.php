@@ -13,9 +13,11 @@ Contact Electric Autos
 <meta name="twitter:title" value="Contact Electric Autos" />
 @endsection
 
-@section('content')
+@section('title')
+Contact us
+@endsection
 
-@include('partials.section-title', ['title' => 'Contact us'])
+@section('content')
 
 <section class="section-pad">
 
@@ -31,31 +33,6 @@ Contact Electric Autos
 				<div class="col-md-9 col-sm-9">
 
 					<h3>Drop us a line or just say <strong><em>Hello!</em></strong></h3>
-
-
-					<!--
-						MESSAGES
-
-							How it works?
-							The form data is posted to php/contact.php where the fields are verified!
-							php.contact.php will redirect back here and will add a hash to the end of the URL:
-								#alert_success 		= email sent
-								#alert_failed		= email not sent - internal server error (404 error or SMTP problem)
-								#alert_mandatory	= email not sent - required fields empty
-								Hashes are handled by assets/js/contact.js
-
-							Form data: required to be an array. Example:
-								contact[email]  WHERE: [email] = field name,  = only if this field is required (PHP will check this)
-								Also, add `required` to input fields if is a mandatory field.
-								Example: <input required type="email" value="" class="form-control" name="contact[email]">
-
-							PLEASE NOTE: IF YOU WANT TO ADD OR REMOVE FIELDS (EXCEPT CAPTCHA), JUST EDIT THE HTML CODE, NO NEED TO EDIT php/contact.php or javascript
-										 ALL FIELDS ARE DETECTED DINAMICALY BY THE PHP
-
-							WARNING! Do not change the `email` and `name`!
-										contact[name] 	- should stay as it is because PHP is using it for AddReplyTo (phpmailer)
-										contact[email] 	- should stay as it is because PHP is using it for AddReplyTo (phpmailer)
-					-->
 
 					@if ($errors->any())
 						<div id="errors" class="alert alert-danger margin-bottom-30">

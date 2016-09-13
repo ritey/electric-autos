@@ -9,9 +9,11 @@ Dashboard
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
 @endsection
 
-@section('content')
+@section('title')
+Hello ' . $vars['user']->name
+@endsection
 
-@include('partials.section-title', ['title' => 'Hello ' . $vars['user']->name])
+@section('content')
 
 <section class="section-pad">
 

@@ -13,11 +13,11 @@ My ad
 <meta name="twitter:title" value="Start selling with Electric Autos" />
 @endsection
 
+@section('title')
+My ad
+@endsection
+
 @section('content')
-
-@include('partials.section-title', ['title' => 'My ad'])
-
-@include('partials.message',['success_message' => ''])
 
 <section class="">
 

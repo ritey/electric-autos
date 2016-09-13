@@ -13,9 +13,11 @@ Electric Autos Blog
 <meta name="twitter:title" value="Electric Autos Blog" />
 @endsection
 
-@section('content')
+@section('title')
+Blog
+@endsection
 
-@include('partials.section-title', ['title' => 'Blog'])
+@section('content')
 
 <section class="section-pad">
 

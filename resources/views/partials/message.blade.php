@@ -1,14 +1,15 @@
-<section class="hero">
+@if($success_message)
+<section class="message alternative">
 
 	<div class="container">
 
 		<div class="row">
 
-			<div class="col-sm-12">
+			<div class="col-sm-12 text-center">
 
 				@if($success_message)
 
-				<h3 class="text_success">{{ $success_message }}</h3>
+				<h3 class="text-success">{{ $success_message }}</h3>
 
 				@endif
 
@@ -20,3 +21,4 @@
 	</div>
 
 </section>
+@endif

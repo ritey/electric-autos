@@ -13,9 +13,11 @@ Electric Autos Terms and Conditions
 <meta name="twitter:title" value="Electric Autos Terms and Conditions" />
 @endsection
 
-@section('content')
+@section('title')
+Terms and conditions
+@endsection
 
-@include('partials.section-title', ['title' => 'Terms and conditions'])
+@section('content')
 
 <section class="section-pad">
 

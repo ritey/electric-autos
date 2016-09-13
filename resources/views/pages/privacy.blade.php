@@ -13,9 +13,11 @@ Electric Autos Privacy Policy
 <meta name="twitter:title" value="Electric Autos Privacy Policy" />
 @endsection
 
-@section('content')
+@section('title')
+Privacy policy
+@endsection
 
-@include('partials.section-title', ['title' => 'Privacy policy'])
+@section('content')
 
 <section class="section-pad">
 

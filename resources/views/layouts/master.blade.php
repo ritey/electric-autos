@@ -80,6 +80,10 @@
 		</div>
 	</nav>
 
+	@include('partials.section-title')
+
+	@include('partials.message',['success_message' => $success_message])
+
 	@yield('content')
 
 	<section id="social-links" class="">

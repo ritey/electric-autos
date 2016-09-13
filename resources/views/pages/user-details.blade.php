@@ -13,9 +13,11 @@ Start selling with Electric Autos
 <meta name="twitter:title" value="Start selling with Electric Autos" />
 @endsection
 
-@section('content')
+@section('title')
+Start selling your car
+@endsection
 
-@include('partials.section-title', ['title' => 'Start selling your car'])
+@section('content')
 
 <section class="section-pad">
 

@@ -6,7 +6,7 @@
 
 			<div class="col-sm-12">
 
-				<h1>{{ $title }}</h1>
+				<h1>@yield('title')</h1>
 
 			</div>
 

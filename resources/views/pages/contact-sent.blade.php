@@ -13,9 +13,11 @@ Contact Electric Autos
 <meta name="twitter:title" value="Contact Electric Autos" />
 @endsection
 
-@section('content')
+@section('title')
+Contact us
+@endsection
 
-@include('partials.section-title', ['title' => 'Contact us'])
+@section('content')
 
 <section class="section-pad">
 
