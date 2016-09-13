@@ -26,12 +26,13 @@ class Tweets {
 
 		if ($tweets->count()) {
 			foreach($tweets as $tweet) {
+				$tweet_message = str_replace('[!day]',date('l'),$tweet->tweet);
 				$data = [
 					'tweeted_at' 	=> date('Y-m-d H:i:s'),
 					'next_at' 		=> date('Y-m-d H:i:s', strtotime('+' . $minutes . ' minutes')),
 				];
 				$this->tweets->update($tweet->id, $data);
-				$result = $this->twitter->post('statuses/update', ['status' => $tweet->tweet, 'format' => 'json']);
+				$result = $this->twitter->post('statuses/update', ['status' => $tweet_message, 'format' => 'json']);
 			}
 		}
 	}
