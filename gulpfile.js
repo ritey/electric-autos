@@ -1,7 +1,5 @@
 const elixir = require('laravel-elixir');
 
-require('laravel-elixir-vue');
-
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -13,7 +11,65 @@ require('laravel-elixir-vue');
  |
  */
 
+var paths = {
+	'jquery': './node_modules/jquery/',
+	'bootstrap': './node_modules/bootstrap-sass/assets/',
+	'fontawesome': './node_modules/font-awesome/',
+	'dropzone': './node_modules/dropzone/'
+}
+
+require('laravel-elixir-vue');
+
 elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+
+    mix.sass('app.scss', 'public/css/', null,  {
+
+		includePaths: [
+
+			paths.bootstrap + 'stylesheets/',
+
+			paths.fontawesome + 'scss/'
+
+		]
+
+	})
+
+		.copy(paths.bootstrap + 'fonts/bootstrap/**', 'public/fonts/bootstrap')
+
+		.copy(paths.fontawesome + 'fonts/**', 'public/fonts/fontawesome')
+
+		.styles([
+
+			'public/css/app.css',
+
+			paths.dropzone + 'dist/min/dropzone.min.css',
+
+			'./resources/assets/css/app.css'
+
+		], 'public/css/app.css', './')
+
+		.scripts([
+
+			paths.jquery + "dist/jquery.min.js",
+
+			paths.bootstrap + "javascripts/bootstrap.min.js",
+
+			'./resources/assets/js/app.js',
+
+			'./resources/assets/js/**/*.js',
+
+			paths.dropzone + 'dist/min/dropzone.min.js'
+
+		], 'public/js/app.js', './')
+
+		.webpack('app.js')
+
+        .version([
+
+			'css/app.css',
+
+			'js/app.js'
+
+		]);
+
 });

@@ -25,6 +25,7 @@ Route::get('/dashboard/ads/create', ['as' => 'ad.create', 'uses' => 'AdvertContr
 Route::get('/dashboard/ads/{slug}', ['as' => 'ad.edit', 'uses' => 'AdvertController@edit']);
 Route::post('/dashboard/ads/{slug}', ['as' => 'ad.save', 'uses' => 'AdvertController@save']);
 Route::get('/dashboard/pics', ['as' => 'pic.index', 'uses' => 'PicsController@index']);
+Route::post('/dashboard/pics/save', ['as' => 'pic.save', 'uses' => 'PicsController@save']);
 
 Route::get('/about', ['as' => 'about', 'uses' => 'HomeController@about']);
 

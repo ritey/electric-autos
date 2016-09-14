@@ -68,11 +68,9 @@ class Tweets {
 			}
 			$value = $dom->filter('span');
 		} catch (\Exception $e) {
-
-		}
-
-		if (empty($value)) {
-			dd($crawler);
+			if (empty($value)) {
+				dd($crawler);
+			}
 		}
 
 		if (is_object($value) && $result = $value->text() ) {

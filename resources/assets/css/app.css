@@ -1,0 +1,391 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+html, body {
+    font-family: 'Raleway';
+}
+
+body {
+    min-height: 2000px;
+    padding-top: 50px;
+}
+
+.addon-header {
+	padding-bottom:40px;
+}
+
+.box {
+	background: #fff;
+	padding: 20px;
+	border-radius: 2px;
+	margin-bottom: 30px;
+}
+
+section.main {
+	padding: 100px 0 70px;
+}
+
+section.message {
+	padding: 20px 0 20px;
+}
+
+#logout-form {
+	display:none;
+}
+
+.login.box {
+	padding: 53px 70px 30px;
+	margin-bottom: 40px;
+	margin-top: 0;
+}
+
+.block {
+    display: block !important;
+}
+
+form .row {
+    margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.margin-bottom-60 {
+    margin-bottom: 60px !important;
+}
+.height-300 {
+    height: 300px !important;
+}
+
+.login {
+
+}
+
+.promo {
+	margin:20px 0px 20px;
+	border:1px solid #c3c3c3;
+	border-width:0px;
+	border-bottom-width:1px;
+	padding-bottom:10px;
+}
+
+.thumbnail img {
+	border-radius: 50%;
+	max-width:200px;
+}
+
+	.login .login-description {
+		font-size: 24px;
+		line-height: 1;
+		margin-bottom: 30px;
+		color: #66ad44;
+		font-weight: 400;
+	}
+
+.login .login-description p {
+	font-size:14px;
+	color:#9f9f9f;
+	margin-top:22px;
+}
+.login .group-control input {
+	border:1px solid #f0f0f0;
+	outline:0;
+	min-height:46px;
+}
+.login .group-control input:focus {
+	border:1px solid #b7e4a3;
+	outline:0;
+	box-shadow:none;
+}
+.login .form-group button.btn.btn-success {
+	box-shadow:0 2px #508836;
+	color:#fff;
+	margin-left:10px;
+	display:inline-block;
+	width:auto;
+	margin-top:3px;
+}
+.login .checkbox label {
+	color:#c8c8c8;
+}
+.login .checkbox label input {
+	border-color:#c8c8c8;
+}
+
+
+.registration .form-heading {
+	margin-bottom:23px;
+}
+.registration .form-heading h3 {
+	color:#66ad44;
+	font-size:24px;
+	font-weight:400;
+	margin-bottom:15px;
+	margin-top:0;
+}.registration
+.registration .form-heading p {
+	font-size:14px;
+	line-height:20px;
+	color:#9f9f9f;
+}
+.registration .form-group {
+	margin-bottom:25px;
+}
+.registration .form-group label {
+	font-weight:400;
+	color:#747373;
+}
+.registration .form-group .btn.btn-lg {
+	border-radius:4px;
+	box-shadow:0 2px #696969;
+	color:#fff;
+	font-weight:400;
+	padding:8px 20px;
+	font-size:16px;
+}
+.registration .form-group .btn.btn-success {
+	box-shadow:0 2px #508836;
+	color:#fff;
+	margin-left:10px;
+}
+.registration .group-control input {
+	border:1px solid #f0f0f0;
+	outline:0;
+	min-height:46px;
+}
+.registration .group-control input:focus {
+	border:1px solid #b7e4a3;
+	outline:0;
+	box-shadow:none;
+}
+.registration .sign-in-text {
+	margin-top:12px;
+	color:#c8c8c8;
+	font-size:14px;
+}
+.registration .sign-in-text a {
+	color:#8dc63f;
+}
+.registration .register-buttons {
+	margin-top:22px;
+}
+
+.form-links {
+	margin-top:30px;
+}
+.form-links ul {
+	list-style:none;
+	padding:0;
+	margin:0 -5px;
+	text-align:center;
+}
+.form-links ul>li {
+	display:inline-block;
+	margin:0 5px;
+}
+.form-links ul>li a {
+	color:#9f9f9f;
+	font-size:16px;
+}
+.form-links ul>li a:hover {
+	color:#79ab37;
+}
+
+.hero {
+	background-color: #414857;
+	color:#fff;
+}
+
+	.hero .heading h1 {
+		font-size: 48px;
+		line-height: 1.2;
+		font-weight: 300;
+		padding:40px 0px 0px 0px;
+	}
+
+	.hero .intro p {
+		margin:0px 0px 40px 0px;
+	}
+
+.alternative {
+	background-color: #e5e5e5;
+}
+
+.section-pad {
+	padding-top:70px;
+	padding-bottom:70px;
+}
+
+.thumbs img {
+	cursor:pointer;
+}
+
+.details {
+}
+
+	.details ul {
+		margin-top:20px;
+		margin-bottom:20px;
+	}
+
+		.details ul li {
+			width:330px;
+			text-align:right;
+			font-weight:bold;
+		}
+
+			.details ul li span {
+				float:left;
+			}
+
+			.details ul li span i {
+				float:left;
+				padding-right:4px;
+				padding-top:2px;
+			}
+
+			.details ul li span span {
+				float:left;
+			}
+
+.item {
+	margin-bottom: 30px;
+	position: relative;
+	background: #fff;
+	padding: 10px;
+	border-radius: 2px;
+	-webkit-box-shadow: 0px 0px 2px 0.04px rgba(0, 0, 0, 0.05);
+	box-shadow: 0px 0px 2px 0.04px rgba(0, 0, 0, 0.05);
+	-webkit-transition: 300ms;
+	-o-transition: 300ms;
+	transition: 300ms;
+}
+	.item figure {
+		position: relative;
+		z-index: 1;
+		display: block;
+		width: 100%;
+		overflow: hidden;
+		text-align: center;
+		padding: 0;
+		margin: 0 0 20px;
+		color: #fff;
+		background: rgba(213, 213, 213, 0.9);
+	}
+
+	.item figure img {
+		width: 100%;
+		position: relative;
+		display: block;
+		opacity: 1;
+		-webkit-transition: opacity 0.4s;
+		transition: opacity 0.4s;
+	}
+
+	.item .item-header {
+		position: relative;
+		padding-bottom: 10px;
+	}
+
+		.item .item-header h3 {
+			display: block;
+			font-size: 16px;
+			line-height: 1.6;
+			font-weight: medium;
+			margin: 0 60px 0 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+	.item .item-meta {
+		padding-top: 10px;
+		margin: 0;
+		line-height: 14px;
+		border-top: 1px solid #ebeded;
+	}
+
+.brands-section {
+	background-color: #66ad44;
+	color: #fff;
+	padding: 20px 0;
+}
+
+	.brands-section a {
+		color: #fff;
+	}
+
+#social-links {
+	background-color: #66ad44;
+	color: #fff;
+	padding: 20px 0;
+}
+
+	#social-links a.social-icon {
+		color: #fff;
+		line-height: 36px;
+		display: block;
+		text-decoration:none;
+	}
+
+		#social-links a.social-icon i.fa {
+			font-size: 36px;
+			margin-right: 15px;
+		}
+
+		#social-links a.social-icon span {
+			font-size: 24px;
+			display: inline-block;
+			margin-right: 10px;
+		}
+
+		#social-links a.social-icon small {
+			font-size: 16px;
+			color: #44732d;
+		}
+
+#bottom-menu {
+	padding-top: 70px !important;
+	background: #fff;
+	color: #666;
+}
+
+	#bottom-menu li {
+		padding-top:10px;
+	}
+
+		#bottom-menu li a {
+			padding-left:0px;
+			padding-top:10px;
+		}
+
+#footer {
+	padding: 50px 0 70px;
+	background: #fff;
+	color: #959595;
+}
+
+/* dropzone overrides */
+
+.dropzone {
+	border-style: dashed;
+	display:table;
+	width:100%;
+}
+
+.dropzone .dz-message{
+	display:table-cell;
+	vertical-align: middle;
+	text-align:center;
+	height:400px;
+}
+
+.dropzone .dz-message span {
+	font-size:2em;
+	color:#d3d3d3;
+}
+
+.dropzone .dz-preview {
+	margin:0 auto;
+	display:table;
+}
