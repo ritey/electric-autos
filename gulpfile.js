@@ -62,8 +62,6 @@ elixir(mix => {
 
 		], 'public/js/app.js', './')
 
-		.webpack('app.js')
-
         .version([
 
 			'css/app.css',

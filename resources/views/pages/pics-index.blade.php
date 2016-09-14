@@ -53,3 +53,18 @@ Images
 </section>
 
 @endsection
+
+@section('footer')
+<script type="text/javascript">
+$('document').ready(function(){
+    Dropzone.options.myAwesomeDropzone = {
+      paramName: "file", // The name that will be used to transfer the file
+      maxFilesize: 2000, // MB
+      uploadMultiple: true,
+      success:function(result, response) {
+        document.location = response.path;
+      }
+    };
+});
+</script>
+@endsection
