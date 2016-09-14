@@ -30,7 +30,7 @@
 				<p><a href="{{ $vars['back_url'] }}" class="btn btn-info"><i class="fa fa-angle-double-left"></i> Back to results</a></p>
 
 				<h2 class="hidden-md hidden-lg">
-					@if($vars['car']->sold
+					@if($vars['car']->sold)
 					NOW SOLD
 					@else
 					Price {{ $vars['car']->currency == 'Pound' ? '&pound;' : '' }}{{ $vars['car']->currency == 'Euro' ? '&euro;' : '' }}{{ $vars['car']->price }}
