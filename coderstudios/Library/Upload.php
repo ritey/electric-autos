@@ -18,7 +18,12 @@ class Upload {
 
 	public function all()
 	{
-		return $this->upload->all();
+		return $this->upload->get();
+	}
+
+	public function mine($id)
+	{
+		return $this->upload->where('user_id',$id);
 	}
 
 	public function truncate()

@@ -5,7 +5,7 @@ Dashboard
 @endsection
 
 @section('metas')
-<meta name="description" value="Cookie Policy for using the Electric Autos website" />
+<meta name="description" value="Your dashboard" />
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
 @endsection
 
@@ -84,20 +84,11 @@ Dashboard
 
 					<div class="col-sm-4">
 
-						@if ($vars['user']->user_type_id == 1 )
-
-						<section class="promo">
-
-							<h4>Are you a business?</h4>
-
-							<p>Upgrade now to a dealer account, it's quick and easy!</p>
-							<a href="{{ route('upgrade') }}" class="btn btn-success">Upgrade account</a>
-
-						</section>
-
-						@endif
+						@include('partials.upgrade', ['user' => $vars['user']])
 
 						@include('partials.stats', ['ads' => $vars['all_ads']])
+
+						@include('partials.pics', ['pics' => $vars['all_pics']])
 
 					</div>
 

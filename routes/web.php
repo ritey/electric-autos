@@ -24,6 +24,7 @@ Route::get('/dashboard/upgrade', ['as' => 'upgrade', 'uses' => 'AccountControlle
 Route::get('/dashboard/ads/create', ['as' => 'ad.create', 'uses' => 'AdvertController@create']);
 Route::get('/dashboard/ads/{slug}', ['as' => 'ad.edit', 'uses' => 'AdvertController@edit']);
 Route::post('/dashboard/ads/{slug}', ['as' => 'ad.save', 'uses' => 'AdvertController@save']);
+Route::get('/dashboard/pics', ['as' => 'pic.index', 'uses' => 'PicsController@index']);
 
 Route::get('/about', ['as' => 'about', 'uses' => 'HomeController@about']);
 

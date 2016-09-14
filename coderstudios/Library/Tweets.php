@@ -7,6 +7,7 @@ use Goutte\Client as Scraper;
 use Carbon\Carbon;
 use Symfony\Component\DomCrawler\Crawler;
 use Cache;
+use Log;
 
 class Tweets {
 
@@ -30,10 +31,6 @@ class Tweets {
 			$value = $dom->filter('li.ProfileNav-item--followers a > span.ProfileNav-value');
 		} catch (\Exception $e) {
 
-		}
-
-		if (empty($value)) {
-			dd($value);
 		}
 
 		if (is_object($value) && $result = $value->text() ) {
@@ -62,14 +59,20 @@ class Tweets {
 
 		try {
 			$crawler = $scraper->request('GET','https://www.facebook.com/Electric-Autos-1767600990124746/?ref=page_internal');
+			if (empty($crawler)){
+				dd($crawler);
+			}
 			$dom = $crawler->filterXPath("//*[contains(@id, 'PagesLikesCountDOMID')]");
+			if (empty($dom)){
+				dd($dom);
+			}
 			$value = $dom->filter('span');
 		} catch (\Exception $e) {
 
 		}
 
 		if (empty($value)) {
-			dd($dom);
+			dd($crawler);
 		}
 
 		if (is_object($value) && $result = $value->text() ) {
