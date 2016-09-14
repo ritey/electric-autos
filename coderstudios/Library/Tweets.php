@@ -69,7 +69,7 @@ class Tweets {
 		}
 
 		if (empty($value)) {
-			dd($value);
+			dd($dom);
 		}
 
 		if (is_object($value) && $result = $value->text() ) {

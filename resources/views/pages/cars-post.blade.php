@@ -14,7 +14,7 @@
 @endsection
 
 @section('title')
-$vars['car']->name
+{{ $vars['car']->name }}
 @endsection
 
 @section('content')

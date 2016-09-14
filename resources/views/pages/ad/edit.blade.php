@@ -19,13 +19,18 @@ My ad
 
 @section('content')
 
-<section class="">
+<section class="section-pad">
 
 	<div class="container">
 
 		<div class="row">
 
 			<div class="col-md-8 col-sm-12">
+
+				<ul class="breadcrumb">
+					<li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+					<li class="active">Ad</li>
+				</ul>
 
 				<h2 class="addon-header">Be as accurate as you can to help sell your car</h2>
 

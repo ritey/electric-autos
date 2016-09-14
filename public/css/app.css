@@ -61,6 +61,14 @@ form .row {
 
 }
 
+.promo {
+	margin:20px 0px 20px;
+	border:1px solid #c3c3c3;
+	border-width:0px;
+	border-bottom-width:1px;
+	padding-bottom:10px;
+}
+
 .thumbnail img {
 	border-radius: 50%;
 	max-width:200px;

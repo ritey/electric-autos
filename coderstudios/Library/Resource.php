@@ -86,7 +86,7 @@ class Resource {
 
 	public function mine($user_id)
 	{
-		return $this->resource->where('user_id',$user_id)->orderBy('created_at','DESC')->paginate();
+		return $this->resource->where('user_id',$user_id)->orderBy('created_at','DESC');
 	}
 
 	public function myAd($user_id, $slug = '')

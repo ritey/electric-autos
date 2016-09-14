@@ -10,7 +10,7 @@ Dashboard
 @endsection
 
 @section('title')
-Hello ' . $vars['user']->name
+{{ 'Hello ' . $vars['user']->name }}
 @endsection
 
 @section('content')
@@ -26,6 +26,10 @@ Hello ' . $vars['user']->name
 				<div class="row">
 
 					<div class="col-sm-8">
+
+						<ul class="breadcrumb">
+							<li class="active">Dashboard</li>
+						</ul>
 
 						<table class="table table-bordered table-hover table-responsive">
 
@@ -82,12 +86,18 @@ Hello ' . $vars['user']->name
 
 						@if ($vars['user']->user_type_id == 1 )
 
-						<h4>Are you a business?</h4>
+						<section class="promo">
 
-						<p>Upgrade now to a dealer account, it's quick and easy!</p>
-						<a href="{{ route('upgrade') }}" class="btn btn-success">Upgrade account</a>
+							<h4>Are you a business?</h4>
+
+							<p>Upgrade now to a dealer account, it's quick and easy!</p>
+							<a href="{{ route('upgrade') }}" class="btn btn-success">Upgrade account</a>
+
+						</section>
 
 						@endif
+
+						@include('partials.stats', ['ads' => $vars['all_ads']])
 
 					</div>
 

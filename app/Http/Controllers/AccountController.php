@@ -48,7 +48,8 @@ class AccountController extends BaseController
 		} else {
 			$vars = [
 				'user' => Auth::user(),
-				'ads' => $this->resource->mine(Auth::user()->id),
+				'ads' => $this->resource->mine(Auth::user()->id)->paginate(),
+				'all_ads' => $this->resource->mine(Auth::user()->id)->get(),
 			];
 			$view = view('pages.dashboard', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));

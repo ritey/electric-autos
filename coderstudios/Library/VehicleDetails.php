@@ -79,7 +79,12 @@ class VehicleDetails {
 
 	public function makeSlug($text)
 	{
-		return str_replace('*','-',str_replace('&','-',str_replace(',','',str_replace(')','',str_replace('(','',str_replace('/','-',str_replace(' ','-',$text)))))));
+		return str_replace('\'\'','',str_replace('*','-',str_replace('&','-',str_replace(',','',str_replace(')','',str_replace('(','',str_replace('/','-',str_replace(' ','-',$text))))))));
+	}
+
+	public function makeName($text)
+	{
+		return str_replace('  ',' ',str_replace('\'\'','',str_replace('*','',str_replace('&','&',str_replace(',',' ',str_replace(')','',str_replace('(','',str_replace('/','',str_replace(' ',' ',$text)))))))));
 	}
 
 	public function makeMileage($text)
@@ -251,7 +256,7 @@ class VehicleDetails {
 
 				if (!empty($ad['title'])) {
 
-					$resource['name'] = !empty($ad['title']) ? $ad['title'] : '';
+					$resource['name'] = !empty($ad['title']) ? $this->makeName($ad['title']) : '';
 					$resource['slug'] = $this->makeSlug($resource['name']);
 					$resource['price'] = $ad['price'];
 					$resource['currency'] = $ad['currency'];

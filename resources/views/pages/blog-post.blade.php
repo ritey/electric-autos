@@ -14,7 +14,7 @@ Electric Autos Blog
 @endsection
 
 @section('title')
-$vars['article']->name
+{{ $vars['article']->name }}
 @endsection
 
 @section('content')
