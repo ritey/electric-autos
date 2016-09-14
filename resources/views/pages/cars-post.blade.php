@@ -132,7 +132,7 @@
 			<div class="col-md-4">
 
 				<h2 class="hidden-sm hidden-xs">
-					@if($vars['car']->sold
+					@if($vars['car']->sold)
 					NOW SOLD
 					@else
 					Price {{ $vars['car']->currency == 'Pound' ? '&pound;' : '' }}{{ $vars['car']->currency == 'Euro' ? '&euro;' : '' }}{{ $vars['car']->price }}
