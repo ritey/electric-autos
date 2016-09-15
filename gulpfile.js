@@ -54,13 +54,15 @@ elixir(mix => {
 
 			paths.bootstrap + "javascripts/bootstrap.min.js",
 
+			paths.dropzone + 'dist/min/dropzone.min.js',
+
 			'./resources/assets/js/app.js',
 
-			'./resources/assets/js/**/*.js',
-
-			paths.dropzone + 'dist/min/dropzone.min.js'
+			'./resources/assets/js/**/*.js'
 
 		], 'public/js/app.js', './')
+
+		//.webpack('app.js')
 
         .version([
 

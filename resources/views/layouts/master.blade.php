@@ -7,7 +7,7 @@
 	<title>@yield('page_title','Electric Autos | Used Electric Cars For Sale | Second hand electric cars')</title>
 	@yield('metas')
 
-    <link rel="stylesheet" href="{{ elixir("/css/app.css") }}">
+    <link rel="stylesheet" href="{{ elixir("css/app.css") }}">
 	<link rel="icon" href="/images/bolt-logo-64x64.png">
 
 	<script>
@@ -173,7 +173,7 @@
 
 	</section>
 
-	<script src="{{ env('APP_BASE','') }}{{ elixir("js/app.js") }}" type="text/javascript"></script>
+	<script src="{{ elixir("js/app.js") }}" type="text/javascript"></script>
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

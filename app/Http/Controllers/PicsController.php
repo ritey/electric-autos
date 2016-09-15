@@ -9,6 +9,7 @@ use Session;
 use CoderStudios\Library\Resource;
 use CoderStudios\Library\Upload;
 use CoderStudios\Requests\UploadRequest;
+use Log;
 
 class PicsController extends BaseController
 {
@@ -61,9 +62,10 @@ class PicsController extends BaseController
 
 	public function save(UploadRequest $request)
 	{
-		$files = $request->file('file');
+		$file = $request->file('file');
         $json = [];
-        foreach($files as $file) {
+        //Log::info(print_r($files->getClientOriginalName(),true));
+        //foreach($files as $file) {
             $data = [];
             $data['filename'] = $file->getClientOriginalName();
             $data['maskname'] = md5($file->getClientOriginalName() . date('Y-m-d H:i:s'));
@@ -71,13 +73,15 @@ class PicsController extends BaseController
             $data['size'] = $file->getClientSize();
             $data['user_id'] = Auth::user()->user_id;
             if ($file->isValid()) {
+                //Log::info(print_r($data));
                 $upload = $this->upload->create($data);
+                //Log::info(print_r($upload));
                 $result = $file->move(storage_path('app/uploads/'.$data['user_id']), $data['maskname'] . '.' . $data['extension']);
                 $json[] = ['result' => true];
             } else {
                 $json[] = ['result' => false];
             }
-        }
+        //}
         $failed = 0;
         $success = 0;
         foreach($json as $item) {
@@ -92,8 +96,8 @@ class PicsController extends BaseController
         }
         if ($success) {
             Session::put('success_message',$message);
-            return response()->json(['result' => true, 'path' => route('pic.index') ]);
+            return response()->json(['result' => true, 'path' => route('dashboard') ]);
         }
-        return response()->json(['result' => false, 'path' => route('pic.index') . '?result=false']);
+        return response()->json(['result' => false, 'path' => route('dashboard') . '?result=false']);
 	}
 }
