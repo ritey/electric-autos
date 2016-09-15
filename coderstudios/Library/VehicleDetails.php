@@ -125,7 +125,7 @@ class VehicleDetails {
             $data['extension'] = $meta['extension'];
             $data['size'] = filesize(storage_path('app/uploads/' . $resource->id) . '/' . $new_name . '.' . $meta['extension']);
             $data['folder'] = $resource->id;
-            $data['user_id'] = 1;
+            $data['user_id'] = '95b688b2-d332-4e42-afb4-ed98c02bc607';
             $this->upload->create($data);
 
             $meta = null;

@@ -52,11 +52,11 @@ Dashboard
 							<tr>
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $item['name'] }}</td>
-								<td>{{ $item['created_at']->format('d-m-Y H:i') }}</td>
-								<td>{{ $item['enabled']  == 1 ? 'Yes' : 'No' }}</td>
-								<td>{{ $item['sold']  == 1 ? 'Yes' : 'No' }}</td>
+								<td class="text-center text-middle">{{ $item['created_at']->format('d-m-Y H:i') }}</td>
+								<td class="text-center text-middle">{{ $item['enabled']  == 1 ? 'Yes' : 'No' }}</td>
+								<td class="text-center text-middle">{{ $item['sold']  == 1 ? 'Yes' : 'No' }}</td>
 								<td class="text-center text-middle"><a href="{{ route('pic.ad.index', ['ad' => $item['id']]) }}"><i class="fa fa-camera"></i></a></td>
-								<td><a href="{{ route('ad.edit',['slug' => $item->slug]) }}">Edit</a></td>
+								<td class="text-center text-middle"><a href="{{ route('ad.edit',['slug' => $item->slug]) }}">Edit</a></td>
 							</tr>
 
 							@endforeach

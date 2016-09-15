@@ -8,6 +8,7 @@
 
         <form action="{{ route('pic.save') }}" method="POST" class="dropzone" id="myAwesomeDropzone" enctype="multipart/form-data">
             {!! csrf_field() !!}
+            <input type="hidden" name="folder" value="{{ $vars['ad'] or '' }}" />
             <div class="fallback">
                 <input name="file" type="file" multiple />
             </div>

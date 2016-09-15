@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use Auth;
 use Session;
+use Storage;
 use CoderStudios\Library\Resource;
 use CoderStudios\Library\Upload;
 use CoderStudios\Requests\UploadRequest;
@@ -50,20 +51,45 @@ class PicsController extends BaseController
 			$view = $this->cache->get($key);
 		} else {
             if (!empty($ad)) {
-                $pics = $this->upload->mine(Auth::user()->id)->where('folder',$ad)->orderBy('created_at','DECS')->paginate();
+                $pics = $this->upload->mine(Auth::user()->user_id)->where('folder',$ad)->orderBy('created_at','DECS')->paginate();
             } else {
-                $pics = $this->upload->mine(Auth::user()->id)->orderBy('created_at','DECS')->paginate();
+                $pics = $this->upload->mine(Auth::user()->user_id)->orderBy('created_at','DECS')->paginate();
             }
 			$vars = [
-				'user' => Auth::user(),
-                'pics' => $pics,
-				'all_pics' => $this->upload->mine(Auth::user()->id)->get(),
+				'user'      => Auth::user(),
+                'pics'      => $pics,
+                'ad'        => $ad,
+				'all_pics'  => $this->upload->mine(Auth::user()->id)->get(),
 			];
 			$view = view('pages.pics-index', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
 		return $view;
 	}
+
+    public function delete($ad = '', $id = '')
+    {
+        $upload = $this->upload->mine(Auth::user()->id)->where('id',$ad)->first();
+        if ($id) {
+            $upload = $this->upload->mine(Auth::user()->id)->where('folder',$ad)->where('id',$id)->first();
+        }
+        if ($upload && $upload->user_id == Auth::user()->id) {
+            $path = '';
+            if ($upload->folder) {
+                $path = $upload->folder;
+            } else {
+                $path = $upload->user_id;
+            }
+            Storage::delete(storage_path('app/uploads/'.$path) .'/'.$upload->maskname . '.' . $upload->extension);
+            $upload->delete();
+            if (!empty($id)) {
+                return redirect()->route('pic.ad.index', ['ad' => $ad])->with('success_message','Pic deleted');
+            } else {
+                return redirect()->route('pic.index')->with('success_message','Pic deleted');
+            }
+        }
+        return redirect()->route('dashboard');
+    }
 
 	public function save(UploadRequest $request)
 	{
@@ -76,6 +102,7 @@ class PicsController extends BaseController
             $data['extension'] = $file->guessExtension();
             $data['size'] = $file->getClientSize();
             $data['user_id'] = Auth::user()->user_id;
+            $data['folder'] = $request->input('folder') != '' ? $request->input('folder') : '';
             if ($file->isValid()) {
                 $upload = $this->upload->create($data);
                 $result = $file->move(storage_path('app/uploads/'.$data['user_id']), $data['maskname'] . '.' . $data['extension']);

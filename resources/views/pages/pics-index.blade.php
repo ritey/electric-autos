@@ -36,7 +36,7 @@ Images
 
 						@foreach($vars['pics'] as $pic)
 
-							@include('partials.pic', ['pic' => $pic])
+							@include('partials.pic', ['pic' => $pic, 'ad' => $vars['ad']])
 
 						@endforeach
 
@@ -76,5 +76,12 @@ Images
 			document.location = response.path;
     	},
     };
+    $('document').ready(function(){
+
+    	$('.confirm').on('click', function(){
+    		return confirm('Are you sure you want to delete this image?');
+    	});
+
+    });
 </script>
 @endsection

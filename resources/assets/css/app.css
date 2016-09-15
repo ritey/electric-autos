@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-
 html, body {
     font-family: 'Raleway';
 }
@@ -10,7 +8,11 @@ body {
 }
 
 .text-middle {
-	vertical-align:middle;
+	vertical-align:middle !important;
+}
+
+full-width {
+	width:100% !important;
 }
 
 .addon-header {
