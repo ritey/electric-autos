@@ -32,6 +32,18 @@ Images
 							<li class="active">Pic gallery</li>
 						</ul>
 
+						<div class="row">
+
+						@foreach($vars['pics'] as $pic)
+
+							@include('partials.pic', ['pic' => $pic])
+
+						@endforeach
+
+						</div>
+
+						{!! $vars['pics']->links() !!}
+
 					</div>
 
 					<div class="col-sm-4">

@@ -52,6 +52,7 @@ class PicsController extends BaseController
 		} else {
 			$vars = [
 				'user' => Auth::user(),
+                'pics' => $this->upload->mine(Auth::user()->id)->orderBy('created_at','DECS')->paginate(),
 				'all_pics' => $this->upload->mine(Auth::user()->id)->get(),
 			];
 			$view = view('pages.pics-index', compact('vars'))->render();

@@ -32,12 +32,20 @@ class ImageController extends BaseController {
 			$folder = $this->request->input('folder');
 		}
 
+		if ($this->request->input('user_id')) {
+			$user_id = $this->request->input('user_id');
+		}
+
 		if ($this->request->input('width')) {
 			$width = $this->request->input('width');
 		}
 
 		if ($this->request->input('height')) {
 			$height = $this->request->input('height');
+		}
+
+		if (empty($folder) && !empty($user_id)) {
+			$folder = $user_id;
 		}
 
 		$image = $this->image->resize( $folder , $filename , $width , $height );
