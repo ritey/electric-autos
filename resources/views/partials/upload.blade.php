@@ -6,7 +6,7 @@
 
 	<div id="uploader">
 
-        <form action="{{ route('pic.save') }}" method="POST" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
+        <form action="{{ route('pic.save') }}" method="POST" class="dropzone" id="myAwesomeDropzone" enctype="multipart/form-data">
             {!! csrf_field() !!}
             <div class="fallback">
                 <input name="file" type="file" multiple />
