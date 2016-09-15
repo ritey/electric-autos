@@ -47,6 +47,9 @@ class PicsController extends BaseController
 	public function index($ad = '')
 	{
 		$key = $this->getKeyName(__function__ . '|' . $ad);
+        if ($this->request->input('page')) {
+            $key = $this->getKeyName(__function__ . '|' . $ad . '|' . $this->request->input('page'));
+        }
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
