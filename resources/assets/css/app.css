@@ -9,6 +9,10 @@ body {
     padding-top: 50px;
 }
 
+.text-middle {
+	vertical-align:middle;
+}
+
 .addon-header {
 	padding-bottom:40px;
 }

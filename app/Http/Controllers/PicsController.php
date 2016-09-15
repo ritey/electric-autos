@@ -9,7 +9,6 @@ use Session;
 use CoderStudios\Library\Resource;
 use CoderStudios\Library\Upload;
 use CoderStudios\Requests\UploadRequest;
-use Log;
 
 class PicsController extends BaseController
 {
@@ -44,15 +43,20 @@ class PicsController extends BaseController
 		$this->middleware('auth');
 	}
 
-	public function index()
+	public function index($ad = '')
 	{
 		$key = $this->getKeyName(__function__);
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
+            if (!empty($ad)) {
+                $pics = $this->upload->mine(Auth::user()->id)->where('folder',$ad)->orderBy('created_at','DECS')->paginate();
+            } else {
+                $pics = $this->upload->mine(Auth::user()->id)->orderBy('created_at','DECS')->paginate();
+            }
 			$vars = [
 				'user' => Auth::user(),
-                'pics' => $this->upload->mine(Auth::user()->id)->orderBy('created_at','DECS')->paginate(),
+                'pics' => $pics,
 				'all_pics' => $this->upload->mine(Auth::user()->id)->get(),
 			];
 			$view = view('pages.pics-index', compact('vars'))->render();
