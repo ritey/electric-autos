@@ -181,6 +181,7 @@ return [
         HieuLe\Active\ActiveServiceProvider::class,
         /*Bogardo\Mailgun\MailgunServiceProvider::class,*/
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
+        Laravel\Cashier\CashierServiceProvider::class,
     ],
 
     /*

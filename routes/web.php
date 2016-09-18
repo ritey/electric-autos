@@ -21,6 +21,7 @@ Route::post('/register', ['as' => 'register-post', 'uses' => 'Auth\RegisterContr
 
 Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'AccountController@dashboard']);
 Route::get('/dashboard/upgrade', ['as' => 'upgrade', 'uses' => 'AccountController@upgrade']);
+Route::post('/dashboard/upgrade', ['as' => 'upgrade.process', 'uses' => 'AccountController@processUpgrade']);
 Route::get('/dashboard/ads/create', ['as' => 'ad.create', 'uses' => 'AdvertController@create']);
 Route::get('/dashboard/ads/{slug}', ['as' => 'ad.edit', 'uses' => 'AdvertController@edit']);
 Route::post('/dashboard/ads/{slug}', ['as' => 'ad.save', 'uses' => 'AdvertController@save']);
@@ -29,6 +30,11 @@ Route::get('/dashboard/{ad}/pics', ['as' => 'pic.ad.index', 'uses' => 'PicsContr
 Route::get('/dashboard/{ad}/pics/{id}/delete', ['as' => 'pic.ad.delete', 'uses' => 'PicsController@delete']);
 Route::get('/dashboard/pics/{id}/delete', ['as' => 'pic.delete', 'uses' => 'PicsController@delete']);
 Route::post('/dashboard/pics/save', ['as' => 'pic.save', 'uses' => 'PicsController@save']);
+
+Route::post(
+    'stripe/webhook',
+    '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook'
+);
 
 Route::get('/about', ['as' => 'about', 'uses' => 'HomeController@about']);
 

@@ -12,7 +12,9 @@
         "fabpot/goutte": "3.*",
         "thujohn/twitter": "~2.0",
         "roumen/sitemap": "2.6.*",
-        "greggilbert/recaptcha": "2.1.*"
+        "greggilbert/recaptcha": "2.1.*",
+        "laravel/cashier": "~7.0",
+        "dompdf/dompdf": "0.7.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

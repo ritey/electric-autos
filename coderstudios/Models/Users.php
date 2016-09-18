@@ -3,11 +3,12 @@
 namespace CoderStudios\Models;
 
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Users extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Billable;
 
     /**
     * The database connection used with the model.
@@ -64,6 +65,10 @@ class Users extends Authenticatable
         'email',
         'password',
         'updated_at',
+        'stripe_id',
+        'card_brand',
+        'card_last_four',
+        'trial_ends_at'
     ];
 
 }

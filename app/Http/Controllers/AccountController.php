@@ -75,4 +75,9 @@ class AccountController extends BaseController
 		}
 		return $view;
 	}
+
+	public function processUpgrade()
+	{
+
+	}
 }

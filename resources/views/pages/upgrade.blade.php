@@ -1,16 +1,19 @@
 @extends('layouts.master')
 
 @section('page_title')
-About Electric Autos
+Upgrade your account on Electric Autos
 @endsection
 
 @section('metas')
-<meta name="description" value="About Electric Autos, the electric used car directory with thousands of cars for sale." />
+<meta name="description" value="Upgrade your account on Electric Autos, the electric used car directory with thousands of cars for sale." />
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
-<meta name="og:description" value="About Electric Autos, the electric used car directory with thousands of cars for sale." />
-<meta name="og:title" value="About Electric Autos" />
-<meta name="twitter:description" value="About Electric Autos, the electric used car directory with thousands of cars for sale." />
-<meta name="twitter:title" value="About Electric Autos" />
+<meta name="og:description" value="Upgrade your account on Electric Autos, the electric used car directory with thousands of cars for sale." />
+<meta name="og:title" value="Upgrade your account on Electric Autos" />
+<meta name="twitter:description" value="Upgrade your account on Electric Autos, the electric used car directory with thousands of cars for sale." />
+<meta name="twitter:title" value="Upgrade your account on Electric Autos" />
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 @endsection
 
 @section('content')
@@ -22,12 +25,12 @@ About Electric Autos
 			<div class="row text-center">
 
 				<div class="heading">
-					<h1>About Electric Autos</h1>
+					<h1>Upgrade your account</h1>
 				</div>
 
 				<div class="intro">
 
-					<p>A new generation electric car directory of used and nearly new electric cars.</p>
+					<p>Get a dealer account and extra functionality</p>
 
 				</div>
 
@@ -46,25 +49,29 @@ About Electric Autos
 				<div class="col-sm-12">
 
 					<div class="addon-header text-center">
-						<h2>Meet the founder</h1>
+						<h2>All the regular features plus...</h1>
 					</div>
 
 					<div class="row">
 
-						<div class="col-sm-4 col-sm-offset-4 text-center">
+						<div class="col-sm-4">
 
-							<div class="thumbnail">
+							<h3><i class="fa fa-trophy"></i> Featured adverts</h4>
+							<p>Choose adverts to be featured in search results and on the homepage</p>
 
-								<img src="/images/david-wright.jpeg" alt="David Wright" />
+						</div>
 
-								<div class="caption">
+						<div class="col-sm-4">
 
-									<h3>David Wright</h3>
-									<p>All round automotive enthusiast and coffee fan</p>
+							<h3><i class="fa fa-trophy"></i> Dealer details page</h4>
+							<p>Have a dedicated page with all your cars for sale listed alongside your information</p>
 
-								</div>
+						</div>
 
-							</div>
+						<div class="col-sm-4">
+
+							<h3><i class="fa fa-trophy"></i> Site Stats</h4>
+							<p>See how well your adverts are doing with analytics including views and trends</p>
 
 						</div>
 
@@ -86,22 +93,22 @@ About Electric Autos
 
 				<div class="col-sm-12">
 
-					<div class="addon-header text-center">
-						<h2>Our latest milestones</h1>
-					</div>
+					<form action="{{ route('upgrade.process') }}" method="POST">
+					  <script
+					    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+					    data-key="pk_test_vucuHZVV4qtZEtjusMRN6c0R"
+					    data-amount="999"
+					    data-name="Electric Autos"
+					    data-description="Monthly Dealer Subscription"
+					    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+					    data-locale="auto"
+					    data-zip-code="true"
+					    data-label="Upgrade my account"
+					    data-currency="gbp">
+					  </script>
+					</form>
 
-					<div class="row">
-
-						<div class="col-sm-8 col-sm-offset-2">
-
-							<h3>01/09/2016 - Site launched</h3>
-							<p>New Electric Autos website goes live offering potential owners to browse available used electric cars for sale and private and trade sellers the ability to list their used electric cars in the biggest online directory of electric cars.</p>
-
-						</div>
-
-					</div>
-
-				</h2>
+				</div>
 
 			</div>
 
