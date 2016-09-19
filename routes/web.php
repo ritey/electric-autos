@@ -27,8 +27,10 @@ Route::get('/dashboard/ads/{slug}', ['as' => 'ad.edit', 'uses' => 'AdvertControl
 Route::post('/dashboard/ads/{slug}', ['as' => 'ad.save', 'uses' => 'AdvertController@save']);
 Route::get('/dashboard/pics', ['as' => 'pic.index', 'uses' => 'PicsController@index']);
 Route::get('/dashboard/{ad}/pics', ['as' => 'pic.ad.index', 'uses' => 'PicsController@index']);
+
 Route::get('/dashboard/{ad}/pics/{id}/delete', ['as' => 'pic.ad.delete', 'uses' => 'PicsController@delete']);
 Route::get('/dashboard/pics/{id}/delete', ['as' => 'pic.delete', 'uses' => 'PicsController@delete']);
+
 Route::post('/dashboard/pics/save', ['as' => 'pic.save', 'uses' => 'PicsController@save']);
 
 Route::post(

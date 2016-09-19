@@ -72,6 +72,7 @@ Images
     	paramName: "file", // The name that will be used to transfer the file
     	maxFilesize: 2000, // MB
     	uploadMultiple: true,
+    	acceptedFiles: "image/jpeg,image/png,image/gif",
     	success:function(result, response) {
 			document.location = response.path;
     	},
