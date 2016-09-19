@@ -100,7 +100,7 @@ Upgrade your account on Electric Autos
 					    data-amount="999"
 					    data-name="Electric Autos"
 					    data-description="Monthly Dealer Subscription"
-					    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+					    data-image="http://www.electric-autos.co.uk/images/bolt-logo-64x64.png"
 					    data-locale="auto"
 					    data-zip-code="true"
 					    data-label="Upgrade my account"
