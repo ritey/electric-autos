@@ -94,6 +94,7 @@ Upgrade your account on Electric Autos
 				<div class="col-sm-12">
 
 					<form action="{{ route('upgrade.process') }}" method="POST">
+						{!! csrf_field() !!}
 					  <script
 					    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 					    data-key="pk_test_vucuHZVV4qtZEtjusMRN6c0R"

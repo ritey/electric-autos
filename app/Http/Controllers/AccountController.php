@@ -60,6 +60,23 @@ class AccountController extends BaseController
 		return $view;
 	}
 
+	public function dealer()
+	{
+		$key = $this->getKeyName(__function__);
+		if ($this->cache->has($key)) {
+			$view = $this->cache->get($key);
+		} else {
+			$vars = [
+				'user' => Auth::user(),
+				'all_ads' => $this->resource->mine(Auth::user()->id)->get(),
+				'all_pics' => $this->upload->mine(Auth::user()->id)->get(),
+			];
+			$view = view('pages.dealer.edit', compact('vars'))->render();
+			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
+		}
+		return $view;
+	}
+
 	public function upgrade()
 	{
 		$key = $this->getKeyName(__function__);
@@ -78,6 +95,11 @@ class AccountController extends BaseController
 
 	public function processUpgrade()
 	{
-
+		$user = Auth::user();
+		$creditCardToken = $this->request->input('stripeToken');
+		$result = $user->newSubscription('Dealer Plan','ea1')->create($creditCardToken, ['email' => $this->request->input('stripeEmail') ]);
+		if ($result->stripe_plan) {
+			return redirect()->route('dashboard')->with('success_message','Account upgraded!');
+		}
 	}
 }

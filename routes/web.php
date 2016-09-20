@@ -21,7 +21,8 @@ Route::post('/register', ['as' => 'register-post', 'uses' => 'Auth\RegisterContr
 
 Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'AccountController@dashboard']);
 Route::get('/dashboard/upgrade', ['as' => 'upgrade', 'uses' => 'AccountController@upgrade']);
-Route::post('/dashboard/upgrade', ['as' => 'upgrade.process', 'uses' => 'AccountController@processUpgrade']);
+Route::post('/dashboard/upgrading', ['as' => 'upgrade.process', 'uses' => 'AccountController@processUpgrade']);
+Route::get('/dashboard/dealer', ['as' => 'dealer.edit', 'uses' => 'AccountController@dealer']);
 Route::get('/dashboard/ads/create', ['as' => 'ad.create', 'uses' => 'AdvertController@create']);
 Route::get('/dashboard/ads/{slug}', ['as' => 'ad.edit', 'uses' => 'AdvertController@edit']);
 Route::post('/dashboard/ads/{slug}', ['as' => 'ad.save', 'uses' => 'AdvertController@save']);

@@ -86,7 +86,15 @@ Dashboard
 
 					<div class="col-sm-4">
 
+						@if (!$vars['user']->subscribed('Dealer Plan'))
+
 						@include('partials.upgrade', ['user' => $vars['user']])
+
+						@else
+
+						@include('partials.dealer-button')
+
+						@endif
 
 						@include('partials.stats', ['ads' => $vars['all_ads']])
 
