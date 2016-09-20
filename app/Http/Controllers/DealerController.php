@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository as Cache;
+use CoderStudios\Library\Dealer;
 
 class DealerController extends BaseController
 {
@@ -27,13 +28,14 @@ class DealerController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache)
+	public function __construct(Request $request, Cache $cache, Dealer $dealer)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
 		$this->basename = class_basename($this);
 		$this->request = $request;
 		$this->cache = $cache;
+		$this->dealer = $dealer;
 		$this->middleware('auth');
 	}
 
@@ -43,7 +45,11 @@ class DealerController extends BaseController
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
+
+			$dealer = $this->dealer->whereSlug($slug);
+
 			$vars = [
+				'dealer'			=> $dealer,
 				'cars_collection' 	=> '',
 				'cars'				=> '',
 			];
@@ -52,3 +58,4 @@ class DealerController extends BaseController
 		}
 		return $view;
 	}
+}

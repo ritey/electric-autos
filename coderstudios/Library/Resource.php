@@ -24,9 +24,7 @@ class Resource {
 	}
 
 	public function get($id) {
-		$resource = $this->resource->where('id',$id)->first();
-
-		return $resource;
+		return $this->resource->where('id',$id)->first();
 	}
 
 	public function totalEnabled()
