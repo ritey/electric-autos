@@ -31,6 +31,8 @@ Dashboard
 							<li class="active">Dashboard</li>
 						</ul>
 
+						@if ($vars['ads']->count())
+
 						<table class="table table-bordered table-hover table-responsive">
 
 							<tr>
@@ -44,8 +46,6 @@ Dashboard
 								<th></th>
 
 							</tr>
-
-							@if (!empty($vars['ads']))
 
 							@foreach($vars['ads'] as $item)
 
@@ -61,15 +61,13 @@ Dashboard
 
 							@endforeach
 
-							@else
-
-							<tr>
-								<td colspan="6">No ads, create one</td>
-							</tr>
-
-							@endif
-
 						</table>
+
+						@else
+
+						<p><strong>You don't have any ads yet, why not <a href="{{ route('ad.create') }}">create</a> your first ad.</strong></p>
+
+						@endif
 
 						@if (!empty($vars['ads']))
 

@@ -9,7 +9,7 @@
 
 				@if($success_message)
 
-				<h3 class="text-success">{{ $success_message }}</h3>
+				<h3 class="text-success">{!! $success_message !!}</h3>
 
 				@endif
 

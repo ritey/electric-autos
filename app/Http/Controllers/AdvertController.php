@@ -125,6 +125,10 @@ class AdvertController extends BaseController
 
 	public function create()
 	{
+		if (!Auth::user()->subscribed('Dealer Plan') && $this->resource->mine(Auth::user()->id)->get()->count() >= 2) {
+			return redirect()->route('dashboard')->with('success_message','You must <a href="'.route('upgrade').'">upgrade</a> your account to create more ads');
+		}
+
 		$key = $this->getKeyName(__function__ . '|' . Auth::user()->user_id);
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);

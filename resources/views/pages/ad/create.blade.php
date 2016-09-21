@@ -101,3 +101,5 @@ My ad
 	</div>
 
 </section>
+
+@endsection
