@@ -135,6 +135,67 @@ class AdvertController extends BaseController
 		return $view;
 	}
 
+	public function createDetails(AdRequest $request)
+	{
+		$vehicle = $this->car($request);
+		$key = $this->getKeyName(__function__ . '|' . $request->input('reg'));
+		if ($this->cache->has($key)) {
+			$view = $this->cache->get($key);
+		} else {
+			$vars = [
+				'vehicle'	=> $vehicle,
+				'models'	=> $this->models->where('make_id',$vehicle['make_id'])->orderBy('name','ASC')->get(),
+				'makes'		=> $this->makes->orderBy('name','ASC')->get(),
+			];
+			$view = view('pages.ad.details', compact('vars'))->render();
+			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
+		}
+		return $view;
+	}
+
+	public function saveNew(VehicleRequest $request)
+	{
+		$vehicle = Session::get('vehicle');
+
+		$resource = [
+	        'enabled' 			=> 0,
+	        'sort_order' 		=> 1,
+	        'private' 			=> 1,
+	        'user_id' 			=> Auth::user()->id,
+	        'dealer_id' 		=> Auth::user()->dealer_id,
+	        'make_id'			=> $request->input('make_id'),
+	        'model_id'			=> $request->input('model_id'),
+	        'name'				=> trim($request->input('name')),
+	        'price'				=> $this->vehicle->makePrice($request->input('price')),
+	        'fuel'				=> $request->input('fuel'),
+	        'year'				=> trim($vehicle['year']),
+	        'colour'			=> trim($vehicle['colour']),
+	        'reg'				=> $vehicle['reg'],
+	        'gearbox'			=> $request->input('gearbox'),
+	        'doors'				=> $request->input('doors'),
+	        'slug'				=> $this->vehicle->makeSlug(trim($request->input('name'))),
+	        'mileage'			=> $vehicle['mileage'],
+	        'length_measure'	=> $vehicle['distance'],
+	        'currency'			=> $request->input('currency'),
+	        'content'			=> $request->input('content'),
+		];
+
+		$result = $this->resource->create($resource);
+
+		if ($result) {
+			$data = [
+				'slug' => $resource['slug'] . '-' . $result->id,
+			];
+
+			$this->resource->update($result->id, $data);
+
+			Session::forget('vehicle');
+
+			return redirect()->route('ad.edit', ['slug' => $data['slug']])->with('success_message','Ad created');
+		}
+		return redirect()->route('ad.create.details');
+	}
+
 	public function edit($slug = '')
 	{
 		$vehicle = $this->resource->myAd(Auth::User()->id,$slug);
@@ -168,7 +229,7 @@ class AdvertController extends BaseController
 	        'colour'			=> trim($request->input('colour')),
 	        'gearbox'			=> $request->input('gearbox'),
 	        'doors'				=> $request->input('doors'),
-	        'slug'				=> $this->vehicle->makeSlug(trim($request->input('name'))),
+	        'slug'				=> $this->vehicle->makeSlug(trim($request->input('name'))) . '-' . $vehicle->id,
 	        'mileage'			=> $this->vehicle->makeMileage($request->input('mileage')),
 	        'length_measure'	=> $request->input('distance'),
 	        'currency'			=> $request->input('currency'),
@@ -177,7 +238,6 @@ class AdvertController extends BaseController
 		];
 
 		$result = $this->resource->update($vehicle->id, $resource);
-		$this->cache->clear();
 		return redirect()->route('ad.edit', ['slug' => $resource['slug']])->with('success_message','Details saved');
 	}
 }

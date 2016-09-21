@@ -110,8 +110,6 @@ class AccountController extends BaseController
 			$user->save();
 		}
 
-		$this->cache->clear();
-
 		return redirect()->route('dealer.edit')->with('success_message','Details saved');
 	}
 

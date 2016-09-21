@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('page_title')
-My ad
+Start selling with Electric Autos
 @endsection
 
 @section('metas')
@@ -14,7 +14,7 @@ My ad
 @endsection
 
 @section('title')
-My ad
+Start selling your car
 @endsection
 
 @section('content')
@@ -34,7 +34,7 @@ My ad
 
 				<h2 class="addon-header">Be as accurate as you can to help sell your car</h2>
 
-				<form class="form form-horizontal" method="POST" action="{{ route('ad.save', ['slug' => $vars['vehicle']['slug']]) }}">
+				<form class="form form-horizontal" method="GET" action="{{ route('ad.create.save') }}">
 					{!! csrf_field() !!}
 
 					@include('partials.errors')
@@ -42,8 +42,8 @@ My ad
 					<div class="form-group">
 
 						<label for="price" class="col-sm-3 control-label">Asking price</label>
-						<div class="col-sm-9">
-							<input type="text" name="price" id="price" class="form-control" value="{{ $vars['vehicle']['price'] }}">
+						<div class="col-sm-9  col-md-4">
+							<input type="text" name="price" id="price" class="form-control" value="{{ old('price') }}">
 						</div>
 
 					</div>
@@ -51,7 +51,7 @@ My ad
 					<div class="form-group">
 
 						<label for="currency" class="col-sm-3 control-label">Currency</label>
-						<div class="col-sm-9">
+						<div class="col-sm-9 col-md-4">
 							<select name="currency" id="" class="form-control">
 								<option value="Pound">Pounds</option>
 								<option value="Euro">Euros</option>
@@ -64,7 +64,8 @@ My ad
 
 						<label for="name" class="col-sm-3 control-label">Ad headline</label>
 						<div class="col-sm-9">
-							<input type="text" name="name" id="name" class="form-control" value="{{ $vars['vehicle']['name'] }}">
+							<input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
+							<p class="help-block">Something like: {{ $vars['vehicle']['title'] or '' }}</p>
 						</div>
 
 					</div>
@@ -73,7 +74,7 @@ My ad
 
 						<label for="content" class="col-sm-3 control-label">Description</label>
 						<div class="col-sm-9">
-							<textarea name="content" id="content" rows="8" class="form-control">{{ $vars['vehicle']['content'] }}</textarea>
+							<textarea name="content" id="content" rows="8" class="form-control">{{ old('content') }}</textarea>
 						</div>
 
 					</div>
@@ -88,7 +89,7 @@ My ad
 									<select name="make_id" id="make_id" class="form-control">
 										<option value="">All</option>
 										@foreach($vars['makes'] as $make)
-											@if ($vars['vehicle']['make_id'] == $make->id)
+											@if ($vars['vehicle']['make_id'] == $make->id || $make->id == old('make_id'))
 												<option selected value="{{ $make->id }}">{{ $make->name }}</option>
 											@else
 												<option value="{{ $make->id }}">{{ $make->name }}</option>
@@ -105,7 +106,7 @@ My ad
 										<option value="">All</option>
 										@if(!empty($vars['models']))
 										@foreach($vars['models'] as $item)
-											@if ($vars['vehicle']['model_id'] == $item->id)
+											@if ($vars['vehicle']['model_id'] == $item->id || $item->id == old('model_id'))
 												<option selected value="{{ $item->id }}">{{ $item->name }}</option>
 											@else
 												<option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -117,74 +118,25 @@ My ad
 							</div>
 
 							<div class="form-group">
-
-								<label for="mileage" class="col-sm-6 control-label">Mileage</label>
+								<label for="fuel" class="col-sm-6 control-label">Fuel</label>
 								<div class="col-sm-6">
-									<input type="text" name="mileage" id="mileage" class="form-control" required="required" value="{{ $vars['vehicle']['mileage'] }}">
+									<select name="fuel" id="fuel" class="form-control">
+										<option value="Electric" {{ old('fuel') == 'Electric' ? 'selected' : '' }}>Electric</option>
+										<option value="Hybrid" {{ old('fuel') == 'Hybrid' ? 'selected' : '' }}>Hybrid</option>
+									</select>
 								</div>
-
 							</div>
-
-							<div class="form-group">
-
-								<label class="col-sm-6 control-label">Distance measure</label>
-								<div class="col-sm-6">
-									<div class="radio">
-										<label for="distance_miles" class="radio-inline">
-											<input type="radio" id="distance_miles" name="distance" value="Miles" {{ $vars['vehicle']['length_measure'] == 'Miles' ? 'checked' : '' }}> Miles
-										</label>
-										<label for="distance_km" class="radio-inline">
-											<input type="radio" id="distance_km" name="distance" value="KM" {{ $vars['vehicle']['length_measure'] == 'KM' ? 'checked' : '' }}> Kilometers
-										</label>
-									</div>
-								</div>
-
-							</div>
-
-							<div class="form-group">
-
-								<div class="col-sm-offset-6 col-sm-6">
-							    	<div class="checkbox">
-										<label for="sold">
-											<input id="sold" name="sold" value="1" type="checkbox" {{ $vars['vehicle']['sold'] == '1' ? 'checked' : '' }}> Sold
-										</label>
-									</div>
-							    </div>
-
-							</div>
-
-							<div class="form-group">
-
-								<div class="col-sm-offset-6 col-sm-6">
-							    	<div class="checkbox">
-										<label for="enabled">
-											<input id="enabled" name="enabled" value="1" type="checkbox" {{ $vars['vehicle']['enabled'] == '1' ? 'checked' : '' }}> Enabled
-										</label>
-									</div>
-							    </div>
-
-							</div>
-
 						</div>
 
 						<div class="col-md-6 col-sm-12">
 
 							<div class="form-group">
 
-								<label for="colour" class="col-sm-6 control-label">Colour</label>
-								<div class="col-sm-6">
-									<input type="text" name="colour" id="colour" value="{{ $vars['vehicle']['colour'] or '' }}" class="form-control">
-								</div>
-
-							</div>
-
-							<div class="form-group">
-
 								<label for="gearbox" class="col-sm-6 control-label">Gearbox</label>
 								<div class="col-sm-6">
 									<select name="gearbox" id="gearbox" class="form-control">
-										<option value="automatic" {{ $vars['vehicle']['gearbox'] == 'automatic' ? 'selected' : '' }}>Automatic</option>
-										<option value="manual" {{ $vars['vehicle']['gearbox'] == 'manual' ? 'selected' : '' }}>Manual</option>
+										<option value="automatic" {{ old('gearbox') == 'automatic' ? 'selected' : '' }}>Automatic</option>
+										<option value="manual" {{ old('gearbox') == 'manual' ? 'selected' : '' }}>Manual</option>
 									</select>
 								</div>
 
@@ -195,9 +147,9 @@ My ad
 								<label for="year" class="col-sm-6 control-label">Year</label>
 								<div class="col-sm-6">
 									<select name="year" id="year" class="form-control">
-										<option value="">Year (from)</option>
+										<option value="">Year</option>
 										@for ($i = date('Y'); $i > (date('Y')-10); $i--)
-										@if(isset($vars['vehicle']['year']) && $vars['vehicle']['year'] == $i)
+										@if(isset($vars['vehicle']['year']) && $vars['vehicle']['year'] == $i || $i == old('year'))
 										<option value="{{ $i }}" selected>{{ $i }}</option>
 										@else
 										<option value="{{ $i }}">{{ $i }}</option>
@@ -209,13 +161,12 @@ My ad
 							</div>
 
 							<div class="form-group">
-								<label for="fuel" class="col-sm-6 control-label">Fuel</label>
+
+								<label for="colour" class="col-sm-6 control-label">Colour</label>
 								<div class="col-sm-6">
-									<select name="fuel" id="fuel" class="form-control">
-										<option value="Electric" {{ $vars['vehicle']['fuel'] == 'Electric' ? 'selected' : '' }}>Electric</option>
-										<option value="Hybrid" {{ $vars['vehicle']['fuel'] == 'Hybrid' ? 'selected' : '' }}>Hybrid</option>
-									</select>
+									<input type="text" name="colour" id="colour" value="{{ $vars['vehicle']['colour'] or old('colour') }}" class="form-control">
 								</div>
+
 							</div>
 
 						</div>
@@ -238,13 +189,11 @@ My ad
 
 			<div class="col-md-4 col-sm-12">
 
-				<section class="promo">
+				<h4>Selling tips</h4>
 
-					<h4>Manage your ad pics</h4>
+				<p>Writing a good description really helps a potential buyer choose their next car so make sure you include as much detail as possible. Too short a description might not get the attention your car deserves.</p>
 
-					<p class="text-center"><a href="{{ route('pic.ad.index', ['ad' => $vars['vehicle']['id']]) }}"><i class="fa fa-camera"></i> Edit</a></p>
-
-				</section>
+				<p>Being accurate with the vehicle details helps prospective buyers find the exact car their looking for.</p>
 
 			</div>
 

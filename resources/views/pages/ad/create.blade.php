@@ -86,6 +86,16 @@ My ad
 
 			</div>
 
+			<div class="col-md-4 col-sm-12">
+
+				<h4>Selling tips</h4>
+
+				<p>We ask for your car registration to help populate some of the vehicle data, we will not display the vehicle registration on the finished advert.</p>
+
+				<p>Please be accurate with your car mileage.</p>
+
+			</div>
+
 		</div>
 
 	</div>

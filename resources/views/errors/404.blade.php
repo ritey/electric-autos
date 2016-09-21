@@ -5,12 +5,12 @@
 @endsection
 
 @section('metas')
-<meta name="description" value="" />
+<meta name="description" value="404 Not Found | Electric Autos" />
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
-<meta name="og:description" value="" />
-<meta name="og:title" value="" />
-<meta name="twitter:description" value="" />
-<meta name="twitter:title" value="" />
+<meta name="og:description" value="404 Not Found | Electric Autos" />
+<meta name="og:title" value="404 Not Found | Electric Autos" />
+<meta name="twitter:description" value="404 Not Found | Electric Autos" />
+<meta name="twitter:title" value="404 Not Found | Electric Autos" />
 @endsection
 
 @section('content')
