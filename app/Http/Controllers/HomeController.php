@@ -173,8 +173,7 @@ class HomeController extends BaseController
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
-			$vars = [
-			];
+			$vars = [];
 			$view = view('pages.start', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}

@@ -55,10 +55,12 @@ class Dealers extends Model
     * @var  array
     */
     protected $fillable = [
+        'enabled',
         'package_id',
         'dealer_id',
         'name',
         'email',
+        'slug',
         'phone',
         'mobile',
         'location',

@@ -49,7 +49,7 @@ class AccountController extends BaseController
 
 	public function dashboard()
 	{
-		$key = $this->getKeyName(__function__);
+		$key = $this->getKeyName(__function__ . '|' . Auth::user()->user_id);
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
@@ -109,6 +109,8 @@ class AccountController extends BaseController
 			$user->dealer_id = $result->id;
 			$user->save();
 		}
+
+		$this->cache->clear();
 
 		return redirect()->route('dealer.edit')->with('success_message','Details saved');
 	}

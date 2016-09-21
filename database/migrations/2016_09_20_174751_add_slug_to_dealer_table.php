@@ -20,11 +20,15 @@ class AddSlugToDealerTable extends Migration
 
         Schema::create('history', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('action');
+            $table->string('action',128);
             $table->string('user_id')->index();
             $table->string('description',256)->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
+        });
+
+        Schema::table('uploads', function(Blueprint $table) {
+            $table->string('dealer_id')->nullable()->index()->after('user_id');
         });
     }
 
@@ -40,5 +44,8 @@ class AddSlugToDealerTable extends Migration
             $table->dropColumn('slug');
         });
         Schema::drop('history');
+        Schema::table('uploads', function(Blueprint $table) {
+            $table->dropColumn('dealer_id');
+        });
     }
 }

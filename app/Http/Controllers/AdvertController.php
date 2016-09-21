@@ -49,7 +49,7 @@ class AdvertController extends BaseController
 		$this->middleware('auth',['except' => ['details','saveVehicle']]);
 	}
 
-	public function details(AdRequest $request)
+	private function car($request)
 	{
 		$vehicle = [];
 		if ($request->input('reg')) {
@@ -60,8 +60,13 @@ class AdvertController extends BaseController
 		$vehicle['distance'] = $request->input('distance');
 
 		Session::put('vehicle',$vehicle);
+		return $vehicle;
+	}
 
-		$key = $this->getKeyName(__function__);
+	public function details(AdRequest $request)
+	{
+		$vehicle = $this->car($request);
+		$key = $this->getKeyName(__function__ . '|' . $request->input('reg'));
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
@@ -78,7 +83,6 @@ class AdvertController extends BaseController
 
 	public function saveVehicle(VehicleRequest $request)
 	{
-
 		$vehicle = Session::get('vehicle');
 
 		$resource = [
@@ -116,25 +120,22 @@ class AdvertController extends BaseController
 			Session::put('vehicle_id',$result->id);
 			return redirect()->route('register');
 		}
-
 	}
 
 	public function create()
 	{
-		$key = $this->getKeyName(__function__);
+		$key = $this->getKeyName(__function__ . '|' . Auth::user()->user_id);
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
-			$vars = [
-				'vehicle' => $vehicle,
-			];
-			$view = view('pages.advert-details', compact('vars'))->render();
+			$vars = [];
+			$view = view('pages.ad.create', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
 		return $view;
 	}
 
-	public function edit($slug)
+	public function edit($slug = '')
 	{
 		$vehicle = $this->resource->myAd(Auth::User()->id,$slug);
 
@@ -144,8 +145,8 @@ class AdvertController extends BaseController
 		} else {
 			$vars = [
 				'models'	=> $this->models->where('make_id',$vehicle['make_id'])->orderBy('name','ASC')->get(),
-				'makes' => $this->makes->orderBy('name','ASC')->get(),
-				'vehicle' => $vehicle,
+				'makes'		=> $this->makes->orderBy('name','ASC')->get(),
+				'vehicle' 	=> $vehicle,
 			];
 			$view = view('pages.ad.edit', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
@@ -176,6 +177,7 @@ class AdvertController extends BaseController
 		];
 
 		$result = $this->resource->update($vehicle->id, $resource);
+		$this->cache->clear();
 		return redirect()->route('ad.edit', ['slug' => $resource['slug']])->with('success_message','Details saved');
 	}
 }

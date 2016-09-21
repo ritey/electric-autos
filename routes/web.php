@@ -25,6 +25,7 @@ Route::post('/dashboard/upgrading', ['as' => 'upgrade.process', 'uses' => 'Accou
 Route::get('/dashboard/dealer', ['as' => 'dealer.edit', 'uses' => 'AccountController@dealer']);
 Route::post('/dashboard/dealer/save', ['as' => 'dealer.save', 'uses' => 'AccountController@saveDealer']);
 Route::get('/dashboard/ads/create', ['as' => 'ad.create', 'uses' => 'AdvertController@create']);
+Route::get('/dashboard/ads/create/details', ['as' => 'ad.create.details', 'uses' => 'AdvertController@createDetails']);
 Route::get('/dashboard/ads/{slug}', ['as' => 'ad.edit', 'uses' => 'AdvertController@edit']);
 Route::post('/dashboard/ads/{slug}', ['as' => 'ad.save', 'uses' => 'AdvertController@save']);
 Route::get('/dashboard/pics', ['as' => 'pic.index', 'uses' => 'PicsController@index']);
