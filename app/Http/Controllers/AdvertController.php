@@ -10,6 +10,7 @@ use CoderStudios\Library\VehicleDetails;
 use CoderStudios\Library\Resource;
 use CoderStudios\Models\Makes;
 use CoderStudios\Models\Models;
+use App\Events\NewAd;
 use Session;
 use Auth;
 
@@ -158,9 +159,9 @@ class AdvertController extends BaseController
 		$vehicle = Session::get('vehicle');
 
 		$resource = [
-	        'enabled' 			=> 0,
+	        'enabled' 			=> 1,
 	        'sort_order' 		=> 1,
-	        'private' 			=> 1,
+	        'private' 			=> empty(Auth::user()->dealer_id) ? 0 : 1,
 	        'user_id' 			=> Auth::user()->id,
 	        'dealer_id' 		=> Auth::user()->dealer_id,
 	        'make_id'			=> $request->input('make_id'),
@@ -190,6 +191,17 @@ class AdvertController extends BaseController
 			$this->resource->update($result->id, $data);
 
 			Session::forget('vehicle');
+
+			$brand = $this->makes->where('id',$request['make_id'])->value('name');
+			$version = $this->models->where('id',$request['model_id'])->value('name');
+
+			$new_ad = [
+				'tweet' => 'New electric car listed: ' . route('cars.brand.car', ['brand' => $brand, 'version' => $version, 'slug' => $data['slug']]) . '#ev #'.$brand.' #'.$version,
+				'subject' => 'New ad: ' . route('cars.brand.car', ['brand' => $brand, 'version' => $version, 'slug' => $data['slug']]),
+				'email_content' => 'New ad: ' . route('cars.brand.car', ['brand' => $brand, 'version' => $version, 'slug' => $data['slug']]),
+			];
+
+            event(new NewAd($new_ad));
 
 			return redirect()->route('ad.edit', ['slug' => $data['slug']])->with('success_message','Ad created');
 		}

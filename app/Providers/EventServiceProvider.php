@@ -20,6 +20,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ContactSent' => [
             'App\Listeners\EmailContactDetails',
         ],
+        'App\Events\NewAd' => [
+            'App\Listeners\EmailAdmin',
+            'App\Listeners\Tweet',
+        ],
     ];
 
     /**

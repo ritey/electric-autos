@@ -4,18 +4,18 @@ namespace App\Listeners;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Mail;
+use Thujohn\Twitter\Twitter;
 
-class EmailAdmin
+class Tweet
 {
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Twitter $tweet)
     {
-
+        $this->tweet = $tweet;
     }
 
     /**
@@ -27,11 +27,8 @@ class EmailAdmin
     public function handle($event)
     {
         $data = $event->data;
-
-        Mail::send(['text' => 'emails.blank'], ['data' => $data], function($message) use ($data)
-        {
-            $message->to('dave@coderstudios.com', 'dave@coderstudios.com')->subject($data['subject']);
-        });
-
+        if (isset($data['tweet']) && strlen($data['tweet']) && env('APP_TWEET',0)) {
+            $this->tweet->post('statuses/update', ['status' => $data['tweet'], 'format' => 'json']);
+        }
     }
 }

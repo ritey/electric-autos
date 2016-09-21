@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
         if ($user) {
-            event(new Registered(['email' => $data['email']]));
+            event(new Registered(['email_content' => 'New user registered:' . $data['email'],'subject' => 'New electric autos user : ' . $data['email'], 'email' => $data['email']]));
         }
         if (Session::get('vehicle_id')) {
             $data = [
