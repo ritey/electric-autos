@@ -35,7 +35,7 @@ class SitemapController extends BaseController
 
 		$resources = $this->resource->all();
 		foreach( $resources as $vehicle) {
-			$xml .= '<url><loc>'.route('home').'/'.$vehicle->make()->first()->name.'/'.$vehicle->model()->first()->name.'/'.$vehicle->slug.'</loc><priority>0.9</priority><lastmod>'.$vehicle->created_at->toAtomString().'</lastmod><changefreq>daily</changefreq></url>';
+			$xml .= '<url><loc>'.route('home').'/used-cars/'.$vehicle->make()->first()->name.'/'.$vehicle->model()->first()->name.'/'.$vehicle->slug.'</loc><priority>0.9</priority><lastmod>'.$vehicle->created_at->toAtomString().'</lastmod><changefreq>daily</changefreq></url>';
 		}
 
 		$xml .= '<url><loc>'.route('home').'/about</loc><priority>0.9</priority><lastmod>2016-09-01T09:00:00+00:00</lastmod><changefreq>monthly</changefreq></url>';
