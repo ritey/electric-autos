@@ -263,7 +263,7 @@ class VehicleDetails {
 					$resource['slug'] = $this->makeSlug($resource['name']);
 					$resource['price'] = $ad['price'];
 					$resource['currency'] = $ad['currency'];
-					$resource['make_id'] = 0;
+					$resource['make_id'] = 1;
 
 					if (strpos(strtolower(' ' . $resource['name']),'bmw')) {
 						$resource['make_id'] = 1;
@@ -284,7 +284,7 @@ class VehicleDetails {
 						$resource['make_id'] = 11;
 					}
 
-					$resource['model_id'] = 0;
+					$resource['model_id'] = 1;
 
 					if ($resource['make_id'] == 8 && strpos(strtolower(' ' . $resource['name']),' model s ')) {
 						$resource['model_id'] = 11;
