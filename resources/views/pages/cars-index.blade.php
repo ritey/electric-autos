@@ -113,7 +113,7 @@ Electric car classifieds
 @endsection
 
 @section('footer')
-<script type="text/javascript">
+<script async type="text/javascript">
 $('document').ready(function(){
 	$('#make').on('change', function() {
 

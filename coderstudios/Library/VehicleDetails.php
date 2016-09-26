@@ -84,11 +84,14 @@ class VehicleDetails {
 
 	public function makeName($text)
 	{
-		return str_replace('  ',' ',str_replace('\'\'','',str_replace('*','',str_replace('&','&',str_replace(',',' ',str_replace(')','',str_replace('(','',str_replace('/','',str_replace(' ',' ',$text)))))))));
+		return str_replace('‘','',str_replace('  ',' ',str_replace('\'\'','',str_replace('*','',str_replace('&','&',str_replace(',',' ',str_replace(')','',str_replace('(','',str_replace('/','',str_replace(' ',' ',$text))))))))));
 	}
 
 	public function makeMileage($text)
 	{
+		if ($text == 'Petrol' || $text == '228 bhp') {
+			return 0;
+		}
 		return trim(str_replace(',','',str_replace('kilometer','',str_replace('kilometers','',str_replace('miles','',$text)))));
 	}
 
@@ -283,32 +286,32 @@ class VehicleDetails {
 
 					$resource['model_id'] = 0;
 
-					if ($resource['make_id'] == 8 && strpos(strtolower($resource['name']),' model s ')) {
+					if ($resource['make_id'] == 8 && strpos(strtolower(' ' . $resource['name']),' model s ')) {
 						$resource['model_id'] = 11;
 					}
-					if ($resource['make_id'] == 8 && strpos(strtolower($resource['name']),' model x ')) {
+					if ($resource['make_id'] == 8 && strpos(strtolower(' ' . $resource['name']),' model x ')) {
 						$resource['model_id'] = 12;
 					}
-					if ($resource['make_id'] == 8 && strpos(strtolower($resource['name']),' roadster ')) {
+					if ($resource['make_id'] == 8 && strpos(strtolower(' ' . $resource['name']),' roadster ')) {
 						$resource['model_id'] = 13;
 					}
 
-					if ($resource['make_id'] == 1 && strpos(strtolower($resource['name']),' i3 ')) {
+					if ($resource['make_id'] == 1 && strpos(strtolower(' ' . $resource['name']),' i3 ')) {
 						$resource['model_id'] = 1;
 					}
-					if ($resource['make_id']	 == 1 && strpos(strtolower($resource['name']),' i8 ')) {
+					if ($resource['make_id']	 == 1 && strpos(strtolower(' ' . $resource['name']),' i8 ')) {
 						$resource['model_id'] = 2;
 					}
 
-					if ($resource['make_id'] == 9 && strpos(strtolower($resource['name']),' prius ')) {
+					if ($resource['make_id'] == 9 && strpos(strtolower(' ' . $resource['name']),' prius ')) {
 						$resource['model_id'] = 14;
 					}
 
-					if ($resource['make_id'] == 9 && strpos(strtolower($resource['name']),' prius+ ')) {
+					if ($resource['make_id'] == 9 && strpos(strtolower(' ' . $resource['name']),' prius+ ')) {
 						$resource['model_id'] = 14;
 					}
 
-					if ($resource['make_id'] == 11 && strpos(strtolower($resource['name']),' golf ')) {
+					if ($resource['make_id'] == 11 && (strpos(strtolower(' ' . $resource['name']),' golf ')) || strpos(strtolower(' ' . $resource['name']),' e-golf ') ) {
 						$resource['model_id'] = 16;
 					}
 
@@ -334,6 +337,7 @@ class VehicleDetails {
 					$dealer['name'] = '';
 					if (count($dom)) {
 						$dealer['name'] = $this->strip($dom->text());
+						$dealer['slug'] = $this->makeSlug($dealer['name']);
 					}
 
 					$dom = $crawler2->filter('.contact-panel--about__location');
@@ -374,6 +378,7 @@ class VehicleDetails {
 					$resource['dealer_id'] = $existing_dealer->id;
 
 					//dd($resource);
+					//Log::info(print_r($resource,true));
 
 					$created_resource = $this->resource->create($resource);
 

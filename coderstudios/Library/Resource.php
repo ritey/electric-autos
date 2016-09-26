@@ -35,6 +35,9 @@ class Resource {
 	public function filter($request)
 	{
 		$result = $this->resource->enabled();
+		if ($request->input('dealer_id')) {
+			$result = $result->where('dealer_id',$request->input('dealer_id'));
+		}
 		if ($request->input('make')) {
 			$result = $result->where('make_id',$request->input('make'));
 		}

@@ -29,8 +29,8 @@ Electric car classifieds
 
 				<div class="col-sm-12 col-md-12">
 
-					<h3>Title</h3>
-					<p>Intro</p>
+					<h3>{{ $vars['dealer']->name }}</h3>
+					<p>{{ $vars['dealer']->location }}</p>
 
 				</div>
 
@@ -92,7 +92,11 @@ Electric car classifieds
 
 			<div class="col-sm-3">
 
-				<h3>Dealer</h3>
+				<h3>{{ $vars['dealer']->name }}</h3>
+				<p>{{ $vars['dealer']->location }}</p>
+				<p>Phone: {{ $vars['dealer']->phone }}</p>
+				<p>Mobile: {{ $vars['dealer']->mobile }}</p>
+				<p>Website: {{ $vars['dealer']->website }}</p>
 
 			</div>
 
