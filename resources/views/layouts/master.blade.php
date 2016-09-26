@@ -7,7 +7,9 @@
 	<title>@yield('page_title','Electric Autos | Used Electric Cars For Sale | Second hand electric cars')</title>
 	@yield('metas')
 
+	<noscript id="deferred-styles">
     <link rel="stylesheet" href="{{ elixir("css/app.css") }}">
+    </noscript>
 	<link rel="icon" href="/images/bolt-logo-64x64.png">
 
 	<script>
@@ -178,6 +180,20 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script>
+      var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("deferred-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        document.body.appendChild(replacement)
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+          webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
+    </script>
 
 @yield('footer')
 </body>
