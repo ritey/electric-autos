@@ -34,6 +34,10 @@ section.message {
 	padding: 20px 0 20px;
 }
 
+.badge a {
+	color:white;
+}
+
 #logout-form {
 	display:none;
 }

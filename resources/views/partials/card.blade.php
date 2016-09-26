@@ -32,7 +32,13 @@
 				Mileage
 			</li>
 			<li class="list-group-item">
-				<span class="badge">{{ $car->private == 1 ? 'Private' : 'Trade' }}</span>
+				<span class="badge">
+					@if($car->private == 1)
+						Private
+					@else
+						<a href="{{ route('dealers.dealer', $car->dealer->slug) }}">Trade</a>
+					@endif
+				</span>
 				Seller type
 			</li>
 		</ul>
