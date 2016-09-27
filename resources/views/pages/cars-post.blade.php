@@ -140,7 +140,9 @@
 				</h2>
 				<h3>Contact seller</h3>
 				@if($vars['car']->dealer)
+				<h3>{{ $vars['car']->dealer->name }}</h3>
 				<p>Call: {{ $vars['car']->dealer->phone }}</p>
+				<p><a href="{{ route('dealers.dealer', ['slug' => $vars['car']->dealer->slug ]) }}">View more from this dealer</a>
 				@else
 				<p></p>
 				@endif

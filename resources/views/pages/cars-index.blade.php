@@ -1,20 +1,20 @@
 @extends('layouts.master')
 
 @section('page_title')
-Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars
+{{ $vars['page_title'] }}
 @endsection
 
 @section('metas')
-<meta name="description" value="Directory of used electric cars, filter for specific used electric cars by make, model, mileage etc" />
+<meta name="description" value="Directory of used {{ $vars['brand']->name }} electric cars, filter for specific used {{ $vars['brand']->name }} electric cars by make, model, mileage etc" />
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
-<meta name="og:description" value="Directory of used electric cars, filter for specific used electric cars by make, model, mileage etc" />
-<meta name="og:title" value="Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars" />
-<meta name="twitter:description" value="Directory of used electric cars, filter for specific used electric cars by make, model, mileage etc" />
-<meta name="twitter:title" value="Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars" />
+<meta name="og:description" value="Directory of used {{ $vars['brand']->name }} electric cars, filter for specific used {{ $vars['brand']->name }} electric cars by make, model, mileage etc" />
+<meta name="og:title" value="{{ $vars['page_title'] }}" />
+<meta name="twitter:description" value="Directory of used {{ $vars['brand']->name }} electric cars, filter for specific used {{ $vars['brand']->name }} electric cars by make, model, mileage etc" />
+<meta name="twitter:title" value="{{ $vars['page_title'] }}" />
 @endsection
 
 @section('title')
-Electric car classifieds
+Electric car classifieds - {{ $vars['brand']->name }}
 @endsection
 
 @section('content')

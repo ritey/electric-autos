@@ -79,7 +79,7 @@ class VehicleDetails {
 
 	public function makeSlug($text)
 	{
-		return strtolower(str_replace('\'\'','',str_replace('*','-',str_replace('&','-',str_replace(',','',str_replace(')','',str_replace('(','',str_replace('/','-',str_replace(' ','-',$text)))))))));
+		return strtolower(str_replace('--','-',str_replace(' ','+',str_replace('\'\'','',str_replace('*','-',str_replace('&','-',str_replace(',','',str_replace(')','',str_replace('(','',str_replace('/','-',str_replace(' ','-',$text)))))))))));
 	}
 
 	public function makeName($text)
@@ -352,7 +352,7 @@ class VehicleDetails {
 						$dealer['mobile'] = isset($phone[2]) ? $phone[2] : '';
 					}
 
-					$dom = $crawler2->filter('.contact-panel--about__dealer-link');
+					$dom = $crawler2->filter('div#contact-and-about-tab2 p > a[href*=\'http\']');
 					$dealer['website'] = '';
 					if (count($dom)) {
 						$dealer['website'] = $this->strip($dom->attr('href'));

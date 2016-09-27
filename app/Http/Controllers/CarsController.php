@@ -69,6 +69,7 @@ class CarsController extends BaseController
 			'makes'					=> $this->makes->orderBy('name','ASC')->get(),
 			'models'				=> $models,
 			'search_route'			=> route('cars.index'),
+			'page_title'			=> 'Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars',
 		];
 		return view('pages.cars-index',compact('vars'));
 	}
@@ -76,6 +77,7 @@ class CarsController extends BaseController
 	public function brand($brand)
 	{
 		$key = $this->getKeyName(__function__ . '|' . $brand);
+		$page_title = 'Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars';
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
@@ -113,6 +115,8 @@ class CarsController extends BaseController
 			//if (is_object($model)) {
 			//	$search_route = route('cars.brand.index', ['brand' => $brand->name, 'model' => $model->name]);
 			//}
+			//
+			$page_title = $brand->name . '\'s for sale on Electric Autos. Find used ' . $brand->name . ' cars for sale in our classifieds.';
 
 			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
@@ -135,6 +139,7 @@ class CarsController extends BaseController
 				'models'				=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
 				'makes'					=> $this->makes->orderBy('name','ASC')->get(),
 				'search_route'			=> $search_route,
+				'page_title'			=> $page_title,
 
 			];
 			$view = view('pages.cars-index',compact('vars'))->render();
