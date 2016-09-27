@@ -18,3 +18,10 @@
 //const app = new Vue({
 //    el: 'body'
 //});
+$('document').ready(function(){
+	$('a[href="#filters"').on('click',function(e){
+		e.preventDefault();
+		console.log($('.filters').className);
+		$('.filters').class = 'visible-xs visible-sm';
+	});
+})
