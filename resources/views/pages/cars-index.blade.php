@@ -1,20 +1,20 @@
 @extends('layouts.master')
 
 @section('page_title')
-{{ $vars['page_title'] }}
+{{ $vars['page_title'] or '' }}
 @endsection
 
 @section('metas')
-<meta name="description" value="Directory of used {{ $vars['brand']->name }} electric cars, filter for specific used {{ $vars['brand']->name }} electric cars by make, model, mileage etc" />
+<meta name="description" value="Directory of used {{ $vars['brand']->name or '' }} electric cars, filter for specific used {{ $vars['brand']->name or ''}} electric cars by make, model, mileage etc" />
 <meta name="keywords" value="electric,autos,cars,sale,used,hybrid" />
-<meta name="og:description" value="Directory of used {{ $vars['brand']->name }} electric cars, filter for specific used {{ $vars['brand']->name }} electric cars by make, model, mileage etc" />
+<meta name="og:description" value="Directory of used {{ $vars['brand']->name or '' }} electric cars, filter for specific used {{ $vars['brand']->name or '' }} electric cars by make, model, mileage etc" />
 <meta name="og:title" value="{{ $vars['page_title'] }}" />
-<meta name="twitter:description" value="Directory of used {{ $vars['brand']->name }} electric cars, filter for specific used {{ $vars['brand']->name }} electric cars by make, model, mileage etc" />
+<meta name="twitter:description" value="Directory of used {{ $vars['brand']->name or '' }} electric cars, filter for specific used {{ $vars['brand']->name or '' }} electric cars by make, model, mileage etc" />
 <meta name="twitter:title" value="{{ $vars['page_title'] }}" />
 @endsection
 
 @section('title')
-Electric car classifieds - {{ $vars['brand']->name }}
+Electric car classifieds {{ $vars['brand']->name or '' }}
 @endsection
 
 @section('content')
