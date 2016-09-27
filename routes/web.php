@@ -43,7 +43,6 @@ Route::post(
 );
 
 Route::get('/about', ['as' => 'about', 'uses' => 'HomeController@about']);
-
 Route::get('/contact', ['as' => 'contact', 'uses' => 'HomeController@contact']);
 Route::post('/contact', ['as' => 'contact.send', 'uses' => 'HomeController@sendContact']);
 

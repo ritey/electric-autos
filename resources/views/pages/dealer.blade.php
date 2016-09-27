@@ -93,11 +93,18 @@ Electric cars for sale from {{ $vars['dealer']->name }}
 			<div class="col-sm-3">
 
 				<h3>{{ $vars['dealer']->name }}</h3>
+				@if ($vars['dealer']->location)
 				<p>{{ $vars['dealer']->location }}</p>
+				@endif
+				@if ($vars['dealer']->phone)
 				<p>Phone: {{ $vars['dealer']->phone }}</p>
+				@endif
+				@if ($vars['dealer']->mobile)
 				<p>Mobile: {{ $vars['dealer']->mobile }}</p>
+				@endif
+				@if ($vars['dealer']->website)
 				<p>Website: {{ $vars['dealer']->website }}</p>
-
+				@endif
 			</div>
 
 		</div>

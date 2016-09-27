@@ -8,6 +8,7 @@ use Illuminate\Contracts\Cache\Repository as Cache;
 use CoderStudios\Models\Makes;
 use CoderStudios\Models\Models;
 use CoderStudios\Library\Resource;
+use CoderStudios\Library\Dealer;
 
 class SitemapController extends BaseController
 {
@@ -16,7 +17,7 @@ class SitemapController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes, Models $models)
+	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes, Models $models, Dealer $dealers)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
@@ -26,6 +27,7 @@ class SitemapController extends BaseController
 		$this->resource = $resource;
 		$this->makes = $makes;
 		$this->models = $models;
+		$this->dealers = $dealers;
 	}
 
 	public function sitemap()
@@ -35,7 +37,12 @@ class SitemapController extends BaseController
 
 		$resources = $this->resource->all();
 		foreach( $resources as $vehicle) {
-			$xml .= '<url><loc>'.route('home').'/used-cars/'.$vehicle->make()->first()->name.'/'.$vehicle->model()->first()->name.'/'.$vehicle->slug.'</loc><priority>0.9</priority><lastmod>'.$vehicle->created_at->toAtomString().'</lastmod><changefreq>daily</changefreq></url>';
+			$xml .= '<url><loc>'.route('home').'/used-cars/'.strtolower(str_replace(' ','+',$vehicle->make()->first()->name)).'/'.strtolower(str_replace(' ','+',$vehicle->model()->first()->name)).'/'.$vehicle->slug.'</loc><priority>0.9</priority><lastmod>'.$vehicle->updated_at->toAtomString().'</lastmod><changefreq>daily</changefreq></url>';
+		}
+
+		$dealers = $this->dealers->all();
+		foreach( $dealers as $dealer) {
+			$xml .= '<url><loc>'.route('dealers.dealer', ['slug' => $dealer->slug]).'</loc><priority>0.9</priority><lastmod>'.$dealer->updated_at->toAtomString().'</lastmod><changefreq>monthly</changefreq></url>';
 		}
 
 		$xml .= '<url><loc>'.route('home').'/about</loc><priority>0.9</priority><lastmod>2016-09-01T09:00:00+00:00</lastmod><changefreq>monthly</changefreq></url>';

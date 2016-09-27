@@ -35,4 +35,9 @@ class Dealer {
 		return $this->dealer->where('slug',$slug)->first();
 	}
 
+	public function all()
+	{
+		return $this->dealer->enabled()->get();
+	}
+
 }

@@ -68,4 +68,15 @@ class Dealers extends Model
         'updated_at',
     ];
 
+    /**
+     * Enabled filter
+     * @param  $query
+     * @param  value
+     * @return collection
+     */
+    public function scopeEnabled($query, $enabled = 1)
+    {
+        $query->where('enabled','=',$enabled);
+    }
+
 }

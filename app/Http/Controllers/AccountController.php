@@ -10,6 +10,7 @@ use CoderStudios\Library\Upload;
 use CoderStudios\Library\Dealer;
 use CoderStudios\Requests\DealerRequest;
 use CoderStudios\Traits\UUID;
+use CoderStudios\Library\VehicleDetails;
 
 class AccountController extends BaseController
 {
@@ -34,7 +35,7 @@ class AccountController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache, Resource $resource, Upload $upload, Dealer $dealer)
+	public function __construct(Request $request, Cache $cache, Resource $resource, Upload $upload, Dealer $dealer, VehicleDetails $vehicle)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
@@ -44,6 +45,7 @@ class AccountController extends BaseController
 		$this->resource = $resource;
 		$this->upload = $upload;
 		$this->dealer = $dealer;
+		$this->vehicle = $vehicle;
 		$this->middleware('auth');
 	}
 
@@ -104,10 +106,13 @@ class AccountController extends BaseController
 			$result = $this->dealer->update(Auth::user()->dealer_id, $data);
 		} else {
 			$data['dealer_id'] = $this->Uuid(openssl_random_pseudo_bytes(16));
+			$data['slug'] = $this->vehicle->makeSlug($data['name']);
 			$result = $this->dealer->create($data);
 			$user = Auth::user();
 			$user->dealer_id = $result->id;
 			$user->save();
+			$result->slug = $result->slug . '-' . $result->id;
+			$result->save();
 		}
 
 		return redirect()->route('dealer.edit')->with('success_message','Details saved');
