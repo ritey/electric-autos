@@ -150,7 +150,7 @@ class CarsController extends BaseController
 
 	public function model($brand, $model = '')
 	{
-
+		$page_title = 'Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars';
 		if ($this->request->input('make') && $this->request->input('model')) {
 
 			$params = $this->request->all();
@@ -187,9 +187,12 @@ class CarsController extends BaseController
 				Abort(404);
 			}
 
+			$page_title = $brand->name . ' for sale on Electric Autos. Find used ' . $brand->name . ' cars for sale in our classifieds.';
+
 			$search_route = route('cars.brand.index', ['brand' => $brand->name]);
 			if (is_object($model)) {
 				$search_route = route('cars.search.index', ['brand' => $brand->name, 'version' => $model->name]);
+				$page_title = $brand->name . ' ' . $model->name . ' for sale on Electric Autos. Find used ' . $brand->name . ' ' . $model->name . ' cars for sale in our classifieds.';
 			}
 
 			$this->request->request->add(['make' => $brand->id]);
@@ -216,6 +219,7 @@ class CarsController extends BaseController
 				'model'					=> $model,
 				'makes'					=> $this->makes->orderBy('name','ASC')->get(),
 				'search_route'			=> $search_route,
+				'page_title'			=> $page_title,
 
 			];
 			$view = view('pages.cars-index',compact('vars'))->render();
