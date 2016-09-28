@@ -21,7 +21,18 @@
 $('document').ready(function(){
 	$('a[href="#filters"').on('click',function(e){
 		e.preventDefault();
-		console.log($('.filters').className);
-		$('.filters').class = 'visible-xs visible-sm';
+
+		if ($('.filters').hasClass('visible-xs')) {
+			$('.filters').removeClass('visible-xs');
+			$('.filters').removeClass('visible-sm');
+			$(this).html('Show filters');
+			//$(this).next('div').slideUp();
+		} else {
+			$('.filters').addClass('visible-xs');
+			$('.filters').addClass('visible-sm');
+			$(this).html('Hide filters');
+			//$(this).next('div').slideDown();
+		}
+		return false;
 	});
 })

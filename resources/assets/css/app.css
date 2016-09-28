@@ -399,3 +399,11 @@ form .row {
 	margin:0 auto;
 	display:table;
 }
+
+@media (max-width: 970px) {
+
+	.filters {
+		display:none;
+	}
+
+}

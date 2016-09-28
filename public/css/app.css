@@ -8359,4 +8359,11 @@ form .row {
 	display:table;
 }
 
+@media (max-width: 970px) {
+
+	.filters {
+		display:none;
+	}
+
+}
 /*# sourceMappingURL=app.css.map */
