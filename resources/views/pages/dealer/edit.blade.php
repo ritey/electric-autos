@@ -41,7 +41,7 @@ Your info
 
 					<div class="form-group">
 
-						<label for="price" class="col-sm-3 control-label">Dealer name</label>
+						<label for="price" class="col-sm-3 control-label">Dealer name*</label>
 						<div class="col-sm-9">
 							<input type="text" name="name" id="name" class="form-control" value="{{ $vars['dealer']['name'] or old('name') }}">
 						</div>
@@ -50,7 +50,7 @@ Your info
 
 					<div class="form-group">
 
-						<label for="price" class="col-sm-3 control-label">Public email</label>
+						<label for="price" class="col-sm-3 control-label">Public email*</label>
 						<div class="col-sm-9">
 							<input type="text" name="email" id="email" class="form-control" value="{{ $vars['dealer']['email'] or old('email') }}">
 						</div>
@@ -59,7 +59,7 @@ Your info
 
 					<div class="form-group">
 
-						<label for="price" class="col-sm-3 control-label">Public phone</label>
+						<label for="price" class="col-sm-3 control-label">Public phone*</label>
 						<div class="col-sm-9">
 							<input type="text" name="phone" id="phone" class="form-control" value="{{ $vars['dealer']['phone'] or old('phone') }}">
 						</div>
@@ -77,7 +77,7 @@ Your info
 
 					<div class="form-group">
 
-						<label for="price" class="col-sm-3 control-label">Post code</label>
+						<label for="price" class="col-sm-3 control-label">Post code*</label>
 						<div class="col-sm-9">
 							<input type="text" name="location" id="location" class="form-control" value="{{ $vars['dealer']['location'] or old('location') }}">
 						</div>
@@ -89,6 +89,15 @@ Your info
 						<label for="price" class="col-sm-3 control-label">Website</label>
 						<div class="col-sm-9">
 							<input type="text" name="website" id="website" class="form-control" value="{{ $vars['dealer']['website'] or old('website') }}">
+						</div>
+
+					</div>
+
+					<div class="form-group">
+
+						<label for="price" class="col-sm-3 control-label">About text*</label>
+						<div class="col-sm-9">
+							<textarea name="description" id="description" class="form-control col-sm-9" rows="4">{{ $vars['dealer']['description'] or old('description') }}</textarea>
 						</div>
 
 					</div>

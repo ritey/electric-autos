@@ -32,6 +32,10 @@ Electric cars for sale from {{ $vars['dealer']->name }}
 					<h3>{{ $vars['dealer']->name }}</h3>
 					<p>{{ $vars['dealer']->location }}</p>
 
+					@if($vars['dealer']->description)
+					<p>{{ $vars['dealer']->description }}</p>
+					@endif
+
 				</div>
 
 				<div class="row">

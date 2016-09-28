@@ -7,4 +7,5 @@
 	@else
 	<p class="clearfix"><a class="confirm" href="{{ route('pic.delete', ['id' => $pic->id]) }}">Delete</a></p>
 	@endif
+
 </div>

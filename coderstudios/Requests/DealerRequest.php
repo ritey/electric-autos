@@ -28,6 +28,7 @@ class DealerRequest extends Request {
 			'email' 	=> 'required',
 			'phone' 	=> 'required',
 			'location' 	=> 'required',
+			'description' => 'required|min:3|max:128',
 		];
 
 		return $rules;
@@ -41,7 +42,9 @@ class DealerRequest extends Request {
 	public function messages()
 	{
 		return [
+			'name.required' => 'You must enter a dealer name.',
 			'location.required' => 'You must enter the dealership post code.',
+			'description.required' => 'Enter a few words about your company.',
 		];
 	}
 }

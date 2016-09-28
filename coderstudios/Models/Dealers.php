@@ -55,6 +55,7 @@ class Dealers extends Model
     * @var  array
     */
     protected $fillable = [
+        'active',
         'enabled',
         'package_id',
         'dealer_id',
@@ -66,6 +67,14 @@ class Dealers extends Model
         'location',
         'website',
         'updated_at',
+        'address_1',
+        'address_2',
+        'town',
+        'city',
+        'county',
+        'lat',
+        'lon',
+        'description',
     ];
 
     /**

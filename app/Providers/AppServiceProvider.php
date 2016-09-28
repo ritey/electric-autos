@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('layouts.master','CoderStudios\Composers\MasterComposer');
+        view()->composer('layouts.admin','CoderStudios\Composers\AdminComposer');
         Cashier::useCurrency('gbp', '£');
     }
 

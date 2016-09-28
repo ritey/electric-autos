@@ -51,6 +51,9 @@ class AccountController extends BaseController
 
 	public function dashboard()
 	{
+		if (Auth::user()->user_type_id == 2) {
+			return redirect()->route('admin.home');
+		}
 		$key = $this->getKeyName(__function__ . '|' . Auth::user()->user_id);
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);

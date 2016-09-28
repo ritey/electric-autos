@@ -11,6 +11,12 @@
 |
 */
 
+Route::group( [ 'namespace' => 'Admin', 'middleware' => 'admin_auth', 'prefix' => '_admin' , 'as' => 'admin.' ] , function() {
+
+	Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
+
+});
+
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 Route::get('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
 Route::post('/logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
