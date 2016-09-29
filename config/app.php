@@ -182,6 +182,7 @@ return [
         /*Bogardo\Mailgun\MailgunServiceProvider::class,*/
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*

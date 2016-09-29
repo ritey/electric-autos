@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository as Cache;
-use CoderStudios\Models\Makes;
-use CoderStudios\Models\Models;
+use CoderStudios\Library\Makes;
+use CoderStudios\Library\Models;
 use CoderStudios\Library\Resource;
 use Session;
 
@@ -30,32 +30,32 @@ class CarsController extends BaseController
 
 	public function index()
 	{
-		$cars = $this->resource->filter($this->request)->paginate(env('APP_PER_PAGE',15));
+		$models = '';
+		$brand = '';
+		Session::put('back_url', $this->request->fullUrl());
+
+		if ($this->request->input('make')) {
+
+			if ($this->request->input('make') && $this->request->input('model')) {
+				$brand = $this->makes->getById($this->request->input('make'));
+				$model = $this->models->get($this->request->input('model'));
+
+				return redirect()->route('cars.search.index', [
+					'brand' => strtolower($brand->name),
+					'model' => strtolower($model->name),
+				]);
+			}
+			$models = $this->models->getByMakeId($this->request->input('make'));
+			$brand = $this->makes->getById($this->request->input('make'));
+		}
+
+		$cars = $this->resource->filter($this->request)->with('make','model','images','dealer')->paginate(env('APP_PER_PAGE',15));
 		$half = number_format(ceil($cars->count() / 2));
 		if ($half < 6) {
 			$half = 6;
 		}
 		$chunks = $cars->chunk($half);
-
-		$models = '';
-		$brand = '';
-
-		if ($this->request->input('make')) {
-
-			if ($this->request->input('make') && $this->request->input('model')) {
-
-				$params = [
-					'brand' => $this->makes->where('id',$this->request->input('make'))->value('name'),
-					'model' => $this->models->where('id',$this->request->input('model'))->value('name'),
-				];
-
-				return redirect()->route('cars.search.index', $params);
-			}
-			$models = $this->models->where('make_id',$this->request->input('make'))->orderBy('name','ASC')->get();
-			$brand = $this->makes->where('id',$this->request->input('make'))->first();
-		}
-
-		Session::put('back_url', $this->request->fullUrl());
+		$makes = $this->makes->all();
 
 		$vars = [
 			'request'				=> $this->request,
@@ -66,7 +66,7 @@ class CarsController extends BaseController
 			'total_page_total'		=> $cars->count(),
 			'page'					=> $cars->currentPage(),
 			'brand'					=> $brand,
-			'makes'					=> $this->makes->orderBy('name','ASC')->get(),
+			'makes'					=> $makes->sortBy('name'),
 			'models'				=> $models,
 			'search_route'			=> route('cars.index'),
 			'page_title'			=> 'Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars',
@@ -82,43 +82,38 @@ class CarsController extends BaseController
 			$view = $this->cache->get($key);
 		} else {
 
-			$brand = $this->makes->whereRaw('LOWER(name) = ?',[strtolower($brand)])->first();
+			$brand = $this->makes->getByName($brand);
 
 			if (!$brand) {
 				Abort(404);
 			}
 
 			if ($this->request->input('make')) {
+				$params = $this->request->all();
 
 				if ($this->request->input('make') && $this->request->input('model')) {
-
-					$params = $this->request->all();
-					$params['brand'] = $this->makes->where('id',$this->request->input('make'))->value('name');
-					$params['model'] = $this->models->where('id',$this->request->input('model'))->value('name');
+					$brand = $this->makes->getById($this->request->input('make'));
+					$model = $this->models->getById($this->request->input('model'));
+					$params['brand'] = strtolower($brand->name);
+					$params['version'] = strtolower(str_replace(' ','+',$model->name));
 					unset($params['make']);
 					unset($params['model']);
-
 					return redirect()->route('cars.search.index', $params);
 				} else {
-
-					$params = $this->request->all();
-					$params['brand'] = $this->makes->where('id',$this->request->input('make'))->value('name');
+					$brand = $this->makes->getById($this->request->input('make'));
+					$params['brand'] = $brand->name;
 					unset($params['make']);
-
 					return redirect()->route('cars.search.index', $params);
 				}
-				$models = $this->models->where('make_id',$this->request->input('make'))->orderBy('name','ASC')->get();
-				$brand = $this->makes->where('id',$this->request->input('make'))->first();
+				$models = $this->models->getByMakeId($this->request->input('make'));
+				$brand = $this->makes->getById($this->request->input('make'));
 			}
 
 			$search_route = route('cars.brand.index', ['brand' => $brand->name]);
-			//if (is_object($model)) {
-			//	$search_route = route('cars.brand.index', ['brand' => $brand->name, 'model' => $model->name]);
-			//}
-			//
+
 			$page_title = $brand->name . '\'s for sale on Electric Autos. Find used ' . $brand->name . ' cars for sale in our classifieds.';
 
-			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->paginate(env('APP_PER_PAGE',15));
+			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->with('make','model','images','dealer')->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {
 				$half = 6;
@@ -126,6 +121,8 @@ class CarsController extends BaseController
 			$chunks = $cars->chunk($half);
 
 			Session::put('back_url', $this->request->fullUrl());
+			$makes = $this->makes->all();
+			$models = $this->models->getByMakeId($brand->id);
 
 			$vars = [
 				'request'				=> $this->request,
@@ -136,11 +133,10 @@ class CarsController extends BaseController
 				'total_page_total'		=> $cars->count(),
 				'page'					=> $cars->currentPage(),
 				'brand'					=> $brand,
-				'models'				=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
-				'makes'					=> $this->makes->orderBy('name','ASC')->get(),
+				'models'				=> $models->sortBy('name'),
+				'makes'					=> $makes->sortBy('name'),
 				'search_route'			=> $search_route,
 				'page_title'			=> $page_title,
-
 			];
 			$view = view('pages.cars-index',compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
@@ -151,24 +147,21 @@ class CarsController extends BaseController
 	public function model($brand, $model = '')
 	{
 		$page_title = 'Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars';
+		$params = $this->request->all();
 		if ($this->request->input('make') && $this->request->input('model')) {
-
-			$params = $this->request->all();
-			$params['brand'] = $this->makes->where('id',$this->request->input('make'))->value('name');
-			$params['version'] = $this->models->where('id',$this->request->input('model'))->value('name');
-
+			$brand = $this->makes->getById($this->request->input('make'));
+			$model = $this->models->getById($this->request->input('model'));
+			$params['brand'] = strtolower($brand->name);
+			$params['version'] = strtolower(str_replace(' ','+',$model->name));
 			unset($params['make']);
 			unset($params['model']);
-
 			return redirect()->route('cars.search.index', $params);
 		} elseif ($this->request->input('make')) {
-
-			$params = $this->request->all();
-			$params['brand'] = $this->makes->where('id',$this->request->input('make'))->value('name');
+			$brand = $this->makes->getById($this->request->input('make'));
+			$params['brand'] = $brand->name;
 			unset($params['make']);
 			unset($params['model']);
 			return redirect()->route('cars.brand.index', $params);
-
 		}
 
 		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $model);
@@ -176,10 +169,10 @@ class CarsController extends BaseController
 			$view = $this->cache->get($key);
 		} else {
 
-			$brand = $this->makes->whereRaw('LOWER(name) = ?',[strtolower($brand)])->first();
+			$brand = $this->makes->getByName($brand);
 
 			if ($model != '') {
-				$model = $this->models->whereRaw('LOWER(name) = ?',[strtolower($model)])->first();
+				$model = $this->models->getByName(str_replace('+',' ',$model));
 				$this->request->request->add(['model' => $model->id]);
 			}
 
@@ -196,8 +189,10 @@ class CarsController extends BaseController
 			}
 
 			$this->request->request->add(['make' => $brand->id]);
+			$makes = $this->makes->all();
+			$models = $this->models->getByMakeId($brand->id);
 
-			$cars = $this->resource->filter($this->request)->paginate(env('APP_PER_PAGE',15));
+			$cars = $this->resource->filter($this->request)->with('make','model','images','dealer')->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {
 				$half = 6;
@@ -215,12 +210,11 @@ class CarsController extends BaseController
 				'total_page_total'		=> $cars->count(),
 				'page'					=> $cars->currentPage(),
 				'brand'					=> $brand,
-				'models'				=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
+				'models'				=> $models->sortBy('name'),
 				'model'					=> $model,
-				'makes'					=> $this->makes->orderBy('name','ASC')->get(),
+				'makes'					=> $makes->sortBy('name'),
 				'search_route'			=> $search_route,
 				'page_title'			=> $page_title,
-
 			];
 			$view = view('pages.cars-index',compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
@@ -234,16 +228,18 @@ class CarsController extends BaseController
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
-			$brand = $this->makes->whereRaw('LOWER(name) = ?',[strtolower($brand)])->first();
+			$brand = $this->makes->getByName($brand);
 			$car = $this->resource->whereSlug($slug);
+			$makes = $this->makes->all();
+			$models = $this->models->getByMakeId($brand->id);
 
 			if (!$brand || !$car) {
 				Abort(404);
 			}
 
 			$vars = [
-				'makes'		=> $this->makes->orderBy('name','ASC')->get(),
-				'models'	=> $this->models->where('make_id',$brand->id)->orderBy('name','ASC')->get(),
+				'makes'		=> $makes->sortBy('name'),
+				'models'	=> $models->sortBy('name'),
 				'brand'		=> $brand,
 				'car'		=> $car,
 				'back_url'	=> Session::get('back_url'),

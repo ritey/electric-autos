@@ -4,13 +4,15 @@ namespace CoderStudios\Library;
 
 use CoderStudios\Models\Resources;
 use CoderStudios\Library\Dealer;
+use Illuminate\Contracts\Cache\Repository as Cache;
 
 class Resource {
 
-	public function __construct(Resources $model, Dealer $dealer)
+	public function __construct(Resources $model, Dealer $dealer, Cache $cache)
 	{
 		$this->resource = $model;
 		$this->dealer = $dealer;
+		$this->cache = $cache;
 	}
 
 	public function create(array $data)
@@ -29,39 +31,53 @@ class Resource {
 
 	public function totalEnabled()
 	{
-		return $this->resource->enabled()->count();
+		$key = md5(snake_case(str_replace('\\','',__NAMESPACE__) . class_basename($this) . '_' . __function__));
+		if ($this->cache->has($key)) {
+			$result = $this->cache->get($key);
+		} else {
+			$result = $this->resource->enabled()->count();
+			$this->cache->add($key, $result, env('APP_CACHE_MINUTES'));
+		}
+		return $result;
 	}
 
 	public function filter($request)
 	{
-		$result = $this->resource->enabled();
-		if ($request->input('dealer_id')) {
-			$result = $result->where('dealer_id',$request->input('dealer_id'));
-		}
-		if ($request->input('make')) {
-			$result = $result->where('make_id',$request->input('make'));
-		}
-		if ($request->input('model')) {
-			$result = $result->where('model_id',$request->input('model'));
-		}
-		if ($request->input('min_price')) {
-			$result = $result->where('price','>=',$request->input('min_price'));
-		}
-		if ($request->input('max_price')) {
-			$result = $result->where('price','<=',$request->input('max_price'));
-		}
-		if ($request->input('min_mileage')) {
-			$result = $result->where('mileage','>=',$request->input('min_mileage'));
-		}
-		if ($request->input('max_mileage')) {
-			$result = $result->where('mileage','<=',$request->input('max_mileage'));
-		}
-		if ($request->input('min_year')) {
-			$result = $result->where('year','>=',$request->input('min_year'));
-		}
-		if ($request->input('max_year')) {
-			$result = $result->where('year','<=',$request->input('max_year'));
-		}
+		//$key = md5(snake_case(str_replace('\\','',__NAMESPACE__) . class_basename($this) . '_' . __function__ . '_' . implode('|', $request->all())));
+		//if ($this->cache->has($key)) {
+		//	$result = $this->cache->get($key);
+		//} else {
+			$result = $this->resource->enabled();
+			if ($request->input('dealer_id')) {
+				$result = $result->where('dealer_id',$request->input('dealer_id'));
+			}
+			if ($request->input('make')) {
+				$result = $result->where('make_id',$request->input('make'));
+			}
+			if ($request->input('model')) {
+				$result = $result->where('model_id',$request->input('model'));
+			}
+			if ($request->input('min_price')) {
+				$result = $result->where('price','>=',$request->input('min_price'));
+			}
+			if ($request->input('max_price')) {
+				$result = $result->where('price','<=',$request->input('max_price'));
+			}
+			if ($request->input('min_mileage')) {
+				$result = $result->where('mileage','>=',$request->input('min_mileage'));
+			}
+			if ($request->input('max_mileage')) {
+				$result = $result->where('mileage','<=',$request->input('max_mileage'));
+			}
+			if ($request->input('min_year')) {
+				$result = $result->where('year','>=',$request->input('min_year'));
+			}
+			if ($request->input('max_year')) {
+				$result = $result->where('year','<=',$request->input('max_year'));
+			}
+			//$this->cache->add($key, $result, env('APP_CACHE_MINUTES'));
+		//}
+		//dd($result);
 		return $result;
 	}
 
