@@ -146,8 +146,8 @@
 				<table align='center' border='0' cellpadding='0' cellspacing='0' id='innerTable' style='border: 3px solid #eee;background: #fff;margin: 20px;color: #555;'>
 					<tr class='with-separator'>
 						<td style='border-bottom: 1px solid #eee;padding:20px' valign='middle' width='204'>
-							<a href='http://electric-autos.co.uk/' target='_blank' title='Car Driver'>
-								<img src="http://electric-autos.co.uk/images/bolt-logo-128x128.png" height="96px" alt="Electric Autos" title="View the Electric Autos website" />
+							<a href='https://electric-autos.co.uk/' target='_blank' title='Electric Autos'>
+								<img src="https://electric-autos.co.uk/images/bolt-logo-128x128.png" height="96px" alt="Electric Autos" title="View the Electric Autos website" />
 							</a>
 						</td>
 						<td align='right' class='email-title' style='font-size: 24px;color: #999;border-bottom: 1px solid #eee;padding:20px' valign='middle' width='200'>
