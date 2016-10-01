@@ -179,7 +179,7 @@
 	<script async src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script async src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script async src="https://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
 
     <script>
       var loadDeferredStyles = function() {
