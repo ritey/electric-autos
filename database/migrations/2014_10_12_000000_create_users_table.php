@@ -35,7 +35,7 @@ class CreateUsersTable extends Migration
             $table->string('phone',32)->nullable();
             $table->string('mobile',32)->nullable();
             $table->string('location',64)->nullable();
-            $table->string('website',96)->nullable();
+            $table->string('website',256)->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
         });

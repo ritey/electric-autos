@@ -97,7 +97,7 @@ class VehicleDetails {
 
 	public function makePrice($text)
 	{
-		return str_replace(',','',$text);
+		return str_replace('POA','0.00',str_replace(',','',$text));
 	}
 
 	protected function getDoc($path)
