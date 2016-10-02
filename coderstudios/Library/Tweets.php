@@ -57,24 +57,29 @@ class Tweets {
 		$result = 1;
 		$scraper = new Scraper();
 
-		try {
-			$crawler = $scraper->request('GET','https://www.facebook.com/Electric-Autos-1767600990124746/?ref=page_internal');
-			if (empty($crawler)){
-				dd($crawler);
+		if (!env('APP_ENV') == 'local') {
+			try {
+				$crawler = $scraper->request('GET','https://www.facebook.com/Electric-Autos-1767600990124746/?ref=page_internal');
+				if (empty($crawler)){
+					dd($crawler);
+				}
+				$dom = $crawler->filterXPath("//*[contains(@id, 'PagesLikesCountDOMID')]");
+				if (empty($dom)){
+					dd($dom);
+				}
+				if ($dom->filter('span')) {
+					$value = $dom->filter('span');
+				} else {
+					Log::info(print_r($crawler,true));
+					dd($dom);
+				}
+			} catch (\Exception $e) {
+				dd('Tweet error<br>'.$e);
 			}
-			$dom = $crawler->filterXPath("//*[contains(@id, 'PagesLikesCountDOMID')]");
-			if (empty($dom)){
-				dd($dom);
-			}
-			$value = $dom->filter('span');
-		} catch (\Exception $e) {
-			if (empty($value)) {
-				dd($crawler);
-			}
-		}
 
-		if (is_object($value) && $result = $value->text() ) {
-			return str_replace('kedvelés','',str_replace('like','',str_replace('likes','',$result)));
+			if (is_object($value) && $result = $value->text() ) {
+				return str_replace('kedvelés','',str_replace('like','',str_replace('likes','',$result)));
+			}
 		}
 
 		return $result;

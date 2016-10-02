@@ -76,7 +76,7 @@ Login to Electric Autos
 						<div class="form-links">
 
 							<ul>
-								<li><a href="{{ route('password-reset') }}">Forgot your password?</a></li>
+								<li><a href="{{ route('password-email') }}">Forgot your password?</a></li>
 								<li><a href="{{ route('register') }}">Don't have an account?</a></li>
 							</ul>
 

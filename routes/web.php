@@ -21,7 +21,11 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 Route::get('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
 Route::post('/logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 Route::post('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
-Route::get('/password-reset', ['as' => 'password-reset', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
+Route::get('/password/email', ['as' => 'password-email', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
+Route::post('/password/email', ['as' => 'password-email', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
+
+Route::get('/password/reset/{token}', ['as' => 'password-reset', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
+Route::post('/password/reset/', ['as' => 'password-reset', 'uses' => 'Auth\ResetPasswordController@reset']);
 Route::get('/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
 Route::post('/register', ['as' => 'register-post', 'uses' => 'Auth\RegisterController@register']);
 

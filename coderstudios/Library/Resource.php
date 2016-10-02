@@ -78,12 +78,12 @@ class Resource {
 			//$this->cache->add($key, $result, env('APP_CACHE_MINUTES'));
 		//}
 		//dd($result);
-		return $result;
+		return $result->with('make','model','images','dealer');
 	}
 
 	public function latest($amount = 3)
 	{
-		return $this->resource->enabled()->orderBy('created_at','DESC')->take($amount);
+		return $this->resource->enabled()->with('make','model','images','dealer')->orderBy('created_at','DESC')->take($amount);
 	}
 
 	public function branded($brand_id, $amount = 3)
@@ -118,16 +118,22 @@ class Resource {
 
 	public function totalResources()
 	{
-		return $this->resource->enabled()->count();
+		$key = md5(snake_case(str_replace('\\','',__NAMESPACE__) . class_basename($this) . '_' . __function__));
+		if ($this->cache->has($key)) {
+			$result = $this->cache->get($key);
+		} else {
+			$result = $this->resource->enabled()->count();
+		}
+		return $result;
 	}
 
 	public function all()
 	{
-		return $this->resource->enabled()->get();
+		return $this->resource->enabled()->with('make','model','images','dealer')->get();
 	}
 
 	public function paginate($perPage = 15)
 	{
-		return $this->resource->paginate($perPage);
+		return $this->resource->with('make','model','images','dealer')->paginate($perPage);
 	}
 }
