@@ -84,7 +84,7 @@ Electric car classifieds {{ $vars['brand']->name or '' }}
 						<p>Try browsing a manufacturer below or change the filters to the side.</p>
 						<ul>
 							@foreach($vars['makes'] as $brand)
-							<li><a href="{{ route('cars.brand.index', ['brand' => $brand->name ]) }}">{{ $brand->name }}</a></li>
+							<li><a href="{{ route('cars.brand.index', ['brand' => strtolower($brand->name) ]) }}">{{ $brand->name }}</a></li>
 							@endforeach
 						</ul>
 

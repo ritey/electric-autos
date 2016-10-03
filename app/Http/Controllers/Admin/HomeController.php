@@ -58,4 +58,21 @@ class HomeController extends BaseController
 		CacheFacade::flush();
 		return redirect()->route('admin.home')->with('success_message','All cache cleared');
 	}
+
+	public function log()
+	{
+		$vars = [
+			'log' => file_get_contents(storage_path().'/logs/laravel.log'),
+		];
+		return view('admin.pages.log', compact('vars'))->render();
+	}
+
+	public function clearLog()
+	{
+		$filename = storage_path().'/logs/laravel.log';
+		$handle = fopen($filename, 'r+');
+		ftruncate($handle, rand(1, filesize($filename)));
+		fclose($handle);
+		return redirect()->route('admin.home')->with('success_message','Log file cleared');
+	}
 }

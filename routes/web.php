@@ -16,6 +16,8 @@ Route::group( [ 'namespace' => 'Admin', 'middleware' => 'admin_auth', 'prefix' =
 	Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 
 	Route::get('/clear-cache', ['as' => 'clear-cache', 'uses' => 'HomeController@clear']);
+	Route::get('/log', ['as' => 'log', 'uses' => 'HomeController@log']);
+	Route::get('/clear-log', ['as' => 'clear-log', 'uses' => 'HomeController@clearLog']);
 
 	Route::get('/ads', ['as' => 'ads', 'uses' => 'AdsController@index']);
 	Route::get('/ads/{id}/edit', ['as' => 'ads.edit', 'uses' => 'AdsController@edit']);

@@ -98,6 +98,7 @@
 					  <li role="presentation" class="dropdown">
 					  	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret">&nbsp;</span></a>
 					  	<ul class="dropdown-menu">
+					  		<li role="presentation"><a href="{{ route('admin.log') }}">Log</a></li>
 					  		<li role="presentation"><a href="{{ route('admin.clear-cache') }}">Clear cache</a></li>
 					  	</ul>
 					  </li>
