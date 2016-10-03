@@ -133,6 +133,10 @@ Start selling your EV
 
 				<p>Please be accurate with your car mileage.</p>
 
+				<p>You can list <strong>2 car adverts for free</strong>, if you want to list more than 2 adverts, you'll need to upgrade your account.</p>
+
+				<p>View our <a target="_blank" href="{{ route('seller-faqs') }}">Seller FAQs</a> if you have more queries</p>
+
 			</div>
 
 		</div>
