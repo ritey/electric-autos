@@ -90,6 +90,9 @@ class MakesController extends BaseController
 		$data = $request->only('name');
 		$ad = $this->makes->where('id',$id)->first();
 		$ad->update($data);
+		foreach(['edit','create','index'] as $name) {
+			$this->cache->forget($this->getKeyName($name));
+		}
 		return redirect()->route('admin.makes')->with('success_message','Make updated');
 	}
 
@@ -97,6 +100,9 @@ class MakesController extends BaseController
 	{
 		$data = $request->only('name');
 		$this->makes->create($data);
+		foreach(['edit','create','index'] as $name) {
+			$this->cache->forget($this->getKeyName($name));
+		}
 		return redirect()->route('admin.makes')->with('success_message','Make created');
 	}
 }

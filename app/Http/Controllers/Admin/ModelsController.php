@@ -93,6 +93,9 @@ class ModelsController extends BaseController
 		$data = $request->only();
 		$ad = $this->models->where('id',$id)->first();
 		$ad->update($data);
+		foreach(['edit','create','index'] as $name) {
+			$this->cache->forget($this->getKeyName($name));
+		}
 		return redirect()->route('admin.models')->with('success_message','Models updated');
 	}
 
@@ -100,6 +103,9 @@ class ModelsController extends BaseController
 	{
 		$data = $request->only('name','make_id');
 		$this->models->create($data);
+		foreach(['edit','create','index'] as $name) {
+			$this->cache->forget($this->getKeyName($name));
+		}
 		return redirect()->route('admin.models')->with('success_message','Model created');
 	}
 }
