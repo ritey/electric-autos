@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use App\Http\Controllers\BaseController;
+use Cache as CacheFacade;
 
 class HomeController extends BaseController
 {
@@ -50,5 +51,11 @@ class HomeController extends BaseController
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
 		return $view;
+	}
+
+	public function clear()
+	{
+		CacheFacade::flush();
+		return redirect()->route('admin.home')->with('success_message','All cache cleared');
 	}
 }
