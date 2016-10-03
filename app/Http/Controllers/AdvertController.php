@@ -67,6 +67,11 @@ class AdvertController extends BaseController
 	public function details(AdRequest $request)
 	{
 		$vehicle = $this->car($request);
+
+		if ($vehicle['make_id'] === 0) {
+			return redirect()->route('start-selling')->with('error_message','<h3 class="text-warning">Sorry we\'ve not found an electric car that matches the registration</h3><p>If you think this is an error please <a href="'.route('contact').'">let us know</a>.</p>')->withInput($request->all());
+		}
+
 		$key = $this->getKeyName(__function__ . '|' . $request->input('reg'));
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);

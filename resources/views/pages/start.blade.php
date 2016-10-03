@@ -101,10 +101,10 @@ Start selling your EV
 						<div class="col-sm-6">
 							<div class="radio">
 								<label for="distance_miles" class="radio-inline">
-									<input type="radio" id="distance_miles" name="distance" value="Miles"> Miles
+									<input type="radio" id="distance_miles" name="distance" value="Miles" {{ old('distance') == 'Miles' ? 'checked' : '' }}> Miles
 								</label>
 								<label for="distance_km" class="radio-inline">
-									<input type="radio" id="distance_km" name="distance" value="KM"> Kilometers
+									<input type="radio" id="distance_km" name="distance" value="KM" {{ old('distance') == 'KM' ? 'checked' : '' }}> Kilometers
 								</label>
 							</div>
 						</div>

@@ -33,7 +33,7 @@ Seller FAQs
 
 					<li>
 						<strong>How much does it cost?</strong>
-						<p class="clearfix">You can list 2 adverts for FREE. If you want to run more than 2 adverts at once, you'll need to upgrade your account to a dealer account costing just &pound;9.99 per month for an unlimited amount of advert slots.</p>
+						<p class="clearfix">You can list <strong>2 adverts for FREE</strong>. If you want to run more than 2 adverts at once, you'll need to upgrade your account to a dealer account costing just &pound;9.99 per month for an unlimited amount of advert slots.</p>
 
 					</li>
 

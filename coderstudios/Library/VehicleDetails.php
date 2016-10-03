@@ -50,7 +50,6 @@ class VehicleDetails {
 		$details['make_id'] = $this->matchMake($details['title']);
 		$details['model_id'] = $this->matchModel($details['make_id'],$details['title']);
 		return $details;
-
 	}
 
 	private function stripMonths($string)

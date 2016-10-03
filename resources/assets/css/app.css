@@ -221,6 +221,10 @@ form .row {
 	background-color: #e5e5e5;
 }
 
+.alternative-warning {
+	background-color: #f2dede;
+}
+
 .section-pad {
 	padding-top:70px;
 	padding-bottom:70px;
