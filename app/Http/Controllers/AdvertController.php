@@ -258,6 +258,10 @@ class AdvertController extends BaseController
 	        'sold'				=> $request->input('sold') == 1 ? 1 : 0,
 		];
 
+		if ($resource['enabled'] && is_null($vehicle['live_at'])) {
+			$resource['live_at'] = date('Y-m-d H:i:s');
+		}
+
 		$result = $this->resource->update($vehicle->id, $resource);
 		return redirect()->route('ad.edit', ['slug' => $resource['slug']])->with('success_message','Details saved');
 	}

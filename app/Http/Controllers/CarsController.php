@@ -49,7 +49,27 @@ class CarsController extends BaseController
 			$brand = $this->makes->getById($this->request->input('make'));
 		}
 
-		$cars = $this->resource->filter($this->request)->with('make','model','images','dealer')->paginate(env('APP_PER_PAGE',15));
+		$results = $this->resource->filter($this->request);
+
+		if ($this->request->input('sort')) {
+			switch($this->request->input('sort')) {
+				case 'last-24':
+					$results->whereRaw('live_at >= now() - INTERVAL 1 DAY',[]);
+				break;
+				case 'low-mileage':
+					$results->orderBy('mileage','ASC');
+				break;
+				case 'best-range':
+					$results->orderBy('range','DESC');
+				break;
+				case 'most-popular':
+					$results->orderBy('views','DESC');
+				break;
+			}
+		}
+
+		$cars = $results->paginate(env('APP_PER_PAGE',15));
+
 		$half = number_format(ceil($cars->count() / 2));
 		if ($half < 6) {
 			$half = 6;
