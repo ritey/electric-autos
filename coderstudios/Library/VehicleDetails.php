@@ -29,26 +29,40 @@ class VehicleDetails {
 
 	public function fetch($reg)
 	{
+		$details['title'] = '';
+		$details['reg'] = $reg;
+		$details['shell'] = '';
+		$details['doors'] = '';
+		$details['body'] = '';
+		$details['colour'] = '';
+		$details['registered'] = '';
+		$details['year'] = '';
+		$details['make_id'] = 0;
+		$details['model_id'] = 0;
+
 		$crawler = $this->scraper->request('GET','https://www.vehiclecheck.co.uk/?vrm='.$reg);
 
 		$dom = $crawler->filterXPath("//*[contains(@class, 'InnerContent')]");
 
 		$title = $dom->filter('div#searchResult > h3');
 
-		$title = $title->text();
+		if ($title->count()) {
 
-		$body = $dom->filter('table#vrmSearchTable tr > td')->extract(['_text']);
+			$title = $title->text();
 
-		$details['title'] = $this->strip($title);
-		$details['reg'] = $reg;
-		$details['shell'] = isset($body[3]) ? $body[3] : '';
-		$details['doors'] = isset($body[3]) ? trim(substr($body[3],0,2)) : '';
-		$details['body'] = isset($body[3]) ? trim(str_replace($details['doors'],'',str_replace('Door','',$body[3]))) : '';
-		$details['colour'] = isset($body[5]) ? $body[5] : '';
-		$details['registered'] = isset($body[7]) ? $body[7] : '';
-		$details['year'] = isset($body[7]) ? trim($this->stripMonths($body[7])) : '';
-		$details['make_id'] = $this->matchMake($details['title']);
-		$details['model_id'] = $this->matchModel($details['make_id'],$details['title']);
+			$body = $dom->filter('table#vrmSearchTable tr > td')->extract(['_text']);
+
+			$details['title'] = $this->strip($title);
+			$details['reg'] = $reg;
+			$details['shell'] = isset($body[3]) ? $body[3] : '';
+			$details['doors'] = isset($body[3]) ? trim(substr($body[3],0,2)) : '';
+			$details['body'] = isset($body[3]) ? trim(str_replace($details['doors'],'',str_replace('Door','',$body[3]))) : '';
+			$details['colour'] = isset($body[5]) ? $body[5] : '';
+			$details['registered'] = isset($body[7]) ? $body[7] : '';
+			$details['year'] = isset($body[7]) ? trim($this->stripMonths($body[7])) : '';
+			$details['make_id'] = $this->matchMake($details['title']);
+			$details['model_id'] = $this->matchModel($details['make_id'],$details['title']);
+		}
 		return $details;
 	}
 
