@@ -55,6 +55,21 @@ class MakesController extends BaseController
 		return $view;
 	}
 
+	public function create()
+	{
+		$key = $this->getKeyName(__function__);
+		if ($this->cache->has($key)) {
+			$view = $this->cache->get($key);
+		} else {
+			$vars = [
+				'make' => $this->makes->newInstance(),
+			];
+			$view = view('admin.pages.makes-create', compact('vars'))->render();
+			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
+		}
+		return $view;
+	}
+
 	public function edit($id)
 	{
 		$key = $this->getKeyName(__function__);
@@ -62,19 +77,26 @@ class MakesController extends BaseController
 			$view = $this->cache->get($key);
 		} else {
 			$vars = [
-				'make' => $this->make->where('id',$id)->first(),
+				'make' => $this->makes->where('id',$id)->first(),
 			];
-			$view = view('admin.pages.make-edit', compact('vars'))->render();
+			$view = view('admin.pages.makes-edit', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
 		return $view;
 	}
 
-	public function update(MakeRequest $request, $id)
+	public function update(MakesRequest $request, $id)
 	{
-		$data = $request->only();
-		$ad = $this->make->where('id',$id)->first();
+		$data = $request->only('name');
+		$ad = $this->makes->where('id',$id)->first();
 		$ad->update($data);
 		return redirect()->route('admin.makes')->with('success_message','Make updated');
+	}
+
+	public function store(MakesRequest $request)
+	{
+		$data = $request->only('name');
+		$this->makes->create($data);
+		return redirect()->route('admin.makes')->with('success_message','Make created');
 	}
 }

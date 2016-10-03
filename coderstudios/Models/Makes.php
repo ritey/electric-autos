@@ -59,4 +59,9 @@ class Makes extends Model
         'updated_at',
     ];
 
+    public function models()
+    {
+        return $this->hasMany('CoderStudios\Models\Models','make_id','id');
+    }
+
 }

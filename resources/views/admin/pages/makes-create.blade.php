@@ -19,7 +19,7 @@ Makes - Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand el
 			<ul class="breadcrumb">
 				<li><a href="{{ route('admin.home') }}">Admin home</a></li>
 				<li><a href="{{ route('admin.makes') }}">Makes</a></li>
-				<li class="active">{{ $vars['make']['name'] }}</li>
+				<li class="active">New make</li>
 			</ul>
 
 		</div>
@@ -30,7 +30,7 @@ Makes - Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand el
 
 				@include('partials.errors')
 
-				<form action="{{ route('admin.makes.update', ['id' => $vars['make']['id']]) }}" method="POST" class="form" role="form">
+				<form action="{{ route('admin.makes.store') }}" method="POST" class="form" role="form">
 					{!! csrf_field() !!}
 
 					<div class="row">
@@ -75,9 +75,6 @@ Makes - Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand el
 			</div>
 
 			<div class="col-sm-4">
-
-				<p class="text-right"><strong>Created at:</strong> {{ $vars['make']['created_at']->format('d-m-Y H:i') }}</p>
-				<p class="text-right"><strong>Updated at:</strong> {{ $vars['make']['updated_at']->format('d-m-Y H:i') }}</p>
 
 			</div>
 

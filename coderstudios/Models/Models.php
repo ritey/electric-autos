@@ -60,4 +60,9 @@ class Models extends Model
         'updated_at',
     ];
 
+    public function make()
+    {
+        return $this->belongsTo('CoderStudios\Models\Makes','make_id','id');
+    }
+
 }

@@ -44,7 +44,7 @@ Users - Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand el
 						<td>{{ $loop->iteration }}</td>
 						<td>{{ $item['name'] }}</td>
 						<td>{{ $item['email'] }}</td>
-						<td></td>
+						<td class="text-center text-middle">{{ $item['dealer_id'] != '' ? 'Yes' : 'No' }}</td>
 						<td class="text-center text-middle">{{ $item['created_at']->format('d-m-Y H:i') }}</td>
 						<td class="text-center text-middle"><a href="{{ route('admin.users.edit', ['id' => $item['id']]) }}">Edit</a></td>
 					</tr>

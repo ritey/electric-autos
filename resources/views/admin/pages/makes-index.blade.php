@@ -23,6 +23,8 @@ Makes - Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand el
 					<li class="active">Makes</li>
 				</ul>
 
+				<p class="text-right"><a class="btn btn-sm btn-default" href="{{ route('admin.makes.create') }}">Add</a></p>
+
 				@if ($vars['makes']->count())
 
 				<table class="table table-bordered table-hover table-responsive">
@@ -37,6 +39,10 @@ Makes - Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand el
 					</tr>
 
 					@foreach($vars['makes'] as $item)
+
+						@if ($vars['makes']->currentPage() > 1)
+							$loop->iteration = $loop->iteration + ($vars['makes']->currentPage()  * $vars['makes']->perPage())
+						@endif
 
 					<tr>
 						<td>{{ $loop->iteration }}</td>

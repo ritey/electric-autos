@@ -23,6 +23,8 @@ Models - Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand e
 					<li class="active">Models</li>
 				</ul>
 
+				<p class="text-right"><a class="btn btn-sm btn-default" href="{{ route('admin.models.create') }}">Add</a></p>
+
 				@if ($vars['models']->count())
 
 				<table class="table table-bordered table-hover table-responsive">
@@ -30,6 +32,7 @@ Models - Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand e
 					<tr>
 
 						<th></th>
+						<th>Make</th>
 						<th>Name</th>
 						<th>Created on</th>
 						<th></th>
@@ -39,7 +42,14 @@ Models - Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand e
 					@foreach($vars['models'] as $item)
 
 					<tr>
-						<td>{{ $loop->iteration }}</td>
+						<td>
+							@if ($vars['models']->currentPage() > 1)
+							 {{ $loop->iteration = $loop->iteration + (($vars['models']->currentPage()-1)  * $vars['models']->perPage()) }}
+							@else
+							{{ $loop->iteration }}
+							@endif
+						</td>
+						<td>{{ $item->make->name }}</td>
 						<td>{{ $item['name'] }}</td>
 						<td class="text-center text-middle">{{ $item['created_at']->format('d-m-Y H:i') }}</td>
 						<td class="text-center text-middle"><a href="{{ route('admin.models.edit', ['id' => $item['id']]) }}">Edit</a></td>

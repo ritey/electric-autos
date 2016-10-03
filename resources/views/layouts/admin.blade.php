@@ -95,6 +95,13 @@
 					  <li role="presentation"><a href="{{ route('admin.users') }}">Users</a></li>
 					  <li role="presentation"><a href="{{ route('admin.subscriptions') }}">Subscriptions</a></li>
 					  <li role="presentation"><a href="{{ route('admin.ads') }}">Ads</a></li>
+					  <li role="presentation" class="dropdown">
+					  	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Data sets <span class="caret">&nbsp;</span></a>
+					  	<ul class="dropdown-menu">
+					  		<li role="presentation"><a href="{{ route('admin.makes') }}">Makes</a></li>
+					  		<li role="presentation"><a href="{{ route('admin.models') }}">Models</a></li>
+					  	</ul>
+					  </li>
 					</ul>
 
 				</div>
