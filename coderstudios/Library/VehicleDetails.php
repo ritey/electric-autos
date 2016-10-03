@@ -47,11 +47,8 @@ class VehicleDetails {
 		$title = $dom->filter('div#searchResult > h3');
 
 		if ($title->count()) {
-
 			$title = $title->text();
-
 			$body = $dom->filter('table#vrmSearchTable tr > td')->extract(['_text']);
-
 			$details['title'] = $this->strip($title);
 			$details['reg'] = $reg;
 			$details['shell'] = isset($body[3]) ? $body[3] : '';
