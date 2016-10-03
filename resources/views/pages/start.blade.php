@@ -49,7 +49,7 @@ Start selling your EV
 
 </section>
 
-<section class="">
+<section class="section-pad-bottom">
 
 	<div class="container">
 

@@ -171,6 +171,52 @@ Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric c
 
 	@endif
 
+	<section class="brands-section section-pad">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-sm-12 col-md-12 text-center">
+
+					<div class="row">
+
+						<h2>Popular electric car (EV) searches</h2>
+
+						<div class="col-sm-3 col-md-3">
+
+							<a href="{{ route('cars.index' , ['sort' => 'last-24']) }}" title="Show cars added in the last 24 hours">Added recently</a>
+
+						</div>
+
+						<div class="col-sm-3 col-md-3">
+
+							<a href="{{ route('cars.index' , ['max_mileage' => '2000', 'sort' => 'low-mileage']) }}" title="Show cars with less than 2,000 miles">Low mileage EVs</a>
+
+						</div>
+
+						<div class="col-sm-3 col-md-3">
+
+							<a href="{{ route('cars.index' , ['sort' => 'best-range']) }}" title="Show cars with the best range">Best range EVs</a>
+
+						</div>
+
+						<div class="col-sm-3 col-md-3">
+
+							<a href="{{ route('cars.index' , ['sort' => 'most-popular']) }}" title="Show the most viewed cars">Most popular EVs</a>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
 	<section class="section-pad">
 
 		<div class="container">

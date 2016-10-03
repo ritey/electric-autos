@@ -43,6 +43,11 @@ Seller FAQs
 					</li>
 
 					<li>
+						<strong>How do I pay?</strong>
+						<p class="clearfix">We use a company called <a href="https://stripe.com" target="_blank" title="Visit the Stripe website">Stripe</a> to take secure payments online using debit and credit cards. If you have a dealer account, we'll automatically charge for the next month on a subscription basis using the card you signed up with.</p>
+					</li>
+
+					<li>
 						<strong>How long does an advert display for?</strong>
 						<p class="clearfix">Your advert will be active for 14 days after you make your advert live. After 14 days you can re-activate if required by logging in and re-submitting your advert.</p>
 					</li>

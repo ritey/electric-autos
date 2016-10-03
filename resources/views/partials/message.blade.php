@@ -46,3 +46,27 @@
 
 </section>
 @endif
+@if($csrf_error)
+<section class="message alternative-warning">
+
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-sm-12 text-center">
+
+				@if($csrf_error)
+
+				{!! $csrf_error !!}
+
+				@endif
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+</section>
+@endif
