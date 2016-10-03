@@ -226,6 +226,11 @@ form .row {
 	padding-bottom:70px;
 }
 
+.section-pad-small {
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
 .thumbs img {
 	cursor:pointer;
 }

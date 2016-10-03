@@ -15,6 +15,23 @@ Route::group( [ 'namespace' => 'Admin', 'middleware' => 'admin_auth', 'prefix' =
 
 	Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 
+	Route::get('/ads', ['as' => 'ads', 'uses' => 'AdsController@index']);
+	Route::get('/ads/{id}/edit', ['as' => 'ads.edit', 'uses' => 'AdsController@edit']);
+	Route::post('/ads/{id}/edit', ['as' => 'ads.update', 'uses' => 'AdsController@update']);
+
+	Route::get('/subscriptions', ['as' => 'subscriptions', 'uses' => 'SubscriptionsController@index']);
+
+	Route::get('/users', ['as' => 'users', 'uses' => 'UsersController@index']);
+	Route::get('/users/{id}/edit', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
+	Route::post('/users/{id}/edit', ['as' => 'users.update', 'uses' => 'UsersController@update']);
+
+	Route::get('/data/makes/index', ['as' => 'makes', 'uses' => 'MakesController@index']);
+	Route::get('/data/makes/{id}/edit', ['as' => 'makes.edit', 'uses' => 'MakesController@edit']);
+	Route::post('/data/makes/{id}/update', ['as' => 'makes.update', 'uses' => 'MakesController@update']);
+	Route::get('/data/models/index', ['as' => 'models', 'uses' => 'ModelsController@index']);
+	Route::get('/data/models/{id}/edit', ['as' => 'models.edit', 'uses' => 'ModelsController@edit']);
+	Route::post('/data/models/{id}/update', ['as' => 'models.update', 'uses' => 'ModelsController@update']);
+
 });
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);

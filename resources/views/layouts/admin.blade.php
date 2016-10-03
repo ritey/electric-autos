@@ -82,6 +82,29 @@
 
 	@include('partials.message',['success_message' => $success_message])
 
+	<section class="section-pad-small">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-sm-12">
+
+					<ul class="nav nav-pills">
+					  <li role="presentation"><a href="{{ route('admin.home') }}">Home</a></li>
+					  <li role="presentation"><a href="{{ route('admin.users') }}">Users</a></li>
+					  <li role="presentation"><a href="{{ route('admin.subscriptions') }}">Subscriptions</a></li>
+					  <li role="presentation"><a href="{{ route('admin.ads') }}">Ads</a></li>
+					</ul>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
 	@yield('content')
 
 	<section id="bottom-menu" class="">
