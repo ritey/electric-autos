@@ -40,17 +40,8 @@ class HomeController extends BaseController
 
 	public function home()
 	{
-		$key = $this->getKeyName(__function__);
-		if ($this->cache->has($key)) {
-			$view = $this->cache->get($key);
-		} else {
-			$vars = [
-
-			];
-			$view = view('admin.pages.home', compact('vars'))->render();
-			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
-		}
-		return $view;
+		$vars = [];
+		return view('admin.pages.home', compact('vars'))->render();
 	}
 
 	public function clear()

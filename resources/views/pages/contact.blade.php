@@ -167,7 +167,7 @@ Contact us
 
 @section('footer')
 
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBv3I0Nfk5ttFMFulcZp3fn1bWMCwby7sc"></script>
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBv3I0Nfk5ttFMFulcZp3fn1bWMCwby7sc"></script>
 		<script type="text/javascript" src="/assets/js/vendor/gmaps.js"></script>
 		<script type="text/javascript">
 
