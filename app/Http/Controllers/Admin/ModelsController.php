@@ -80,7 +80,7 @@ class ModelsController extends BaseController
 			$view = $this->cache->get($key);
 		} else {
 			$vars = [
-				'make' => $this->models->where('id',$id)->first(),
+				'model' => $this->models->where('id',$id)->first(),
 			];
 			$view = view('admin.pages.models-edit', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
