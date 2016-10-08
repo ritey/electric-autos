@@ -121,7 +121,7 @@ class CarsController extends BaseController
 					return redirect()->route('cars.search.index', $params);
 				} else {
 					$brand = $this->makes->getById($this->request->input('make'));
-					$params['brand'] = $brand->name;
+					$params['brand'] = strtolower($brand->name);
 					unset($params['make']);
 					return redirect()->route('cars.search.index', $params);
 				}
@@ -129,7 +129,7 @@ class CarsController extends BaseController
 				$brand = $this->makes->getById($this->request->input('make'));
 			}
 
-			$search_route = route('cars.brand.index', ['brand' => $brand->name]);
+			$search_route = route('cars.brand.index', ['brand' => strtolower($brand->name)]);
 
 			$page_title = $brand->name . '\'s for sale on Electric Autos. Find used ' . $brand->name . ' cars for sale in our classifieds.';
 
