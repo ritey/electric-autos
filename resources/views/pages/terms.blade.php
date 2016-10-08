@@ -11,6 +11,7 @@ Electric Autos Terms and Conditions
 <meta name="og:title" value="Electric Autos Terms and Conditions" />
 <meta name="twitter:description" value="Terms and conditions for using the Electric Autos website" />
 <meta name="twitter:title" value="Electric Autos Terms and Conditions" />
+<meta name="twitter:creator" value="@electricautosuk" />
 @endsection
 
 @section('title')

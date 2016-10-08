@@ -11,6 +11,7 @@ Electric Autos Privacy Policy
 <meta name="og:title" value="Electric Autos Privacy Policy" />
 <meta name="twitter:description" value="Electric Autos Privacy Policy" />
 <meta name="twitter:title" value="Electric Autos Privacy Policy" />
+<meta name="twitter:creator" value="@electricautosuk" />
 @endsection
 
 @section('title')

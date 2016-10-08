@@ -11,6 +11,7 @@
 <meta name="og:title" value="Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars" />
 <meta name="twitter:description" value="Directory of used electric cars, filter for specific used electric cars by make, model, mileage etc" />
 <meta name="twitter:title" value="Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars" />
+<meta name="twitter:creator" value="@electricautosuk" />
 @endsection
 
 @section('title')

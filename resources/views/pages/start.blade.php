@@ -11,6 +11,7 @@ Start selling with Electric Autos
 <meta name="og:title" value="Start selling with Electric Autos" />
 <meta name="twitter:description" value="Start selling with Electric Autos" />
 <meta name="twitter:title" value="Start selling with Electric Autos" />
+<meta name="twitter:creator" value="@electricautosuk" />
 @endsection
 
 @section('title')

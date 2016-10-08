@@ -11,6 +11,7 @@ Electric Autos Blog
 <meta name="og:title" value="Electric Autos Blog" />
 <meta name="twitter:description" value="Electric Autos Blog" />
 <meta name="twitter:title" value="Electric Autos Blog" />
+<meta name="twitter:creator" value="@electricautosuk" />
 @endsection
 
 @section('title')

@@ -11,6 +11,7 @@ About Electric Autos
 <meta name="og:title" value="About Electric Autos" />
 <meta name="twitter:description" value="About Electric Autos, the electric used car directory with thousands of cars for sale." />
 <meta name="twitter:title" value="About Electric Autos" />
+<meta name="twitter:creator" value="@electricautosuk" />
 @endsection
 
 @section('content')

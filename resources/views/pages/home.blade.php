@@ -11,6 +11,7 @@ Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric c
 <meta name="og:title" value="Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric cars | Second hand hybrid Cars" />
 <meta name="twitter:description" value="Electric and hybrid new and used cars for sale. Find the right used electric car for you at electric autos." />
 <meta name="twitter:title" value="Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric cars | Second hand hybrid Cars" />
+<meta name="twitter:creator" value="@electricautosuk" />
 @endsection
 
 @section('content')

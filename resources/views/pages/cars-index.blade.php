@@ -11,6 +11,8 @@
 <meta name="og:title" value="{{ $vars['page_title'] }}" />
 <meta name="twitter:description" value="Directory of used {{ $vars['brand']->name or '' }} electric cars, filter for specific used {{ $vars['brand']->name or '' }} electric cars by make, model, mileage etc" />
 <meta name="twitter:title" value="{{ $vars['page_title'] }}" />
+<meta name="twitter:creator" value="@electricautosuk" />
+
 @endsection
 
 @section('title')

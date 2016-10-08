@@ -11,6 +11,7 @@ Electric Autos Seller FAQs
 <meta name="og:title" value="Electric Autos Seller FAQs" />
 <meta name="twitter:description" value="Electric Autos Seller FAQs" />
 <meta name="twitter:title" value="Electric Autos Seller FAQs" />
+<meta name="twitter:creator" value="@electricautosuk" />
 @endsection
 
 @section('title')

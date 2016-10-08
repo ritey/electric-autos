@@ -11,6 +11,7 @@ Electric cars for sale from {{ $vars['dealer']->name }}
 <meta name="og:title" value="Electric cars for sale from {{ $vars['dealer']->name }}" />
 <meta name="twitter:description" value="Electric cars for sale from {{ $vars['dealer']->name }}" />
 <meta name="twitter:title" value="Electric cars for sale from {{ $vars['dealer']->name }}" />
+<meta name="twitter:creator" value="@electricautosuk" />
 @endsection
 
 @section('title')

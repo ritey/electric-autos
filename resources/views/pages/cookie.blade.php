@@ -11,6 +11,7 @@ Electric Autos Cookie Policy
 <meta name="og:title" value="Cookie Policy for using the Electric Autos website" />
 <meta name="twitter:description" value="Cookie Policy for using the Electric Autos website" />
 <meta name="twitter:title" value="Cookie Policy for using the Electric Autos website" />
+<meta name="twitter:creator" value="@electricautosuk" />
 @endsection
 
 @section('title')

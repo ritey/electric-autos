@@ -11,6 +11,7 @@ Contact Electric Autos
 <meta name="og:title" value="Contact Electric Autos" />
 <meta name="twitter:description" value="Contact Electric Autos" />
 <meta name="twitter:title" value="Contact Electric Autos" />
+<meta name="twitter:creator" value="@electricautosuk" />
 @endsection
 
 @section('title')

@@ -47,7 +47,7 @@ class DealerController extends BaseController
 
 	public function dealer($slug)
 	{
-		$key = $this->getKeyName(__function__);
+		$key = $this->getKeyName(__function__ . '|' . strtolower($slug));
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
