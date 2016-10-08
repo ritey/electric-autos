@@ -35,7 +35,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ route('home') }}"><img src="/images/text-logo-400x50.png" alt="Electric Autos"></a>
+				<a class="navbar-brand" href="{{ route('home') }}"><img src="/images/text-logo-160x20.png" alt="Electric Autos"></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
