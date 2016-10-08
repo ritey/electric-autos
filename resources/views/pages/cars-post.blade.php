@@ -38,7 +38,6 @@
 					@endif
 				</h2>
 
-
 			</div>
 
 		</div>

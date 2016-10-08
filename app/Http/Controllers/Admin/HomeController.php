@@ -62,7 +62,7 @@ class HomeController extends BaseController
 	{
 		$filename = storage_path().'/logs/laravel.log';
 		$handle = fopen($filename, 'r+');
-		ftruncate($handle, rand(1, filesize($filename)));
+		ftruncate($handle, 0);
 		fclose($handle);
 		return redirect()->route('admin.home')->with('success_message','Log file cleared');
 	}
