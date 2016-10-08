@@ -96,7 +96,11 @@ class CarsController extends BaseController
 
 	public function brand($brand)
 	{
-		$key = $this->getKeyName(__function__ . '|' . $brand);
+		$page_id = 1;
+		if ($this->request->get('page')) {
+			$page_id = $this->request->get('page');
+		}
+		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $page_id);
 		$page_title = 'Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars';
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
@@ -167,6 +171,10 @@ class CarsController extends BaseController
 	public function model($brand, $model = '')
 	{
 		$page_title = 'Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars';
+		$page_id = 1;
+		if ($this->request->get('page')) {
+			$page_id = $this->request->get('page');
+		}
 		$params = $this->request->all();
 		if ($this->request->input('make') && $this->request->input('model')) {
 			$brand = $this->makes->getById($this->request->input('make'));
@@ -184,7 +192,7 @@ class CarsController extends BaseController
 			return redirect()->route('cars.brand.index', $params);
 		}
 
-		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $model);
+		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $model . '|' . $page_id);
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
