@@ -64,25 +64,25 @@ Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric c
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.brand.index' , ['brand' => 'tesla']) }}" title="Electric Tesla for sale">Tesla</a>
+							<a class="btn btn-primary btn-lg" href="{{ route('cars.brand.index' , ['brand' => 'tesla']) }}" title="Electric Tesla for sale">Tesla</a>
 
 						</div>
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.brand.index' , ['brand' => 'toyota']) }}" title="Electric Toyota for sale">Toyota</a>
+							<a class="btn btn-primary btn-lg" href="{{ route('cars.brand.index' , ['brand' => 'toyota']) }}" title="Electric Toyota for sale">Toyota</a>
 
 						</div>
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.brand.index' , ['brand' => 'bmw']) }}" title="Electric BMW for sale">BMW</a>
+							<a class="btn btn-primary btn-lg" href="{{ route('cars.brand.index' , ['brand' => 'bmw']) }}" title="Electric BMW for sale">BMW</a>
 
 						</div>
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.brand.index' , ['brand' => 'volkswagen']) }}" title="Electric Volkswagen for sale">Volkswagen</a>
+							<a class="btn btn-primary btn-lg" href="{{ route('cars.brand.index' , ['brand' => 'volkswagen']) }}" title="Electric Volkswagen for sale">Volkswagen</a>
 
 						</div>
 
