@@ -39,7 +39,7 @@ Electric Autos Blog
 
 				         <div class="container-fluid nopadding">
 
-				            <img src="{{ $vars['article']->image or '/images/holder.png' }}" alt="Electric Autos Blog Post Image" class="img-responsive wow fadeInDown" data-wow-delay="0.6s" data-wow-offset="10">
+				            <img src="{{ $vars['article']->image or '/images/bolt-logo-128x128.png' }}" alt="Electric Autos Blog Post Image" class="img-responsive wow fadeInDown" data-wow-delay="0.6s" data-wow-offset="10">
 
 				            <article class="post wow fadeInDown" data-wow-delay="0.6s" data-wow-offset="10">
 

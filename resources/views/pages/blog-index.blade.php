@@ -38,11 +38,13 @@ Blog
 
 						<div class="col-sm-6 col-md-4">
 
+                           <a href="{{ route('blog.post', ['slug' => $article->slug]) }}">
                            @if ($article->images()->count())
                            <img src="{{ '/image.png?width=357&height=267&filename=' . $article->images->first()->maskname . '.' . $article->images->first()->extension . '&folder=' . $article->images->first()->folder }}" class="img-responsive" alt="Electric Autos Blog Post" />
                            @else
-                           <img src="/images/holder.png" class="img-responsive" alt="Electric Autos">
+                           <img src="/images/bolt-logo-128x128.png" class="img-responsive" alt="Electric Autos">
                            @endif
+                           </a>
                            <figcaption>
                               <div class="post-meta"><span>by {{ $article->meta_author }},</span> <span>{{ $article->live_at->format('d-m-Y') }}</span></div>
                               <div class="post-header">

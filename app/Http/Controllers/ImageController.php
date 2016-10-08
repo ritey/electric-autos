@@ -21,7 +21,7 @@ class ImageController extends BaseController {
 	{
 		$width = 100;
 		$height = 100;
-		$filename = 'holder.png';
+		$filename = 'bolt-logo-128x128.png';
 		$folder = '';
 
 		if ($this->request->input('filename')) {

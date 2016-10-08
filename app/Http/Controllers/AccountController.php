@@ -11,6 +11,7 @@ use CoderStudios\Library\Dealer;
 use CoderStudios\Requests\DealerRequest;
 use CoderStudios\Traits\UUID;
 use CoderStudios\Library\VehicleDetails;
+use CoderStudios\Requests\ProfileRequest;
 
 class AccountController extends BaseController
 {
@@ -47,6 +48,21 @@ class AccountController extends BaseController
 		$this->dealer = $dealer;
 		$this->vehicle = $vehicle;
 		$this->middleware('auth');
+	}
+
+	public function profile()
+	{
+		$key = $this->getKeyName(__function__ . '|' . Auth::user()->user_id);
+		if ($this->cache->has($key)) {
+			$view = $this->cache->get($key);
+		} else {
+			$vars = [
+				'user' => Auth::user(),
+			];
+			$view = view('pages.profile', compact('vars'))->render();
+			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
+		}
+		return $view;
 	}
 
 	public function dashboard()
@@ -145,5 +161,13 @@ class AccountController extends BaseController
 		if ($result->stripe_plan) {
 			return redirect()->route('dealer.edit')->with('success_message','Account upgraded!');
 		}
+	}
+
+	public function profileUpdate(ProfileRequest $request)
+	{
+		$user = Auth::user();
+		$data = $request->only('email','name');
+		$user->update($data);
+		return redirect()->route('profile')->with('success_message','Profile updated');
 	}
 }

@@ -57,23 +57,6 @@ class BlogController extends BaseController
 	{
 		$key = $this->getKeyName(__function__);
 
-		$article = [
-	        'enabled' => 1,
-	        'sort_order' => 0,
-	        'slug' => 'electric-autos-first-post',
-	        'name' => 'Electric Autos',
-	        'meta_author' => 'David Wright',
-	        'meta_date' => '2016-07-01 09:30:00',
-	        'meta_title' => 'Electric Autos is here!',
-	        'meta_description' => 'Electric Autos is here!',
-	        'summary' => 'Electric Autos is here!',
-	        'body' => '<p>Electric Autos is here!</p>',
-	        'updated_at' => '2016-07-01 20:10:00',
-	        'live_at' => '2016-09-05 09:00:00',
-		];
-
-		//$first = $this->articles->create($article);
-
 		$articles = $this->articles->where('enabled',1)->orderBy('sort_order','DESC')->orderBy('live_at','DESC')->take(10)->get();
 
 		if ($this->cache->has($key)) {
@@ -97,7 +80,7 @@ class BlogController extends BaseController
      */
 	public function article($slug = '')
 	{
-		$key = $this->getKeyName(__function__);
+		$key = $this->getKeyName(__function__ . '|' . $slug);
 
 		$article = $this->articles->where('slug',strtolower(trim($slug)))->first();
 

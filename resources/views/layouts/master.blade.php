@@ -63,7 +63,13 @@
 					<li><a href="{{ route('register') }}">Create an account</a></li>
 					<li><a href="{{ route('login') }}">Login</a></li>
 					@else
-					<li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+					<li>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My account <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="{{ route('profile') }}">Profile</a></li>
+							<li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+						</ul>
+					</li>
 					<li>
 						<a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">Logout</a>

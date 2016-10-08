@@ -34,11 +34,19 @@ Images
 
 						<div class="row">
 
+						@if ($vars['pics']->count())
+
 						@foreach($vars['pics'] as $pic)
 
 							@include('partials.pic', ['pic' => $pic, 'ad' => $vars['ad']])
 
 						@endforeach
+
+						@else
+
+						<p>No images have been uploaded yet.</p>
+
+						@endif
 
 						</div>
 

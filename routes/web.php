@@ -23,6 +23,12 @@ Route::group( [ 'namespace' => 'Admin', 'middleware' => 'admin_auth', 'prefix' =
 	Route::get('/ads/{id}/edit', ['as' => 'ads.edit', 'uses' => 'AdsController@edit']);
 	Route::post('/ads/{id}/edit', ['as' => 'ads.update', 'uses' => 'AdsController@update']);
 
+	Route::get('/posts', ['as' => 'posts', 'uses' => 'BlogController@index']);
+	Route::get('/posts/create', ['as' => 'posts.create', 'uses' => 'BlogController@create']);
+	Route::get('/posts/{id}/edit', ['as' => 'posts.edit', 'uses' => 'BlogController@edit']);
+	Route::post('/posts/{id}/edit', ['as' => 'posts.update', 'uses' => 'BlogController@update']);
+	Route::post('/posts/store', ['as' => 'posts.store', 'uses' => 'BlogController@store']);
+
 	Route::get('/subscriptions', ['as' => 'subscriptions', 'uses' => 'SubscriptionsController@index']);
 
 	Route::get('/users', ['as' => 'users', 'uses' => 'UsersController@index']);
@@ -53,6 +59,9 @@ Route::get('/password/reset/{token}', ['as' => 'password-reset', 'uses' => 'Auth
 Route::post('/password/reset/', ['as' => 'password-reset', 'uses' => 'Auth\ResetPasswordController@reset']);
 Route::get('/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
 Route::post('/register', ['as' => 'register-post', 'uses' => 'Auth\RegisterController@register']);
+
+Route::get('/profile', ['as' => 'profile', 'uses' => 'AccountController@profile']);
+Route::post('/profile/save', ['as' => 'profile-save', 'uses' => 'AccountController@profileUpdate']);
 
 Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'AccountController@dashboard']);
 Route::get('/dashboard/upgrade', ['as' => 'upgrade', 'uses' => 'AccountController@upgrade']);

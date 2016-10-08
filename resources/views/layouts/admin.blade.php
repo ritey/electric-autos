@@ -92,6 +92,7 @@
 
 					<ul class="nav nav-pills">
 					  <li role="presentation"><a href="{{ route('admin.home') }}">Home</a></li>
+					  <li role="presentation"><a href="{{ route('admin.posts') }}">Posts</a></li>
 					  <li role="presentation"><a href="{{ route('admin.users') }}">Users</a></li>
 					  <li role="presentation"><a href="{{ route('admin.subscriptions') }}">Subscriptions</a></li>
 					  <li role="presentation"><a href="{{ route('admin.ads') }}">Ads</a></li>
