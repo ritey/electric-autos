@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use CoderStudios\Models\Makes;
 
 class Handler extends ExceptionHandler
 {
@@ -47,6 +48,11 @@ class Handler extends ExceptionHandler
         if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
 
             return redirect($request->fullUrl())->with('csrf_error',"Opps! Seems you haven't used the site for a longtime. Please try again");
+        }
+
+        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHTTPException) {
+            $makes = Makes::orderBy('name','ASC')->get();
+            return response()->view('errors.404', ['makes' => $makes], 404);
         }
 
         return parent::render($request, $exception);
