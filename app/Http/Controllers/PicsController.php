@@ -86,6 +86,8 @@ class PicsController extends BaseController
             Storage::delete(storage_path('app/uploads/'.$path) .'/'.$upload->maskname . '.' . $upload->extension);
             Storage::delete(storage_path('app/uploads/'.$upload->user_id) .'/'.$upload->maskname . '.' . $upload->extension);
             $upload->delete();
+            $this->cache->forget(md5('app_http_controllers_account_controller_dashboard|'.Auth::user()->user_id));
+
             if (!empty($id)) {
                 return redirect()->route('pic.ad.index', ['ad' => $ad])->with('success_message','Pic deleted');
             } else {
@@ -131,6 +133,7 @@ class PicsController extends BaseController
             Session::put('success_message',$message);
             return response()->json(['result' => true, 'path' => route('pic.index') ]);
         }
+        $this->cache->forget(md5('app_http_controllers_account_controller_dashboard|'.Auth::user()->user_id));
         return response()->json(['result' => false, 'path' => route('pic.index') . '?result=false']);
 	}
 }
