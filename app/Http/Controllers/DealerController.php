@@ -53,6 +53,11 @@ class DealerController extends BaseController
 		} else {
 
 			$dealer = $this->dealer->whereSlug($slug);
+
+			if (!$dealer) {
+				Abort(404);
+			}
+
 			$this->request->request->add(['dealer_id' => $dealer->id]);
 
 			$cars = $this->resource->filter($this->request)->paginate(env('APP_PER_PAGE',15));
