@@ -89,7 +89,7 @@ class BlogController extends BaseController
 
 	public function update(PostRequest $request, $id)
 	{
-		$data = $request->only();
+		$data = $request->only($this->article->getFillable());
 		$post = $this->article->where('id',$id)->first();
 		$post->update($data);
 		return redirect()->route('admin.posts')->with('success_message','Post updated');

@@ -55,7 +55,6 @@ class Articles extends Model
     * @var  array
     */
     protected $fillable = [
-        'id',
         'enabled',
         'sort_order',
         'name',
