@@ -79,7 +79,7 @@ class CreateUsersTable extends Migration
             $table->integer('sort_order')->default(0)->index();
             $table->integer('car_type_id')->index()->nullable();
             $table->integer('user_id')->index();
-            $table->integer('dealer_id')->index();
+            $table->integer('dealer_id')->index()->nullable();
             $table->integer('make_id')->index();
             $table->integer('model_id')->index();
             $table->string('name',128);

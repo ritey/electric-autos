@@ -24,7 +24,7 @@ class UploadRequest extends Request {
 	public function rules()
 	{
 		$rules = [
-			'file'		=> 'required',
+
 		];
 
 		return $rules;

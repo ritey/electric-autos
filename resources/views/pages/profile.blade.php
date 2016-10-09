@@ -28,6 +28,7 @@ Profile
 					<div class="col-sm-8">
 
 						<ul class="breadcrumb">
+							<li>My account</li>
 							<li class="active">Profile</li>
 						</ul>
 

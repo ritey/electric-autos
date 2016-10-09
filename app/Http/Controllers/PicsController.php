@@ -72,11 +72,11 @@ class PicsController extends BaseController
 
     public function delete($ad = '', $id = '')
     {
-        $upload = $this->upload->mine(Auth::user()->id)->where('id',$ad)->first();
+        $upload = $this->upload->mine(Auth::user()->user_id)->where('id',$id)->first();
         if ($id) {
-            $upload = $this->upload->mine(Auth::user()->id)->where('folder',$ad)->where('id',$id)->first();
+            $upload = $this->upload->mine(Auth::user()->user_id)->where('folder',$ad)->where('id',$id)->first();
         }
-        if ($upload && $upload->user_id == Auth::user()->id) {
+        if ($upload && $upload->user_id == Auth::user()->user_id) {
             $path = '';
             if ($upload->folder) {
                 $path = $upload->folder;
@@ -84,6 +84,7 @@ class PicsController extends BaseController
                 $path = $upload->user_id;
             }
             Storage::delete(storage_path('app/uploads/'.$path) .'/'.$upload->maskname . '.' . $upload->extension);
+            Storage::delete(storage_path('app/uploads/'.$upload->user_id) .'/'.$upload->maskname . '.' . $upload->extension);
             $upload->delete();
             if (!empty($id)) {
                 return redirect()->route('pic.ad.index', ['ad' => $ad])->with('success_message','Pic deleted');

@@ -1,4 +1,5 @@
 <p class="text-center">Advert</p>
+<div style="max-width:400px">
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- electronic autos -->
 <ins class="adsbygoogle"
@@ -9,3 +10,4 @@
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+</div>

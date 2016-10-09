@@ -89,7 +89,7 @@ class VehicleDetails {
 
 	public function makeSlug($text)
 	{
-		return strtolower(str_replace('--','-',str_replace(' ','+',str_replace('\'\'','',str_replace('*','-',str_replace('&','-',str_replace(',','',str_replace(')','',str_replace('(','',str_replace('/','-',str_replace(' ','-',$text)))))))))));
+		return strtolower(str_replace('"','',str_replace('--','-',str_replace(' ','+',str_replace('\'\'','',str_replace('*','-',str_replace('&','-',str_replace(',','',str_replace(')','',str_replace('(','',str_replace('/','-',str_replace(' ','-',$text))))))))))));
 	}
 
 	public function makeName($text)

@@ -19,6 +19,7 @@ class ImageController extends BaseController {
 
 	public function index()
 	{
+		$user_id = '';
 		$width = 100;
 		$height = 100;
 		$filename = 'bolt-logo-128x128.png';
@@ -49,6 +50,11 @@ class ImageController extends BaseController {
 		}
 
 		$image = $this->image->resize( $folder , $filename , $width , $height );
+
+		if(!$image && !empty($user_id)) {
+			$image = $this->image->resize( $user_id , $filename , $width , $height );
+		}
+
 		$info = pathinfo($image);
 		$extension = isset($info['extension']) ? $info['extension'] : 'png';
 		$image = $this->file->get($image);
