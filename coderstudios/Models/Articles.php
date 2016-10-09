@@ -71,6 +71,15 @@ class Articles extends Model
         'live_at',
     ];
 
+    public function setEnabledAttribute($value)
+    {
+        if (empty($value)) {
+            $this->attributes['enabled'] = 0;
+        } else {
+            $this->attributes['enabled'] = $value;
+        }
+    }
+
     public function images()
     {
         return $this->hasMany('CoderStudios\Models\Uploads','article_id','id');

@@ -77,6 +77,15 @@ class Dealers extends Model
         'description',
     ];
 
+    public function setEnabledAttribute($value)
+    {
+        if (empty($value)) {
+            $this->attributes['enabled'] = 0;
+        } else {
+            $this->attributes['enabled'] = $value;
+        }
+    }
+
     /**
      * Enabled filter
      * @param  $query
