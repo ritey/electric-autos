@@ -98,7 +98,7 @@ Upgrade your account on Electric Autos
 						{!! csrf_field() !!}
 					  <script
 					    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-					    data-key="pk_test_vucuHZVV4qtZEtjusMRN6c0R"
+					    data-key="{{ env('STRIPE_KEY') }}"
 					    data-amount="999"
 					    data-name="Electric Autos"
 					    data-description="Monthly Dealer Subscription"
