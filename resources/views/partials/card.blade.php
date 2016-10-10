@@ -33,7 +33,7 @@
 			</li>
 			<li class="list-group-item">
 				<span class="badge">
-					@if($car->private == 1)
+					@if(!$car->dealer)
 						Private
 					@else
 						<a href="{{ route('dealers.dealer', $car->dealer->slug) }}">Trade</a>
