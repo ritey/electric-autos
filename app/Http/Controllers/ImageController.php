@@ -37,6 +37,10 @@ class ImageController extends BaseController {
 			$user_id = $this->request->input('user_id');
 		}
 
+		if (empty($user_id) && $this->request->input('id')) {
+			$user_id = $this->request->input('id');
+		}
+
 		if ($this->request->input('width')) {
 			$width = $this->request->input('width');
 		}
