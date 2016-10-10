@@ -1,6 +1,6 @@
 <div class="item">
 	<figure>
-		<a href="{{ route('cars.brand.car', ['brand' => strtolower($car->make()->first()->name), 'version' => strtolower($car->model()->first()->name), 'slug' => $car->slug]) }}">
+		<a href="{{ route('cars.brand.car', ['brand' => strtolower(str_replace(' ','+',$car->make()->first()->name)), 'version' => str_replace(' ','+',strtolower($car->model()->first()->name)), 'slug' => $car->slug]) }}">
 		@if (is_object($car) && $car->images()->count())
 		<img src="{{ route('image') }}?folder={{ $car->id }}&filename={{ urlencode($car->images()->first()->maskname . '.' . $car->images()->first()->extension) }}&width=370&height=300" alt="">
 		@else
@@ -9,7 +9,7 @@
 		</a>
 	</figure>
 	<div class="item-header">
-		<h3><a href="{{ route('cars.brand.car', ['brand' => strtolower($car->make()->first()->name), 'version' => strtolower($car->model()->first()->name),  'slug' => $car->slug]) }}">{{ $car->name or 'Car' }}</a></h3>
+		<h3><a href="{{ route('cars.brand.car', ['brand' => str_replace(' ','+',strtolower($car->make()->first()->name)), 'version' => str_replace(' ','+',strtolower($car->model()->first()->name)),  'slug' => $car->slug]) }}">{{ $car->name or 'Car' }}</a></h3>
 		<ul class="list-group">
 			<li class="list-group-item">
 				<span class="badge">{{ $car->make()->first()->name or 'Make' }}</span>
