@@ -129,11 +129,11 @@ class PicsController extends BaseController
         if ($failed > 0) {
             $message = $message . ' ' . $failed . ' ' . str_plural('file',$failed) . ' failed to upload.';
         }
+        $this->cache->forget(md5('app_http_controllers_account_controller_dashboard|'.Auth::user()->user_id));
         if ($success) {
             Session::put('success_message',$message);
             return response()->json(['result' => true, 'path' => route('pic.index') ]);
         }
-        $this->cache->forget(md5('app_http_controllers_account_controller_dashboard|'.Auth::user()->user_id));
         return response()->json(['result' => false, 'path' => route('pic.index') . '?result=false']);
 	}
 }

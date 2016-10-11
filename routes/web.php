@@ -46,6 +46,11 @@ Route::group( [ 'namespace' => 'Admin', 'middleware' => 'admin_auth', 'prefix' =
 	Route::get('/data/models/{id}/edit', ['as' => 'models.edit', 'uses' => 'ModelsController@edit']);
 	Route::post('/data/models/{id}/update', ['as' => 'models.update', 'uses' => 'ModelsController@update']);
 
+	Route::get('/pics', ['as' => 'pic.index', 'uses' => 'BlogController@images']);
+	Route::get('/pics/{article}', ['as' => 'pic.ad.index', 'uses' => 'BlogController@images']);
+	Route::post('/pics/save', ['as' => 'pic.save', 'uses' => 'BlogController@saveImage']);
+	Route::get('/pics/{id}/delete', ['as' => 'pic.ad.delete', 'uses' => 'BlogController@deleteImage']);
+
 });
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);

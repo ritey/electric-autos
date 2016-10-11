@@ -26,6 +26,15 @@ class Upload {
 		return $this->upload->where('user_id',$id);
 	}
 
+	public function article($article)
+	{
+		if ($article) {
+			return $this->upload->where('article_id',$article);
+		} else {
+			return $this->upload->whereNotNull('article_id');
+		}
+	}
+
 	public function truncate()
 	{
 		return $this->upload->truncate();

@@ -47,7 +47,7 @@ Posts - Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand el
 						<td>{{ $item['name'] }}</td>
 						<td class="text-center text-middle">{{ $item['created_at']->format('d-m-Y H:i') }}</td>
 						<td class="text-center text-middle">{{ $item['enabled']  == 1 ? 'Yes' : 'No' }}</td>
-						<td class="text-center text-middle"><a href="#"><i class="fa fa-camera"></i></a></td>
+						<td class="text-center text-middle"><a href="{{ route('admin.pic.ad.index', ['article' => $item['id'] ]) }}"><i class="fa fa-camera"></i></a></td>
 						<td class="text-center text-middle"><a href="{{ route('admin.posts.edit', ['id' => $item['id']]) }}">Edit</a></td>
 					</tr>
 
