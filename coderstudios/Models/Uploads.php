@@ -57,6 +57,7 @@ class Uploads extends Model
     protected $fillable = [
         'enabled',
         'user_id',
+        'article_id',
         'folder',
         'extension',
         'filename',

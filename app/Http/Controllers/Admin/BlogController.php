@@ -7,11 +7,11 @@ use Illuminate\Contracts\Cache\Repository as Cache;
 use App\Http\Controllers\BaseController;
 use CoderStudios\Models\Articles;
 use CoderStudios\Requests\PostRequest;
+use CoderStudios\Library\Upload;
+use CoderStudios\Requests\UploadRequest;
 use Auth;
 use Session;
 use Storage;
-use CoderStudios\Library\Upload;
-use CoderStudios\Requests\UploadRequest;
 
 class BlogController extends BaseController
 {
@@ -140,6 +140,7 @@ class BlogController extends BaseController
             $data['maskname'] = md5($file->getClientOriginalName() . date('Y-m-d H:i:s'));
             $data['extension'] = $file->guessExtension();
             $data['size'] = $file->getClientSize();
+            $data['article_id'] = $request->input('folder');
             $data['user_id'] = Auth::user()->user_id;
             $data['folder'] = 'site';
             if ($file->isValid()) {
@@ -171,17 +172,12 @@ class BlogController extends BaseController
 
     public function deleteImage($id = '')
     {
-        $upload = $this->upload->mine(Auth::user()->user_id)->where('article_id',$id)->first();
+        $upload = $this->upload->mine(Auth::user()->user_id)->where('id',$id)->first();
         if ($upload && $upload->user_id == Auth::user()->user_id) {
             $path = 'site';
             Storage::delete(storage_path('app/uploads/'.$path) .'/'.$upload->maskname . '.' . $upload->extension);
             $upload->delete();
-
-            if (!empty($id)) {
-                return redirect()->route('admin.pic.ad.index', ['article' => $id])->with('success_message','Pic deleted');
-            } else {
-                return redirect()->route('admin.pic.index')->with('success_message','Pic deleted');
-            }
+            return redirect()->route('admin.pic.index')->with('success_message','Pic deleted');
         }
         return redirect()->route('admin.pic.index');
     }
