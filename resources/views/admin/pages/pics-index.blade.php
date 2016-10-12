@@ -30,7 +30,7 @@ Images
 
 					@foreach($vars['pics'] as $pic)
 
-						@include('partials.pic', ['img_url' 		=> route('image') . '?user_id='.$pic->user_id.'&folder='.$pic->folder.'&filename='.urlencode($pic->maskname . '.' . $pic->extension).'&width=200&height=150','img_alt' 		=> $pic->filename,'delete_url' 	=> route('admin.pic.ad.delete', ['id' => $pic->id])])
+						@include('partials.pic', ['img_filename' => $pic->filename . '.' . $pic->extension,'img_url' => route('image') . '?user_id='.$pic->user_id.'&folder='.$pic->folder.'&filename='.urlencode($pic->maskname . '.' . $pic->extension).'&width=200&height=150','img_alt' 		=> $pic->filename,'delete_url' 	=> route('admin.pic.ad.delete', ['id' => $pic->id])])
 
 					@endforeach
 
