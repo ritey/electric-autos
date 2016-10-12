@@ -9,6 +9,7 @@ use CoderStudios\Models\Makes;
 use CoderStudios\Models\Models;
 use CoderStudios\Library\Resource;
 use CoderStudios\Library\Dealer;
+use CoderStudios\Models\Articles;
 
 class SitemapController extends BaseController
 {
@@ -17,7 +18,7 @@ class SitemapController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes, Models $models, Dealer $dealers)
+	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes, Models $models, Dealer $dealers, Articles $articles)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
@@ -28,6 +29,7 @@ class SitemapController extends BaseController
 		$this->makes = $makes;
 		$this->models = $models;
 		$this->dealers = $dealers;
+		$this->articles = $articles;
 	}
 
 	public function sitemap()
@@ -49,6 +51,13 @@ class SitemapController extends BaseController
 		$xml .= '<url><loc>'.route('home').'/start-selling</loc><priority>0.9</priority><lastmod>2016-09-01T09:00:00+00:00</lastmod><changefreq>monthly</changefreq></url>';
 		$xml .= '<url><loc>'.route('home').'/seller-faqs</loc><priority>0.9</priority><lastmod>2016-09-01T09:00:00+00:00</lastmod><changefreq>monthly</changefreq></url>';
 		$xml .= '<url><loc>'.route('home').'/blog</loc><priority>0.9</priority><lastmod>2016-09-01T09:00:00+00:00</lastmod><changefreq>monthly</changefreq></url>';
+
+		$articles = $this->articles->where('enabled',1)->orderBy('sort_order','DESC')->orderBy('live_at','DESC')->get();
+		foreach($articles as $article) {
+			$url = route('blog.post', ['slug' => $article->slug]);
+
+			$xml .= '<url><loc>'.$url.'</loc><priority>0.9</priority><lastmod>'.$article->updated_at->toAtomString().'</lastmod><changefreq>monthly</changefreq></url>';
+		}
 
 		$xml .= '</urlset>';
 
