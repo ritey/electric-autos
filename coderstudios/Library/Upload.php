@@ -31,7 +31,7 @@ class Upload {
 		if ($article) {
 			return $this->upload->where('article_id',$article);
 		} else {
-			return $this->upload->whereNotNull('article_id');
+			return $this->upload->where('folder','site');
 		}
 	}
 
