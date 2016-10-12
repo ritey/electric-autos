@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository as Cache;
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Admin\BaseController;
 use CoderStudios\Models\Resources;
 use CoderStudios\Requests\AdRequest;
 
@@ -75,6 +75,7 @@ class AdsController extends BaseController
 		$data = $request->only();
 		$ad = $this->resource->where('id',$id)->first();
 		$ad->update($data);
+  		$this->clearAdminCache();
 		return redirect()->route('admin.ads')->with('success_message','Ad updated');
 	}
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository as Cache;
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Admin\BaseController;
 use CoderStudios\Models\Articles;
 use CoderStudios\Requests\PostRequest;
 use CoderStudios\Library\Upload;
@@ -98,6 +98,7 @@ class BlogController extends BaseController
 		$data = $request->only($this->article->getFillable());
 		$post = $this->article->where('id',$id)->first();
 		$post->update($data);
+  		$this->clearAdminCache();
 		return redirect()->route('admin.posts')->with('success_message','Post updated');
 	}
 
@@ -105,6 +106,7 @@ class BlogController extends BaseController
 	{
 		$data = $request->only($this->article->getFillable());
 		$this->article->create($data);
+  		$this->clearAdminCache();
 		return redirect()->route('admin.posts')->with('success_message','Post created');
 	}
 
@@ -163,6 +165,7 @@ class BlogController extends BaseController
         if ($failed > 0) {
             $message = $message . ' ' . $failed . ' ' . str_plural('file',$failed) . ' failed to upload.';
         }
+  		$this->clearAdminCache();
         if ($success) {
             Session::put('success_message',$message);
             return response()->json(['result' => true, 'path' => route('admin.pic.index') ]);
@@ -177,6 +180,7 @@ class BlogController extends BaseController
             $path = 'site';
             Storage::delete(storage_path('app/uploads/'.$path) .'/'.$upload->maskname . '.' . $upload->extension);
             $upload->delete();
+       		$this->clearAdminCache();
             return redirect()->route('admin.pic.index')->with('success_message','Pic deleted');
         }
         return redirect()->route('admin.pic.index');

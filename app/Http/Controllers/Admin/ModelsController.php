@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository as Cache;
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Admin\BaseController;
 use CoderStudios\Models\Makes;
 use CoderStudios\Models\Models;
 use CoderStudios\Requests\ModelsRequest;
