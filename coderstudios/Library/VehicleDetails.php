@@ -2,14 +2,15 @@
 
 namespace CoderStudios\Library;
 
+use Illuminate\Contracts\Cache\Repository as Cache;
 use Goutte\Client as Scraper;
 use Carbon\Carbon;
 use Symfony\Component\DomCrawler\Crawler;
 use CoderStudios\Library\Dealer;
 use CoderStudios\Library\Resource;
 use CoderStudios\Library\Upload;
-use CoderStudios\Models\Models;
-use CoderStudios\Models\Makes;
+use CoderStudios\Models\Models as CarModels;
+use CoderStudios\Models\Makes as CarMakes;
 use CoderStudios\Traits\UUID;
 use Storage;
 
@@ -17,7 +18,7 @@ class VehicleDetails {
 
 	use UUID;
 
-	public function __construct(Scraper $scraper, Dealer $dealer, Resource $resource, Upload $upload, Makes $makes, Models $models)
+	public function __construct(Cache $cache,Scraper $scraper, Dealer $dealer, Resource $resource, Upload $upload, CarMakes $makes, CarModels $models)
 	{
 		$this->scraper = $scraper;
 		$this->dealer = $dealer;
@@ -25,6 +26,42 @@ class VehicleDetails {
 		$this->upload = $upload;
 		$this->makes = $makes;
 		$this->models = $models;
+		$this->cache = $cache;
+	}
+
+	public function buildCar($car)
+	{
+		$key = md5($car->slug);
+		$data = [];
+		if ($this->cache->has($key)) {
+			$data = $this->cache->get($key);
+		} else {
+			$first_image = $car->images()->first();
+			if (is_object($car->dealer) && empty($car->dealer->slug)) {
+				$dealer = $car->dealer;
+				$dealer->slug = $this->makeSlug($dealer->name) . '-' . $dealer->id;
+				$dealer->save();
+			}
+			$data = [
+				'id'				=> $car->id,
+				'ad_slug' 			=> route('cars.brand.car', ['brand' => strtolower(str_replace(' ','+',$car->make->name)), 'version' => str_replace(' ','+',strtolower($car->model->name)), 'slug' => $car->slug]),
+				'image_count' 		=> $car->images_count,
+				'img_url'			=> is_object($first_image) ? route('image') . '?id=' . $first_image->user_id . '&folder=' . $car->id . '&filename=' . urlencode($first_image->maskname . '.' . $first_image->extension) . '&width=370&height=300' : '#',
+				'name'				=> '',
+				'make'				=> $car->make->name,
+				'model'				=> $car->model->name,
+				'year'				=> $car->year,
+				'price'				=> $car->price,
+				'currency'			=> $car->currency,
+				'mileage'			=> $car->mileage,
+				'mileage_measure' 	=> $car->length_measure,
+				'private'			=> is_object($car->dealer) ? 0 : 1,
+				'dealer_url'		=> is_object($car->dealer) ? route('dealers.dealer', $car->dealer->slug) : '',
+			];
+			$this->cache->add($key, $data, env('APP_CACHE_MINUTES'));
+		}
+
+		return $data;
 	}
 
 	public function fetch($reg)

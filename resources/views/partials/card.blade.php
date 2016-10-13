@@ -1,42 +1,42 @@
 <div class="item">
 	<figure>
-		<a href="{{ route('cars.brand.car', ['brand' => strtolower(str_replace(' ','+',$car->make()->first()->name)), 'version' => str_replace(' ','+',strtolower($car->model()->first()->name)), 'slug' => $car->slug]) }}">
-		@if (is_object($car) && $car->images()->count())
-		<img src="{{ route('image') }}?id={{ $car->images()->first()->user_id }}&folder={{ $car->id }}&filename={{ urlencode($car->images()->first()->maskname . '.' . $car->images()->first()->extension) }}&width=370&height=300" alt="">
+		<a href="{{ $car['ad_slug'] }}">
+		@if ($car['image_count'])
+		<img src="{{ $car['img_url'] }}" alt="">
 		@else
 		<img src="/images/holder.png" alt="">
 		@endif
 		</a>
 	</figure>
 	<div class="item-header">
-		<h3><a href="{{ route('cars.brand.car', ['brand' => str_replace(' ','+',strtolower($car->make()->first()->name)), 'version' => str_replace(' ','+',strtolower($car->model()->first()->name)),  'slug' => $car->slug]) }}">{{ $car->name or 'Car' }}</a></h3>
+		<h3><a href="{{ $car['ad_slug'] }}">{{ $car['name'] or 'Car' }}</a></h3>
 		<ul class="list-group">
 			<li class="list-group-item">
-				<span class="badge">{{ $car->make()->first()->name or 'Make' }}</span>
+				<span class="badge">{{ $car['make'] or 'Make' }}</span>
 				Make
 			</li>
 			<li class="list-group-item">
-				<span class="badge">{{ $car->model()->first()->name or 'Model' }}</span>
+				<span class="badge">{{ $car['model'] or 'Model' }}</span>
 				Model
 			</li>
 			<li class="list-group-item">
-				<span class="badge">{{ $car->year or 'Year' }}</span>
+				<span class="badge">{{ $car['year'] or 'Year' }}</span>
 				Year
 			</li>
 			<li class="list-group-item">
-				<span class="badge">{{ $car->currency == 'Pound' ? '&pound;' : '' }}{{ $car->currency == 'Euro' ? '&euro;' : '' }}{{ $car->price or 'Price' }}</span>
+				<span class="badge">{{ $car['currency'] == 'Pound' ? '&pound;' : '' }}{{ $car['currency'] == 'Euro' ? '&euro;' : '' }}{{ $car['price'] or 'Price' }}</span>
 				Price
 			</li>
 			<li class="list-group-item">
-				<span class="badge">{{ $car->mileage or 'Mileage' }} {{ strtolower($car->length_measure) }}</span>
+				<span class="badge">{{ $car['mileage'] or 'Mileage' }} {{ $car['mileage_measure'] }}</span>
 				Mileage
 			</li>
 			<li class="list-group-item">
 				<span class="badge">
-					@if(!$car->dealer)
+					@if($car['private'])
 						Private
 					@else
-						<a href="{{ route('dealers.dealer', $car->dealer->slug) }}">Trade</a>
+						<a href="{{ $car['dealer_url'] }}">Trade</a>
 					@endif
 				</span>
 				Seller type
@@ -46,5 +46,4 @@
 	<div class="item-meta clearfix">
 		<a href="#">Report this advert</a>
 	</div>
-
 </div>

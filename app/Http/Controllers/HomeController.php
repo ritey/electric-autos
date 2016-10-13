@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use CoderStudios\Library\VehicleDetails;
 use CoderStudios\Library\Resource;
-use CoderStudios\Models\Makes;
-use CoderStudios\Models\Models;
 use CoderStudios\Requests\ContactRequest;
 use App\Events\ContactSent;
 use Session;
@@ -34,7 +32,7 @@ class HomeController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache, VehicleDetails $vehicle, Resource $resource, Models $models)
+	public function __construct(Request $request, Cache $cache, VehicleDetails $vehicle, Resource $resource)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
@@ -43,20 +41,31 @@ class HomeController extends BaseController
 		$this->cache = $cache;
 		$this->vehicle = $vehicle;
 		$this->resource = $resource;
-		$this->models = $models;
 	}
 
 	public function home()
 	{
 		Session::put('back_url', $this->request->fullUrl());
+		//dd($this->resource->get(1));
 		//$this->vehicle->scrape();
 		$key = $this->getKeyName(__function__);
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
+			$cars = [];
+			$latest_key = $this->getKeyName(__function__ . '|cars');
+			if ($this->cache->has($latest_key)) {
+				$cars = $this->cache->get($latest_key);
+			} else {
+				$latest = $this->resource->latest()->get();
+				foreach($latest as $car) {
+					$cars[] = $this->vehicle->buildCar($car);
+				}
+				$this->cache->add($latest_key, $cars, env('APP_CACHE_MINUTES'));
+			}
 			$vars = [
-				'total_cars' => $this->resource->totalResources(),
-				'latest' => $this->resource->latest()->get(),
+				'total_cars' 	=> $this->resource->totalResources(),
+				'latest' 		=> $cars,
 			];
 			$view = view('pages.home', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));

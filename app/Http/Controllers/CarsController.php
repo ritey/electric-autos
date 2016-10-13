@@ -7,6 +7,7 @@ use Illuminate\Contracts\Cache\Repository as Cache;
 use CoderStudios\Library\Makes;
 use CoderStudios\Library\Models;
 use CoderStudios\Library\Resource;
+use CoderStudios\Library\VehicleDetails;
 use Session;
 
 class CarsController extends BaseController
@@ -16,7 +17,7 @@ class CarsController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes, Models $models)
+	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes, Models $models, VehicleDetails $vehicle)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
@@ -26,6 +27,7 @@ class CarsController extends BaseController
 		$this->resource = $resource;
 		$this->makes = $makes;
 		$this->models = $models;
+		$this->vehicle = $vehicle;
 	}
 
 	public function index()
@@ -75,12 +77,21 @@ class CarsController extends BaseController
 			$half = 6;
 		}
 		$chunks = $cars->chunk($half);
+
+		$count = 0;
+		foreach($chunks as $set) {
+			foreach($set as $car) {
+				$car_set[$count][] = $this->vehicle->buildCar($car);
+			}
+			$count++;
+		}
+
 		$makes = $this->makes->all();
 
 		$vars = [
 			'request'				=> $this->request,
 			'cars_collection'		=> $cars,
-			'cars'					=> $chunks,
+			'cars'					=> $car_set,
 			'total_cars'			=> $this->resource->totalEnabled(),
 			'total_cars_found'		=> $cars->total(),
 			'total_page_total'		=> $cars->count(),
@@ -137,12 +148,20 @@ class CarsController extends BaseController
 
 			$page_title = $brand->name . '\'s for sale on Electric Autos. Find used ' . $brand->name . ' cars for sale in our classifieds.';
 
-			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->with('make','model','images','dealer')->paginate(env('APP_PER_PAGE',15));
+			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->with('make','model','images','dealer')->withCount('images')->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {
 				$half = 6;
 			}
 			$chunks = $cars->chunk($half);
+
+			$count = 0;
+			foreach($chunks as $set) {
+				foreach($set as $car) {
+					$car_set[$count][] = $this->vehicle->buildCar($car);
+				}
+				$count++;
+			}
 
 			Session::put('back_url', $this->request->fullUrl());
 			$makes = $this->makes->all();
@@ -151,7 +170,7 @@ class CarsController extends BaseController
 			$vars = [
 				'request'				=> $this->request,
 				'cars_collection'		=> $cars,
-				'cars'					=> $chunks,
+				'cars'					=> $car_set,
 				'total_cars'			=> $this->resource->totalEnabled(),
 				'total_cars_found'		=> $cars->total(),
 				'total_page_total'		=> $cars->count(),
@@ -220,19 +239,26 @@ class CarsController extends BaseController
 			$makes = $this->makes->all();
 			$models = $this->models->getByMakeId($brand->id);
 
-			$cars = $this->resource->filter($this->request)->with('make','model','images','dealer')->paginate(env('APP_PER_PAGE',15));
+			$cars = $this->resource->filter($this->request)->with('make','model','images','dealer')->withCount('images')->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {
 				$half = 6;
 			}
 			$chunks = $cars->chunk($half);
+			$count = 0;
+			foreach($chunks as $set) {
+				foreach($set as $car) {
+					$car_set[$count][] = $this->vehicle->buildCar($car);
+				}
+				$count++;
+			}
 
 			Session::put('back_url', $this->request->fullUrl());
 
 			$vars = [
 				'request'				=> $this->request,
 				'cars_collection'		=> $cars,
-				'cars'					=> $chunks,
+				'cars'					=> $car_set,
 				'total_cars'			=> $this->resource->totalEnabled(),
 				'total_cars_found'		=> $cars->total(),
 				'total_page_total'		=> $cars->count(),

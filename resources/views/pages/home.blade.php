@@ -253,6 +253,7 @@ Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric c
 		</div>
 
 	</section>
+
 @endsection
 
 @section('footer')
