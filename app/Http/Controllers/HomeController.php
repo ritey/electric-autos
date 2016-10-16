@@ -79,10 +79,7 @@ class HomeController extends BaseController
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
-			$vars = [
-				'featured' => ['1',2,3],
-				'latest' => ['1',2,3],
-			];
+			$vars = [];
 			$view = view('pages.about', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
@@ -95,9 +92,7 @@ class HomeController extends BaseController
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
-			$vars = [
-				''
-			];
+			$vars = [];
 			$view = view('pages.cookie', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
@@ -110,9 +105,7 @@ class HomeController extends BaseController
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
-			$vars = [
-
-			];
+			$vars = [];
 			$view = view('pages.contact', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
@@ -135,7 +128,7 @@ class HomeController extends BaseController
 			$view = $this->cache->get($key);
 		} else {
 			$vars = [
-				'page_title'		=> 'Pitchy',
+				'page_title'		=> 'Electric Autos',
 				'request'			=> $this->request,
 			];
 			$view = view('pages.contact-sent', compact('vars'))->render();
@@ -150,10 +143,7 @@ class HomeController extends BaseController
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
-			$vars = [
-				'featured' => ['1',2,3],
-				'latest' => ['1',2,3],
-			];
+			$vars = [];
 			$view = view('pages.terms', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
@@ -166,10 +156,7 @@ class HomeController extends BaseController
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
-			$vars = [
-				'featured' => ['1',2,3],
-				'latest' => ['1',2,3],
-			];
+			$vars = [];
 			$view = view('pages.privacy', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
@@ -195,10 +182,7 @@ class HomeController extends BaseController
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
-			$vars = [
-				'featured' => ['1',2,3],
-				'latest' => ['1',2,3],
-			];
+			$vars = [];
 			$view = view('pages.faqs', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
