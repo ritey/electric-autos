@@ -56,6 +56,7 @@ elixir(mix => {
 
 			paths.dropzone + 'dist/min/dropzone.min.js',
 
+			'./resources/assets/js/ios9.js',
 			'./resources/assets/js/app.js',
 
 			'./resources/assets/js/**/*.js'
