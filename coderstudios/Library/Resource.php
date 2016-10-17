@@ -98,7 +98,7 @@ class Resource {
 
 	public function whereSlug($slug = '')
 	{
-		return $this->resource->enabled()->where('slug',$slug)->first();
+		return $this->resource->enabled()->where('slug',$slug)->withCount('images')->first();
 	}
 
 	public function mine($user_id)

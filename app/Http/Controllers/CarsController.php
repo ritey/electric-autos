@@ -40,8 +40,18 @@ class CarsController extends BaseController
 
 			$brand = $this->makes->getById($this->request->input('make'));
 
+			if (!$brand) {
+				return redirect()->route('cars.index');
+			}
+
 			if ($this->request->input('make') && $this->request->input('model')) {
 				$model = $this->models->get($this->request->input('model'));
+
+				if (!$model) {
+					return redirect()->route('cars.search.index', [
+						'brand' => strtolower($brand->name),
+					]);
+				}
 
 				return redirect()->route('cars.search.index', [
 					'brand' => strtolower($brand->name),
@@ -298,6 +308,8 @@ class CarsController extends BaseController
 			if (!$brand || !$car) {
 				Abort(404);
 			}
+
+			$car = $this->vehicle->buildCar($car);
 
 			$vars = [
 				'makes'		=> $makes->sortBy('name'),

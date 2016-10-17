@@ -42,21 +42,41 @@ class VehicleDetails {
 				$dealer->slug = $this->makeSlug($dealer->name) . '-' . $dealer->id;
 				$dealer->save();
 			}
+			$images = [];
+			if ($car->images_count) {
+				$count = 1;
+				foreach($car->images()->get() as $image) {
+					$images[] = [
+						'thumb_src' 	=> route('image') . '?folder=' . $car->id . '&filename=' . urlencode($image->maskname . '.' . $image->extension) . '&width=80&height=80',
+						'alt'	=> $car->make->name . ' ' . $car->model->name . ' image ' . $count,
+					];
+					$count++;
+				}
+			}
 			$data = [
 				'id'				=> $car->id,
 				'ad_slug' 			=> route('cars.brand.car', ['brand' => strtolower(str_replace(' ','+',$car->make->name)), 'version' => str_replace(' ','+',strtolower($car->model->name)), 'slug' => $car->slug]),
 				'image_count' 		=> $car->images_count,
 				'img_url'			=> is_object($first_image) ? route('image') . '?id=' . $first_image->user_id . '&folder=' . $car->id . '&filename=' . urlencode($first_image->maskname . '.' . $first_image->extension) . '&width=370&height=300' : '#',
-				'name'				=> '',
+				'name'				=> $car->name,
+				'content'			=> $car->content,
 				'make'				=> $car->make->name,
 				'model'				=> $car->model->name,
 				'year'				=> $car->year,
+				'sold'				=> $car->sold,
+				'colour'			=> $car->colour,
+				'fuel'				=> $car->fuel,
+				'doors'				=> $car->doors,
+				'gearbox'			=> $car->gearbox,
 				'price'				=> $car->price,
 				'currency'			=> $car->currency,
 				'mileage'			=> $car->mileage,
 				'mileage_measure' 	=> $car->length_measure,
 				'private'			=> is_object($car->dealer) ? 0 : 1,
+				'dealer_name'		=> is_object($car->dealer) ? $car->dealer->name : '',
+				'dealer_phone'		=> is_object($car->dealer) ? $car->dealer->phone : '',
 				'dealer_url'		=> is_object($car->dealer) ? route('dealers.dealer', $car->dealer->slug) : '',
+				'images'			=> $images,
 			];
 			$this->cache->add($key, $data, env('APP_CACHE_MINUTES'));
 		}
