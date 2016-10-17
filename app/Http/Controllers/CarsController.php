@@ -38,13 +38,18 @@ class CarsController extends BaseController
 
 		if ($this->request->input('make')) {
 
+			$brand = $this->makes->getById($this->request->input('make'));
+
 			if ($this->request->input('make') && $this->request->input('model')) {
-				$brand = $this->makes->getById($this->request->input('make'));
 				$model = $this->models->get($this->request->input('model'));
 
 				return redirect()->route('cars.search.index', [
 					'brand' => strtolower($brand->name),
 					'model' => strtolower($model->name),
+				]);
+			} else {
+				return redirect()->route('cars.search.index', [
+					'brand' => strtolower($brand->name),
 				]);
 			}
 			$models = $this->models->getByMakeId($this->request->input('make'));
@@ -79,6 +84,7 @@ class CarsController extends BaseController
 		$chunks = $cars->chunk($half);
 
 		$count = 0;
+		$car_set = [];
 		foreach($chunks as $set) {
 			foreach($set as $car) {
 				$car_set[$count][] = $this->vehicle->buildCar($car);
@@ -156,6 +162,7 @@ class CarsController extends BaseController
 			$chunks = $cars->chunk($half);
 
 			$count = 0;
+			$car_set = [];
 			foreach($chunks as $set) {
 				foreach($set as $car) {
 					$car_set[$count][] = $this->vehicle->buildCar($car);
@@ -246,6 +253,7 @@ class CarsController extends BaseController
 			}
 			$chunks = $cars->chunk($half);
 			$count = 0;
+			$car_set = [];
 			foreach($chunks as $set) {
 				foreach($set as $car) {
 					$car_set[$count][] = $this->vehicle->buildCar($car);
