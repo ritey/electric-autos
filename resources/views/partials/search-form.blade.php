@@ -1,7 +1,7 @@
 <div class="hidden-lg hidden-md">
 <a href="#filters">Show filters</a>
 </div>
-<div class="filters">
+<div class="filters visible-xs">
 	<form method="GET" action="{{ $vars['search_route'] }}#results" class="form">
 		<div class="form-group">
 			<label for="make">Make</label>
