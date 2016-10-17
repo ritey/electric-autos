@@ -19,20 +19,18 @@
 //    el: 'body'
 //});
 $('document').ready(function(){
-	$('a[href="#filters"').on('click',function(e){
+	$('a[href="#filters"').on('click',function(e) {
+		alert('clicked');
 		e.preventDefault();
-
 		if ($('.filters').hasClass('visible-xs')) {
+			$(this).html('Show filters');
 			$('.filters').removeClass('visible-xs');
 			$('.filters').removeClass('visible-sm');
-			$(this).html('Show filters');
-			//$(this).next('div').slideUp();
 		} else {
+			$(this).html('Hide filters');
 			$('.filters').addClass('visible-xs');
 			$('.filters').addClass('visible-sm');
-			$(this).html('Hide filters');
-			//$(this).next('div').slideDown();
 		}
-		return false;
+		return;
 	});
 })
