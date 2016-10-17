@@ -413,6 +413,10 @@ form .row {
 	display:table;
 }
 
+.filters {
+	cursor:pointer;
+}
+
 @media (max-width: 970px) {
 
 	.filters {

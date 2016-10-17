@@ -20,7 +20,6 @@
 //});
 $('document').ready(function(){
 	$('a[href="#filters"').on('click',function(e) {
-		alert('clicked');
 		e.preventDefault();
 		if ($('.filters').hasClass('visible-xs')) {
 			$(this).html('Show filters');
