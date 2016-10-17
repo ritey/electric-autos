@@ -20,7 +20,7 @@
 //});
 $('document').ready(function() {
   $('a[href="#filters"').css('cursor','pointer');
-	$('a[href="#filters"').on('click',function(e) {
+	$(document).on('click','a[href="#filters"',function(e) {
 		e.preventDefault();
 		if ($('.filters').hasClass('visible-xs')) {
 			$(this).html('Show filters');
@@ -31,6 +31,6 @@ $('document').ready(function() {
 			$('.filters').addClass('visible-xs');
 			$('.filters').addClass('visible-sm');
 		}
-		return;
+		return false;
 	});
 });
