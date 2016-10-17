@@ -19,9 +19,10 @@
 //    el: 'body'
 //});
 $('document').ready(function() {
-	$('a[href="#filters"').on('click',function(e) {
+	$('a[href="#filters"').css('cursor','pointer');
+  $(document).on('click','a[href="#filters"',function(e) {
 		e.preventDefault();
-		if ($('.filters').hasClass('visible-xs')) {
+		if ($.trim($(this).text()) != 'Show filters') {
 			$(this).html('Show filters');
 			$('.filters').removeClass('visible-xs');
 			$('.filters').removeClass('visible-sm');
