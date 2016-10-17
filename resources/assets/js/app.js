@@ -20,7 +20,7 @@
 //});
 $('document').ready(function() {
 	$('#filters').css('cursor','pointer');
-  $(document).on('click','a[href="#filters"',function(e) {
+  $(document).on('click','a[href="#filters"]',function(e) {
 		e.preventDefault();
 		if ($.trim($(this).text()) != 'Show filters') {
 			$(this).html('Show filters');
