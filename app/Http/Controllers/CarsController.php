@@ -7,7 +7,6 @@ use Illuminate\Contracts\Cache\Repository as Cache;
 use CoderStudios\Library\Makes;
 use CoderStudios\Library\Models;
 use CoderStudios\Library\Resource;
-use CoderStudios\Library\VehicleDetails;
 use Session;
 
 class CarsController extends BaseController
@@ -17,7 +16,7 @@ class CarsController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes, Models $models, VehicleDetails $vehicle)
+	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes, Models $models)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
@@ -27,7 +26,6 @@ class CarsController extends BaseController
 		$this->resource = $resource;
 		$this->makes = $makes;
 		$this->models = $models;
-		$this->vehicle = $vehicle;
 	}
 
 	public function index()
@@ -107,7 +105,7 @@ class CarsController extends BaseController
 		$vars = [
 			'request'				=> $this->request,
 			'cars_collection'		=> $cars,
-			'cars'					=> $car_set,
+			'cars'					=> $chunks,
 			'total_cars'			=> $this->resource->totalEnabled(),
 			'total_cars_found'		=> $cars->total(),
 			'total_page_total'		=> $cars->count(),
@@ -123,11 +121,7 @@ class CarsController extends BaseController
 
 	public function brand($brand)
 	{
-		$page_id = 1;
-		if ($this->request->get('page')) {
-			$page_id = $this->request->get('page');
-		}
-		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $page_id);
+		$key = $this->getKeyName(__function__ . '|' . $brand);
 		$page_title = 'Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars';
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
@@ -152,7 +146,7 @@ class CarsController extends BaseController
 					return redirect()->route('cars.search.index', $params);
 				} else {
 					$brand = $this->makes->getById($this->request->input('make'));
-					$params['brand'] = strtolower($brand->name);
+					$params['brand'] = $brand->name;
 					unset($params['make']);
 					return redirect()->route('cars.search.index', $params);
 				}
@@ -160,17 +154,18 @@ class CarsController extends BaseController
 				$brand = $this->makes->getById($this->request->input('make'));
 			}
 
-			$search_route = route('cars.brand.index', ['brand' => strtolower($brand->name)]);
+			$search_route = route('cars.brand.index', ['brand' => $brand->name]);
 
 			$page_title = $brand->name . '\'s for sale on Electric Autos. Find used ' . $brand->name . ' cars for sale in our classifieds.';
 
-			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->with('make','model','images','dealer')->withCount('images')->paginate(env('APP_PER_PAGE',15));
+			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->with('make','model','images','dealer')->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {
 				$half = 6;
 			}
 			$chunks = $cars->chunk($half);
 
+<<<<<<< Updated upstream
 			$count = 0;
 			$car_set = [];
 			foreach($chunks as $set) {
@@ -180,6 +175,8 @@ class CarsController extends BaseController
 				$count++;
 			}
 
+=======
+>>>>>>> Stashed changes
 			Session::put('back_url', $this->request->fullUrl());
 			$makes = $this->makes->all();
 			$models = $this->models->getByMakeId($brand->id);
@@ -187,7 +184,7 @@ class CarsController extends BaseController
 			$vars = [
 				'request'				=> $this->request,
 				'cars_collection'		=> $cars,
-				'cars'					=> $car_set,
+				'cars'					=> $chunks,
 				'total_cars'			=> $this->resource->totalEnabled(),
 				'total_cars_found'		=> $cars->total(),
 				'total_page_total'		=> $cars->count(),
@@ -207,10 +204,6 @@ class CarsController extends BaseController
 	public function model($brand, $model = '')
 	{
 		$page_title = 'Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars';
-		$page_id = 1;
-		if ($this->request->get('page')) {
-			$page_id = $this->request->get('page');
-		}
 		$params = $this->request->all();
 		if ($this->request->input('make') && $this->request->input('model')) {
 			$brand = $this->makes->getById($this->request->input('make'));
@@ -228,7 +221,7 @@ class CarsController extends BaseController
 			return redirect()->route('cars.brand.index', $params);
 		}
 
-		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $model . '|' . $page_id);
+		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $model);
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
@@ -256,12 +249,13 @@ class CarsController extends BaseController
 			$makes = $this->makes->all();
 			$models = $this->models->getByMakeId($brand->id);
 
-			$cars = $this->resource->filter($this->request)->with('make','model','images','dealer')->withCount('images')->paginate(env('APP_PER_PAGE',15));
+			$cars = $this->resource->filter($this->request)->with('make','model','images','dealer')->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {
 				$half = 6;
 			}
 			$chunks = $cars->chunk($half);
+<<<<<<< Updated upstream
 			$count = 0;
 			$car_set = [];
 			foreach($chunks as $set) {
@@ -270,13 +264,15 @@ class CarsController extends BaseController
 				}
 				$count++;
 			}
+=======
+>>>>>>> Stashed changes
 
 			Session::put('back_url', $this->request->fullUrl());
 
 			$vars = [
 				'request'				=> $this->request,
 				'cars_collection'		=> $cars,
-				'cars'					=> $car_set,
+				'cars'					=> $chunks,
 				'total_cars'			=> $this->resource->totalEnabled(),
 				'total_cars_found'		=> $cars->total(),
 				'total_page_total'		=> $cars->count(),
