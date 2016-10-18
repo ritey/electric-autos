@@ -8,6 +8,7 @@ use CoderStudios\Library\Dealer;
 use CoderStudios\Models\Makes;
 use CoderStudios\Models\Models;
 use CoderStudios\Library\Resource;
+use CoderStudios\Library\VehicleDetails;
 use Session;
 
 class DealerController extends BaseController
@@ -32,7 +33,7 @@ class DealerController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache, Dealer $dealer, Resource $resource, Makes $makes, Models $models)
+	public function __construct(Request $request, Cache $cache, Dealer $dealer, Resource $resource, Makes $makes, Models $models, VehicleDetails $vehicle)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
@@ -43,6 +44,7 @@ class DealerController extends BaseController
 		$this->resource = $resource;
 		$this->makes = $makes;
 		$this->models = $models;
+		$this->vehicle = $vehicle;
 	}
 
 	public function dealer($slug)
@@ -67,6 +69,15 @@ class DealerController extends BaseController
 			}
 			$chunks = $cars->chunk($half);
 
+			$count = 0;
+			$car_set = [];
+			foreach($chunks as $set) {
+				foreach($set as $car) {
+					$car_set[$count][] = $this->vehicle->buildCar($car);
+				}
+				$count++;
+			}
+
 			$brand = '';
 			$makes = $this->makes->get();
 			$models = $this->models->where('make_id',1)->get();
@@ -76,7 +87,7 @@ class DealerController extends BaseController
 			$vars = [
 				'dealer'				=> $dealer,
 				'cars_collection'		=> $cars,
-				'cars'					=> $chunks,
+				'cars'					=> $car_set,
 				'total_cars'			=> $this->resource->totalEnabled(),
 				'total_cars_found'		=> $cars->total(),
 				'total_page_total'		=> $cars->count(),
