@@ -165,7 +165,6 @@ class CarsController extends BaseController
 			}
 			$chunks = $cars->chunk($half);
 
-<<<<<<< Updated upstream
 			$count = 0;
 			$car_set = [];
 			foreach($chunks as $set) {
@@ -175,8 +174,6 @@ class CarsController extends BaseController
 				$count++;
 			}
 
-=======
->>>>>>> Stashed changes
 			Session::put('back_url', $this->request->fullUrl());
 			$makes = $this->makes->all();
 			$models = $this->models->getByMakeId($brand->id);
@@ -255,7 +252,7 @@ class CarsController extends BaseController
 				$half = 6;
 			}
 			$chunks = $cars->chunk($half);
-<<<<<<< Updated upstream
+
 			$count = 0;
 			$car_set = [];
 			foreach($chunks as $set) {
@@ -264,8 +261,6 @@ class CarsController extends BaseController
 				}
 				$count++;
 			}
-=======
->>>>>>> Stashed changes
 
 			Session::put('back_url', $this->request->fullUrl());
 
