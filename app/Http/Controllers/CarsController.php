@@ -7,6 +7,7 @@ use Illuminate\Contracts\Cache\Repository as Cache;
 use CoderStudios\Library\Makes;
 use CoderStudios\Library\Models;
 use CoderStudios\Library\Resource;
+use CoderStudios\Library\VehicleDetails;
 use Session;
 
 class CarsController extends BaseController
@@ -16,7 +17,7 @@ class CarsController extends BaseController
      *
      * @return void
      */
-	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes, Models $models)
+	public function __construct(Request $request, Cache $cache, Resource $resource, Makes $makes, Models $models, VehicleDetails $vehicle)
 	{
 		parent::__construct($cache);
 		$this->namespace = __NAMESPACE__;
@@ -26,6 +27,7 @@ class CarsController extends BaseController
 		$this->resource = $resource;
 		$this->makes = $makes;
 		$this->models = $models;
+		$this->vehicle = $vehicle;
 	}
 
 	public function index()
@@ -105,7 +107,7 @@ class CarsController extends BaseController
 		$vars = [
 			'request'				=> $this->request,
 			'cars_collection'		=> $cars,
-			'cars'					=> $chunks,
+			'cars'					=> $car_set,
 			'total_cars'			=> $this->resource->totalEnabled(),
 			'total_cars_found'		=> $cars->total(),
 			'total_page_total'		=> $cars->count(),
@@ -181,7 +183,7 @@ class CarsController extends BaseController
 			$vars = [
 				'request'				=> $this->request,
 				'cars_collection'		=> $cars,
-				'cars'					=> $chunks,
+				'cars'					=> $car_set,
 				'total_cars'			=> $this->resource->totalEnabled(),
 				'total_cars_found'		=> $cars->total(),
 				'total_page_total'		=> $cars->count(),
@@ -267,7 +269,7 @@ class CarsController extends BaseController
 			$vars = [
 				'request'				=> $this->request,
 				'cars_collection'		=> $cars,
-				'cars'					=> $chunks,
+				'cars'					=> $car_set,
 				'total_cars'			=> $this->resource->totalEnabled(),
 				'total_cars_found'		=> $cars->total(),
 				'total_page_total'		=> $cars->count(),
