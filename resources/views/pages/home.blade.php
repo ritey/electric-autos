@@ -30,6 +30,7 @@ Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric c
 
 							<div class="heading">
 								<h1>Electric and hybrid cars for sale</h1>
+								<h2>Electric Autos, the best used electric cars in the UK</h2>
 							</div>
 
 							<div class="intro">
@@ -186,25 +187,25 @@ Electric Autos | Used Hybrid and Electric Cars For Sale | Second hand electric c
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.index' , ['sort' => 'last-24']) }}" title="Show cars added in the last 24 hours">Added recently</a>
+							<a class="home-link" href="{{ route('cars.index' , ['sort' => 'last-24']) }}" title="Show cars added in the last 24 hours">Added recently</a>
 
 						</div>
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.index' , ['max_mileage' => '2000', 'sort' => 'low-mileage']) }}" title="Show cars with less than 2,000 miles">Low mileage EVs</a>
+							<a class="home-link" href="{{ route('cars.index' , ['max_mileage' => '2000', 'sort' => 'low-mileage']) }}" title="Show cars with less than 2,000 miles">Low mileage EVs</a>
 
 						</div>
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.index' , ['sort' => 'best-range']) }}" title="Show cars with the best range">Best range EVs</a>
+							<a class="home-link" href="{{ route('cars.index' , ['sort' => 'best-range']) }}" title="Show cars with the best range">Best range EVs</a>
 
 						</div>
 
 						<div class="col-sm-3 col-md-3">
 
-							<a href="{{ route('cars.index' , ['sort' => 'most-popular']) }}" title="Show the most viewed cars">Most popular EVs</a>
+							<a class="home-link" href="{{ route('cars.index' , ['sort' => 'most-popular']) }}" title="Show the most viewed cars">Most popular EVs</a>
 
 						</div>
 
