@@ -146,7 +146,7 @@
 					<h4>Connect</h4>
 
 					<ul class="list-unstyled">
-						<li><a href="{{ route('about') }}">About</a></li>
+						<li><a href="{{ route('about') }}">About Electric Autos</a></li>
 						<li><a href="{{ route('start-selling') }}">Start selling</a></li>
 						<li><a href="{{ route('blog.index') }}">Blog</a></li>
 					</ul>
