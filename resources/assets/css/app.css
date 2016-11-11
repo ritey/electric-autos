@@ -419,4 +419,8 @@ form .row {
 		display:none;
 	}
 
+	a.home-link {
+		margin-bottom:30px;
+	}
+
 }
