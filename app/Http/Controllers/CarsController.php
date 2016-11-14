@@ -95,7 +95,7 @@ class CarsController extends BaseController
 			}
 		}
 
-		$cars = $results->paginate(env('APP_PER_PAGE',15));
+		$cars = $results->withCount('images')->paginate(env('APP_PER_PAGE',15));
 
 		$half = number_format(ceil($cars->count() / 2));
 		if ($half < 6) {
@@ -171,7 +171,7 @@ class CarsController extends BaseController
 
 			$page_title = $brand->name . '\'s for sale on Electric Autos. Find used ' . $brand->name . ' cars for sale in our classifieds.';
 
-			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->with('make','model','images','dealer')->paginate(env('APP_PER_PAGE',15));
+			$cars = $this->resource->branded($brand->id,env('APP_PER_PAGE',15))->with('make','model','images','dealer')->withCount('images')->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {
 				$half = 6;
@@ -260,7 +260,7 @@ class CarsController extends BaseController
 			$makes = $this->makes->all();
 			$models = $this->models->getByMakeId($brand->id);
 
-			$cars = $this->resource->filter($this->request)->with('make','model','images','dealer')->paginate(env('APP_PER_PAGE',15));
+			$cars = $this->resource->filter($this->request)->with('make','model','images','dealer')->withCount('images')->paginate(env('APP_PER_PAGE',15));
 			$half = number_format(ceil($cars->count() / 2));
 			if ($half < 6) {
 				$half = 6;
