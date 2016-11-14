@@ -49,6 +49,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li class="{{ active_class(if_uri(['about']), 'active') }}"><a href="{{ route('about') }}">About us</a></li>
+							<li class="{{ active_class(if_uri(['seller-faqs']), 'active') }}"><a href="{{ route('seller-faqs') }}">Sellers FAQ</a></li>
 							<li class="{{ active_class(if_uri(['contact']), 'active') }}"><a href="{{ route('contact') }}">Contact us</a></li>
 							<!-- <li><a href="#">Something else here</a></li>
 							<li role="separator" class="divider"></li>

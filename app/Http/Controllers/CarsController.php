@@ -30,10 +30,20 @@ class CarsController extends BaseController
 		$this->vehicle = $vehicle;
 	}
 
+	private function getPage()
+	{
+		$page = 1;
+		if ($this->request->input('page') && is_numeric($this->request->input('page'))) {
+			$page = $this->request->input('page');
+		}
+		return $page;
+	}
+
 	public function index()
 	{
 		$models = '';
 		$brand = '';
+		$page = $this->getPage();
 		Session::put('back_url', $this->request->fullUrl());
 
 		if ($this->request->input('make')) {
@@ -123,7 +133,8 @@ class CarsController extends BaseController
 
 	public function brand($brand)
 	{
-		$key = $this->getKeyName(__function__ . '|' . $brand);
+		$page = $this->getPage();
+		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $page);
 		$page_title = 'Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars';
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
@@ -204,6 +215,7 @@ class CarsController extends BaseController
 	{
 		$page_title = 'Electric cars for sale on Electric Autos | Electric Classifieds | Used autos | Used cars';
 		$params = $this->request->all();
+		$page = $this->getPage();
 		if ($this->request->input('make') && $this->request->input('model')) {
 			$brand = $this->makes->getById($this->request->input('make'));
 			$model = $this->models->getById($this->request->input('model'));
@@ -220,7 +232,7 @@ class CarsController extends BaseController
 			return redirect()->route('cars.brand.index', $params);
 		}
 
-		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $model);
+		$key = $this->getKeyName(__function__ . '|' . $brand . '|' . $model . '|' . $page);
 		if ($this->cache->has($key)) {
 			$view = $this->cache->get($key);
 		} else {
