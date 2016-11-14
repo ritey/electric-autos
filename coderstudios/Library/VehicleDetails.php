@@ -151,7 +151,7 @@ class VehicleDetails {
 
 	public function makeName($text)
 	{
-		return str_replace('‘','',str_replace('  ',' ',str_replace('\'\'','',str_replace('*','',str_replace('&','&',str_replace(',',' ',str_replace(')','',str_replace('(','',str_replace('/','',str_replace(' ',' ',$text))))))))));
+		return trim(str_replace('‘','',str_replace('  ',' ',str_replace('\'\'','',str_replace('*','',str_replace('&','&',str_replace(',',' ',str_replace(')','',str_replace('(','',str_replace('/','',str_replace(' ',' ',$text)))))))))));
 	}
 
 	public function makeMileage($text)
@@ -394,6 +394,9 @@ class VehicleDetails {
 					$resource['mileage'] = $this->makeMileage($resource['mileage']);
 					$resource['gearbox'] = isset($ad['specs'][3]) ? $ad['specs'][3] : '';
 					$resource['year'] = substr($ad['title'], strlen($ad['title'])-5, 4);
+					if (!is_numeric($resource['year'])) {
+						$resource['year'] = '';
+					}
 
 					$crawler2 = $this->scraper->request('GET',$ad['link']);
 
@@ -476,6 +479,8 @@ class VehicleDetails {
 
 			}
 		}
+
+		$this->cache->clear();
 
 		dd('done');
 
