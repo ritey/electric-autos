@@ -119,7 +119,6 @@ class HomeController extends BaseController
      */
 	public function sendContact(ContactRequest $request)
 	{
-
 		event(new ContactSent($request));
 
 		$key = $this->getKeyName(__function__);
