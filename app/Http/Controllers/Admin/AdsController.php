@@ -64,7 +64,7 @@ class AdsController extends BaseController
 			$vars = [
 				'ad' => $this->resource->where('id',$id)->first(),
 			];
-			$view = view('admin.pages.ad-edit', compact('vars'))->render();
+			$view = view('admin.pages.ads-edit', compact('vars'))->render();
 			$this->cache->add($key, $view, env('APP_CACHE_MINUTES'));
 		}
 		return $view;
