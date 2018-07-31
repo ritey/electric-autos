@@ -73,7 +73,7 @@ class AdvertController extends BaseController
 		}
 
 		$key = $this->getKeyName(__function__ . '|' . $request->input('reg'));
-		if ($this->cache->has($key)) {
+		if ($this->cache->has($key) && empty($this->request->session()->get('error_message')) && empty($this->request->session()->get('errors'))) {
 			$view = $this->cache->get($key);
 		} else {
 			$vars = [
