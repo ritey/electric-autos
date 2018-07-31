@@ -169,9 +169,20 @@ class VehicleDetails {
 
 	protected function getDoc($path)
 	{
+		if (!strpos(' ' . $path,'http:')) {
+			$path = 'http:' . $path;
+		}
 		$ch =  curl_init($path);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$result = curl_exec($ch);
+		if (!$result) {
+			if (strpos(' '.$path,'//') < 6) {
+				$path = 'https:' . $path;
+			}
+			$ch =  curl_init($path);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$result = curl_exec($ch);
+		}
 		$ch = null;
 		return $result;
 	}

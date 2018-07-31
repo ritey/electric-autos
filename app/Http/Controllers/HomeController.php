@@ -165,7 +165,7 @@ class HomeController extends BaseController
 	public function start()
 	{
 		$key = $this->getKeyName(__function__);
-		if ($this->cache->has($key)) {
+		if ($this->cache->has($key) && empty($this->request->session()->get('error_message'))) {
 			$view = $this->cache->get($key);
 		} else {
 			$vars = [];
