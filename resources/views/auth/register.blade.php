@@ -124,6 +124,16 @@ Register an account on Electric Autos
 								</div>
 
 								<div class="row">
+									<div class="col-sm-12 text-center">
+										<div class="form-group">
+											<div class="col-md-12">
+												{!! Recaptcha::render() !!}
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
 
 									<div class="col-sm-12 text-center">
 
