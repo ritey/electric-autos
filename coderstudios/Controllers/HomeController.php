@@ -2,7 +2,7 @@
 
 namespace CoderStudios\Controllers;
 
-use App\Events\ContactSent;
+use CoderStudios\Events\ContactSent;
 use CoderStudios\Library\Resource;
 use CoderStudios\Library\VehicleDetails;
 use CoderStudios\Requests\ContactRequest;
@@ -41,8 +41,6 @@ class HomeController extends BaseController
 
     public function home()
     {
-        return view('welcome');
-        \Session::put('back_url', $this->request->fullUrl());
         // dd($this->resource->get(1));
         // $this->vehicle->scrape();
         $key = $this->getKeyName(__FUNCTION__);

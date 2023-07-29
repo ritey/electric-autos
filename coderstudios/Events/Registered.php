@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Events;
+namespace CoderStudios\Events;
 
-use Illuminate\Http\Request;
-use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
 class Registered extends Event
@@ -14,9 +12,6 @@ class Registered extends Event
 
     /**
      * Create a new event instance.
-     *
-     * @param  $data
-     * @return void
      */
     public function __construct(array $data)
     {

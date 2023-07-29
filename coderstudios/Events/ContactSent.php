@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Events;
+namespace CoderStudios\Events;
 
-use Illuminate\Http\Request;
-use App\Events\Event;
-use Illuminate\Queue\SerializesModels;
 use CoderStudios\Requests\ContactRequest;
+use Illuminate\Queue\SerializesModels;
 
 class ContactSent extends Event
 {
@@ -15,9 +13,6 @@ class ContactSent extends Event
 
     /**
      * Create a new event instance.
-     *
-     * @param  Users  $user
-     * @return void
      */
     public function __construct(ContactRequest $request)
     {
